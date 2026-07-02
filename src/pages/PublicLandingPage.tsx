@@ -1,5 +1,13 @@
 import { Check, Layers, Shield, Sparkles, Star, Zap } from "lucide-react";
 
+/**
+ * PublicLandingPage — Unused stub (starter template).
+ * The actual IGOLD landing content lives in igold/IgoldSite.tsx.
+ * This component was part of the convex-vite-starter boilerplate and
+ * was never ported to IGOLD's design system.
+ * TODO: Either populate with IGOLD-specific content or remove entirely.
+ * @deprecated Use igold/IgoldSite.tsx for the public-facing landing page.
+ */
 export function PublicLandingPage() {
   return (
     <div className="flex-1 flex flex-col overflow-hidden">
