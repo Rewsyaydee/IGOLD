@@ -110,7 +110,7 @@ export default function PostureExplorer() {
               aria-label={L(pt.nameEn, pt.name)}
               onClick={() => setActive(i)}
             >
-              <video src={`${POSE_VIDEO[pt.pose]}#t=0.6`} muted playsInline preload="metadata" aria-hidden="true" />
+              <video src={`${POSE_VIDEO[pt.pose]}#t=0.6`} muted playsInline preload="none" loading="lazy" aria-hidden="true" />
               <span className="pex-thumb__label">{L(pt.nameEn, pt.name)}</span>
             </button>
           ))}

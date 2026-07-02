@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { Volume2 } from "lucide-react";
 import { STEPS, POSE_VIDEO } from "../data";
@@ -12,6 +12,7 @@ export function Kaifiat() {
   const ref = useRef<HTMLElement>(null);
   const figureRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const toastTimer = useRef<ReturnType<typeof setTimeout>>();
   const [i, setI] = useState(0);
   const [toast, setToast] = useState<string | null>(null);
   const [vidErr, setVidErr] = useState<Record<string, boolean>>({});
@@ -38,12 +39,16 @@ export function Kaifiat() {
   const onAudio = () => {
     const kind = playAudio(step.id === 4 ? "fatihah" : `step-${step.id}`);
     if (kind === "placeholder") {
+      if (toastTimer.current) clearTimeout(toastTimer.current);
       setToast(L("Sample recitation tone — the real audio will be added later.", "Audio recitation contoh — fail audio sebenar akan ditambah kemudian."));
-      setTimeout(() => setToast(null), 2600);
+      toastTimer.current = setTimeout(() => setToast(null), 2600);
     }
   };
 
-  const go = (dir: number) => setI(p => Math.max(0, Math.min(STEPS.length - 1, p + dir)));
+  const go = useCallback((dir: number) => setI(p => Math.max(0, Math.min(STEPS.length - 1, p + dir))), []);
+
+  // Cleanup toast timer on unmount
+  useEffect(() => () => { if (toastTimer.current) clearTimeout(toastTimer.current); }, []);
 
   return (
     <section id="kaifiat" ref={ref} className="section">
