@@ -10,7 +10,8 @@ dist/
 .env.*.local
 
 # Convex generated files
-convex/_generated/
+# NOTE: committed intentionally so CI/Vercel builds (tsc) can resolve
+# `convex/_generated/api`. Regenerate with `npx convex dev` if convex/ changes.
 
 # IDE
 .vscode/
