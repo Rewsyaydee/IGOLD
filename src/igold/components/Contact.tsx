@@ -14,16 +14,37 @@ export function Contact() {
 
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Client-side validation before hitting the server
+    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
+      setStatus("error");
+      setErrorMsg(L("Please fill in all fields.", "Sila isi semua ruangan."));
+      return;
+    }
+    const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRx.test(form.email.trim())) {
+      setStatus("error");
+      setErrorMsg(L("Please enter a valid email address.", "Sila masukkan alamat e-mel yang sah."));
+      return;
+    }
+
     setStatus("sending");
+    setErrorMsg(null);
     try {
       await submit(form);
       setStatus("done");
       setForm({ name: "", email: "", message: "" });
-    } catch {
+    } catch (err) {
       setStatus("error");
+      setErrorMsg(
+        err instanceof Error
+          ? err.message
+          : L("Sorry, something went wrong. Please try again.", "Maaf, ada masalah. Sila cuba lagi."),
+      );
     }
   };
 
@@ -72,7 +93,11 @@ export function Contact() {
             {status === "sending" ? L("Sending…", "Menghantar…") : <><Send size={16} /> {L("Send Message", "Hantar Mesej")}</>}
           </button>
           {status === "done" && <p style={{ color: "#4ade80", marginTop: "1rem", fontSize: "0.9rem" }}>{L("✓ Thank you! Your message has been sent.", "✓ Terima kasih! Mesej anda telah dihantar.")}</p>}
-          {status === "error" && <p style={{ color: "#f87171", marginTop: "1rem", fontSize: "0.9rem" }}>{L("Sorry, something went wrong. Please try again.", "Maaf, ada masalah. Sila cuba lagi.")}</p>}
+          {status === "error" && (
+            <p style={{ color: "#f87171", marginTop: "1rem", fontSize: "0.9rem" }}>
+              {errorMsg || L("Sorry, something went wrong. Please try again.", "Maaf, ada masalah. Sila cuba lagi.")}
+            </p>
+          )}
         </form>
 
         <div className="reveal" style={{ display: "flex", flexDirection: "column", justifyContent: "center", gap: "1.4rem" }}>

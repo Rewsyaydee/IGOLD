@@ -5,15 +5,26 @@ import { SITE } from "../data";
 export function Preloader({ onDone }: { onDone: () => void }) {
   const root = useRef<HTMLDivElement>(null);
   const [count, setCount] = useState(0);
+  const doneRef = useRef(false);
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced) {
-      onDone();
+      if (!doneRef.current) {
+        doneRef.current = true;
+        onDone();
+      }
       return;
     }
 
-    const tl = gsap.timeline({ onComplete: onDone });
+    const tl = gsap.timeline({
+      onComplete: () => {
+        if (!doneRef.current) {
+          doneRef.current = true;
+          onDone();
+        }
+      },
+    });
     const counter = { v: 0 };
     tl.to(counter, {
       v: 100,
