@@ -608,7 +608,7 @@ export const BACAAN: Bacaan[] = [
 // ---------------------------------------------------------------------------
 // QUIZ — test understanding (10 questions)
 // ---------------------------------------------------------------------------
-export interface Quiz {
+export interface QuizQuestion {
   id: number;
   q: string;
   qEn: string;
@@ -619,7 +619,7 @@ export interface Quiz {
   explainEn: string;
 }
 
-export const QUIZ: Quiz[] = [
+export const QUIZ: QuizQuestion[] = [
   {
     id: 1,
     q: "Apakah lafaz yang menandakan permulaan solat?",
