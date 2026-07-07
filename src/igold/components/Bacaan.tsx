@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Volume2 } from "lucide-react";
 import { BACAAN } from "../data";
 import { playAudio, hasRealAudio } from "../audio";
@@ -8,16 +8,21 @@ import { useLang } from "../lang";
 export function Bacaan() {
   const { L } = useLang();
   const ref = useRef<HTMLElement>(null);
+  const toastTimer = useRef<ReturnType<typeof setTimeout>>();
   const [toast, setToast] = useState<string | null>(null);
   useReveal(ref, { stagger: 0.08 });
 
   const onPlay = (id: string) => {
     const kind = playAudio(id);
     if (kind === "placeholder") {
+      if (toastTimer.current) clearTimeout(toastTimer.current);
       setToast(L("Sample tone — the real recitation audio will be added later.", "Audio contoh — fail recitation sebenar akan ditambah kemudian."));
-      setTimeout(() => setToast(null), 2400);
+      toastTimer.current = setTimeout(() => setToast(null), 2600);
     }
   };
+
+  // Cleanup toast timer on unmount
+  useEffect(() => () => { if (toastTimer.current) clearTimeout(toastTimer.current); }, []);
 
   return (
     <section id="bacaan" ref={ref} className="section">

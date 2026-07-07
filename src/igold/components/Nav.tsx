@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { NAV_ITEMS, SITE } from "../data";
 import { useLang } from "../lang";
 
@@ -56,24 +56,43 @@ export function Nav() {
 
   useEffect(() => {
     const ids = NAV_ITEMS.map(n => n.id);
-    const onScroll = () => {
-      setScrolled(window.scrollY > 40);
-      let current = ids[0];
-      for (const id of ids) {
-        const el = document.getElementById(id);
-        if (el && el.getBoundingClientRect().top <= 120) current = id;
-      }
-      setActive(current);
-    };
+
+    // Track scroll position for header transparency
+    const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+
+    // Use IntersectionObserver for more accurate scroll spy
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Find the topmost section that's intersecting or just above the viewport
+        const visible = entries.filter(e => e.isIntersecting);
+        if (visible.length > 0) {
+          // Pick the one with the smallest top (highest on page among visible)
+          const topMost = visible.reduce((a, b) =>
+            a.boundingClientRect.top < b.boundingClientRect.top ? a : b
+          );
+          setActive(topMost.target.id);
+        }
+      },
+      { rootMargin: "-80px 0px -60% 0px" },
+    );
+
+    for (const id of ids) {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    }
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      observer.disconnect();
+    };
   }, []);
 
-  const go = (id: string) => {
+  const go = useCallback((id: string) => {
     setOpen(false);
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
+  }, []);
 
   return (
     <header
