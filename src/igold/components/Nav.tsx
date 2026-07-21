@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NAV_ITEMS, SITE } from "../data";
+import { NAV_ITEMS } from "../data";
 import { APP_CONFIG } from "../config";
 import { useLang } from "../lang";
 import { useMadhhab } from "../madhhab";
