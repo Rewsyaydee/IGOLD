@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
-import { Volume2 } from "lucide-react";
+import { Square, Volume2 } from "lucide-react";
 import { BACAAN } from "../data";
-import { playAudio, hasRealAudio } from "../audio";
+import { playAudio, stopAudio, hasRealAudio } from "../audio";
 import { useReveal } from "../useReveal";
 import { useLang } from "../lang";
 
@@ -9,10 +9,17 @@ export function Bacaan() {
   const { L } = useLang();
   const ref = useRef<HTMLElement>(null);
   const [toast, setToast] = useState<string | null>(null);
+  const [playingId, setPlayingId] = useState<string | null>(null);
   useReveal(ref, { stagger: 0.08 });
 
   const onPlay = (id: string) => {
+    if (playingId === id) {
+      stopAudio();
+      setPlayingId(null);
+      return;
+    }
     const kind = playAudio(id);
+    setPlayingId(id);
     if (kind === "placeholder") {
       setToast(L("Sample tone — the real recitation audio will be added later.", "Audio contoh — fail recitation sebenar akan ditambah kemudian."));
       setTimeout(() => setToast(null), 2400);
@@ -40,8 +47,8 @@ export function Bacaan() {
                 <h3 style={{ margin: 0, fontSize: "1.08rem", fontWeight: 600 }}>{L(b.titleEn, b.title)}</h3>
                 <span style={{ color: "var(--muted)", fontSize: "0.8rem" }}>{L(b.whenEn, b.when)}</span>
               </div>
-              <button onClick={() => onPlay(b.id)} aria-label={`${L("Listen to", "Dengar")} ${L(b.titleEn, b.title)}`} style={{ flexShrink: 0, display: "grid", placeItems: "center", width: 42, height: 42, borderRadius: "50%", border: "1px solid var(--line)", background: "var(--gold-tint)", cursor: "pointer" }}>
-                <Volume2 size={18} color="var(--gold-500)" />
+              <button onClick={() => onPlay(b.id)} aria-label={`${playingId === b.id ? L("Stop", "Hentikan") : L("Listen to", "Dengar")} ${L(b.titleEn, b.title)}`} style={{ flexShrink: 0, display: "grid", placeItems: "center", width: 42, height: 42, borderRadius: "50%", border: "1px solid var(--line)", background: playingId === b.id ? "var(--gold-500)" : "var(--gold-tint)", cursor: "pointer" }}>
+                {playingId === b.id ? <Square size={16} color="var(--white)" /> : <Volume2 size={18} color="var(--gold-500)" />}
               </button>
             </div>
             <div className="arabic" style={{ fontSize: "1.5rem", color: "var(--ink)", margin: "0.5rem 0", lineHeight: 1.9 }}>{b.arabic}</div>

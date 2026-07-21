@@ -93,3 +93,7 @@ export function playAudio(id: string): "real" | "placeholder" {
 }
 
 export const hasRealAudio = (id: string) => Boolean(AUDIO_URLS[id]);
+
+export function stopAudio() {
+  Object.values(howls).forEach(h => h.stop());
+}
