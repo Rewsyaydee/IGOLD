@@ -47,8 +47,8 @@ export function Hero() {
     >
       <div style={{ position: "absolute", inset: 0, zIndex: 1, pointerEvents: "none" }}>
         <DotField
-          dotRadius={1.5}
-          dotSpacing={14}
+          dotRadius={2.5}
+          dotSpacing={18}
           bulgeStrength={67}
           glowRadius={160}
           sparkle={false}
