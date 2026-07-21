@@ -1,9 +1,9 @@
 // ============================================================================
 // IGOLD — Interactive Solat Guide  ·  Content data (single source of truth)
 // ----------------------------------------------------------------------------
-// Method: Shafi'i (as commonly taught in Malaysia). All religious content
-// should be reviewed and approved by a qualified ustaz / the IGOLD academic
-// team before public release. Every string below is editable here.
+// Methods: Shafi'i and Hanafi. All religious content should be reviewed and
+// approved by a qualified ustaz / the IGOLD academic team before public release.
+// Every string below is editable here.
 // ============================================================================
 
 export const SITE = {
@@ -647,8 +647,8 @@ export const QUIZ: QuizQuestion[] = [
     options: ["10", "13", "17", "5"],
     optionsEn: ["10", "13", "17", "5"],
     answer: 1,
-    explain: "Terdapat 13 rukun solat dalam mazhab Syafie.",
-    explainEn: "There are 13 pillars of prayer in the Shafi'i school.",
+    explain: "Terdapat 13 rukun solat dalam mazhab Syafie (mazhab Hanafi mengklasifikasikannya secara berbeza).",
+    explainEn: "There are 13 pillars in the Shafi'i school (the Hanafi school classifies them differently).",
   },
   {
     id: 4,
@@ -726,9 +726,542 @@ export const NAV_ITEMS = [
   { id: "about", label: "Pengenalan", labelEn: "About" },
   { id: "syarat", label: "Syarat Solat", labelEn: "Conditions" },
   { id: "rukun", label: "Rukun Solat", labelEn: "Pillars" },
+  { id: "niyyah", label: "Niat Solat", labelEn: "Intentions" },
+  { id: "wudu", label: "Wuduk", labelEn: "Wudu" },
   { id: "kaifiat", label: "Cara Solat", labelEn: "Steps" },
   { id: "explorer", label: "Posisi", labelEn: "Postures" },
   { id: "bacaan", label: "Bacaan", labelEn: "Recitations" },
   { id: "kuiz", label: "Kuiz", labelEn: "Quiz" },
   { id: "hubungi", label: "Hubungi", labelEn: "Contact" },
+];
+
+// ============================================================================
+// NIYYAH — Prayer intentions for the five fardhu prayers
+// Cards are always visible (no hover-to-reveal). Audio files provided by client.
+// ============================================================================
+export interface NiyyahItem {
+  id: string;
+  prayer: string;
+  prayerEn: string;
+  rakats: number;
+  time: string;
+  timeEn: string;
+  arabic: string;
+  transliteration: string;
+  meaning: string;
+  meaningEn: string;
+  hasAudio?: boolean;
+}
+
+export const NIYYAH: NiyyahItem[] = [
+  {
+    id: "subuh",
+    prayer: "Subuh (Fajar)",
+    prayerEn: "Fajr (Dawn)",
+    rakats: 2,
+    time: "Selepas fajar sebelum matahari terbit",
+    timeEn: "After dawn, before sunrise",
+    arabic: "أُصَلِّي فَرْضَ الصُّبْحِ رَكْعَتَيْنِ أَدَاءً لِلّٰهِ تَعَالَى",
+    transliteration: "Uṣallī farḍaṣ-ṣubḥi rak'atayni adā'an lillāhi ta'ālā",
+    meaning: "Sahaja aku solat fardhu Subuh dua rakaat tunai kerana Allah Ta'ala.",
+    meaningEn: "I intend to perform the obligatory Fajr prayer, two rak'ahs, for the sake of Allah Most High.",
+    hasAudio: true,
+  },
+  {
+    id: "zohor",
+    prayer: "Zohor (Tengah Hari)",
+    prayerEn: "Zuhr (Noon)",
+    rakats: 4,
+    time: "Selepas gelincir matahari",
+    timeEn: "After the sun passes its zenith",
+    arabic: "أُصَلِّي فَرْضَ الظُّهْرِ أَرْبَعَ رَكَعَاتٍ أَدَاءً لِلّٰهِ تَعَالَى",
+    transliteration: "Uṣallī farḍaẓ-ẓuhri arba'a raka'ātin adā'an lillāhi ta'ālā",
+    meaning: "Sahaja aku solat fardhu Zohor empat rakaat tunai kerana Allah Ta'ala.",
+    meaningEn: "I intend to perform the obligatory Zuhr prayer, four rak'ahs, for the sake of Allah Most High.",
+    hasAudio: true,
+  },
+  {
+    id: "asar",
+    prayer: "Asar (Petang)",
+    prayerEn: "Asr (Afternoon)",
+    rakats: 4,
+    time: "Apabila bayang objek sama panjang dengan objeknya",
+    timeEn: "When the shadow of an object equals its length",
+    arabic: "أُصَلِّي فَرْضَ الْعَصْرِ أَرْبَعَ رَكَعَاتٍ أَدَاءً لِلّٰهِ تَعَالَى",
+    transliteration: "Uṣallī farḍal-'aṣri arba'a raka'ātin adā'an lillāhi ta'ālā",
+    meaning: "Sahaja aku solat fardhu Asar empat rakaat tunai kerana Allah Ta'ala.",
+    meaningEn: "I intend to perform the obligatory Asr prayer, four rak'ahs, for the sake of Allah Most High.",
+    hasAudio: true,
+  },
+  {
+    id: "maghrib",
+    prayer: "Maghrib (Senja)",
+    prayerEn: "Maghrib (Sunset)",
+    rakats: 3,
+    time: "Selepas matahari terbenam",
+    timeEn: "After sunset",
+    arabic: "أُصَلِّي فَرْضَ الْمَغْرِبِ ثَلَاثَ رَكَعَاتٍ أَدَاءً لِلّٰهِ تَعَالَى",
+    transliteration: "Uṣallī farḍal-maghribi thalātha raka'ātin adā'an lillāhi ta'ālā",
+    meaning: "Sahaja aku solat fardhu Maghrib tiga rakaat tunai kerana Allah Ta'ala.",
+    meaningEn: "I intend to perform the obligatory Maghrib prayer, three rak'ahs, for the sake of Allah Most High.",
+    hasAudio: true,
+  },
+  {
+    id: "isyak",
+    prayer: "Isyak (Malam)",
+    prayerEn: "Isha (Night)",
+    rakats: 4,
+    time: "Selepas hilang cahaya merah di ufuk",
+    timeEn: "After the red twilight disappears",
+    arabic: "أُصَلِّي فَرْضَ الْعِشَاءِ أَرْبَعَ رَكَعَاتٍ أَدَاءً لِلّٰهِ تَعَالَى",
+    transliteration: "Uṣallī farḍal-'ishā'i arba'a raka'ātin adā'an lillāhi ta'ālā",
+    meaning: "Sahaja aku solat fardhu Isyak empat rakaat tunai kerana Allah Ta'ala.",
+    meaningEn: "I intend to perform the obligatory Isha prayer, four rak'ahs, for the sake of Allah Most High.",
+    hasAudio: true,
+  },
+];
+
+// ============================================================================
+// MADHHAB-SPECIFIC DATA — Hanafi variations
+// Components select Shafi'i (default) or Hanafi arrays via useMadhhab().
+// ============================================================================
+
+export const HANAFI_RUKUN: Rukun[] = [
+  { id: 1, title: "Niat", titleEn: "Intention", type: "Qalbi", desc: "Berniat di dalam hati untuk menunaikan solat yang tertentu.", descEn: "Intending in the heart to perform the specific prayer." },
+  { id: 2, title: "Takbiratul Ihram", titleEn: "Opening takbir", type: "Qauli", desc: "Melafazkan 'Allahu Akbar' sebagai tanda bermulanya solat.", descEn: "Saying 'Allahu Akbar' to mark the beginning of the prayer." },
+  { id: 3, title: "Berdiri bagi yang mampu", titleEn: "Standing if able", type: "Fi'li", desc: "Berdiri tegak bagi solat fardhu bagi mereka yang berkemampuan.", descEn: "Standing upright for the obligatory prayer for those who are able." },
+  { id: 4, title: "Membaca Al-Fatihah", titleEn: "Reciting Al-Fatihah", type: "Qauli", desc: "Membaca surah Al-Fatihah pada setiap rakaat.", descEn: "Reciting Surah Al-Fatihah in every rak'ah." },
+  { id: 5, title: "Rukuk & tomakninah", titleEn: "Bowing with stillness", type: "Fi'li", desc: "Membongkok dengan tenang sehingga anggota badan stabil.", descEn: "Bowing calmly until the limbs are settled." },
+  { id: 6, title: "Sujud dua kali & tomakninah", titleEn: "Two prostrations with stillness", type: "Fi'li", desc: "Sujud sebanyak dua kali pada setiap rakaat dengan tenang.", descEn: "Prostrating twice in each rak'ah, calmly." },
+  { id: 7, title: "Duduk tahiyat akhir", titleEn: "Sitting for the final tashahhud", type: "Fi'li", desc: "Duduk untuk membaca tahiyat akhir sepanjang bacaan tasyahhud.", descEn: "Sitting for the duration of the final tashahhud recitation." },
+  { id: 8, title: "Membaca tahiyat akhir", titleEn: "Reciting the final tashahhud", type: "Qauli", desc: "Membaca lafaz tahiyat (tasyahhud) pada duduk yang terakhir.", descEn: "Reciting the tashahhud in the final sitting." },
+  { id: 9, title: "Memberi salam", titleEn: "The closing salam", type: "Qauli", desc: "Mengucapkan salam yang pertama (mengikut Hanafi, kedua-dua salam adalah wajib).", descEn: "Saying the first salam (in the Hanafi school, both salams are wajib)." },
+  { id: 10, title: "Tertib", titleEn: "Performing in order", type: "Qalbi", desc: "Menunaikan setiap rukun mengikut susunannya yang betul.", descEn: "Performing each pillar in its correct sequence." },
+];
+
+export const HANAFI_STEPS: Step[] = [
+  {
+    id: 1,
+    name: "Niat & Berdiri",
+    nameEn: "Intention & Standing",
+    pose: "stand",
+    meaning: "Berdiri tegak menghadap kiblat, dan berniat di dalam hati untuk menunaikan solat (contoh: solat fardhu Subuh dua rakaat kerana Allah Ta'ala).",
+    meaningEn: "Stand upright facing the qiblah and make the intention in your heart to perform the prayer (e.g. the two-rak'ah Fajr prayer for the sake of Allah).",
+    note: "Niat di dalam hati. Berdiri bagi yang mampu. Lelaki: tangan di bawah pusat. Perempuan: tangan di dada.",
+    noteEn: "The intention is in the heart. Stand if you are able. Men: hands below the navel. Women: hands on the chest.",
+  },
+  {
+    id: 2,
+    name: "Takbiratul Ihram",
+    nameEn: "Opening Takbir",
+    pose: "takbir",
+    arabic: "اللّٰهُ أَكْبَر",
+    transliteration: "Allāhu Akbar",
+    meaning: "Allah Maha Besar. Angkat kedua tangan sehingga paras telinga (lelaki) atau bahu (perempuan) sambil melafazkannya.",
+    meaningEn: "Allah is the Greatest. Raise both hands to ear level (men) or shoulder level (women) while saying it.",
+    hasAudio: true,
+  },
+  {
+    id: 3,
+    name: "Doa Iftitah",
+    nameEn: "Opening Supplication",
+    pose: "qiyam",
+    arabic: "سُبْحَانَكَ اللّٰهُمَّ وَبِحَمْدِكَ وَتَبَارَكَ اسْمُكَ وَتَعَالَى جَدُّكَ وَلَا إِلٰهَ غَيْرُكَ",
+    transliteration: "Subḥānakallāhumma wa biḥamdika, wa tabārakasmuka, wa ta'ālā jadduka, wa lā ilāha ghayruk",
+    meaning: "Maha Suci Engkau ya Allah, dan segala puji bagi-Mu. Maha Berkat nama-Mu, Maha Tinggi kebesaran-Mu, dan tiada Tuhan selain Engkau.",
+    meaningEn: "Glory be to You, O Allah, and praise. Blessed is Your name, exalted is Your majesty, and there is no god but You.",
+    note: "Doa iftitah versi Hanafi. Sunat dibaca selepas takbir, sebelum Al-Fatihah.",
+    noteEn: "Hanafi version of the opening supplication. Recommended after the takbir, before Al-Fatihah.",
+    hasAudio: true,
+  },
+  {
+    id: 4,
+    name: "Al-Fatihah",
+    nameEn: "Surah Al-Fatihah",
+    pose: "qiyam",
+    arabic: "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيمِ ۝ الْحَمْدُ لِلّٰهِ رَبِّ الْعٰلَمِينَ ۝ الرَّحْمٰنِ الرَّحِيمِ ۝ مٰلِكِ يَوْمِ الدِّينِ ۝ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ۝ اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ ۝ صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ",
+    transliteration: "Bismillāhir-raḥmānir-raḥīm. Al-ḥamdu lillāhi rabbil-'ālamīn. Ar-raḥmānir-raḥīm. Māliki yawmid-dīn. Iyyāka na'budu wa iyyāka nasta'īn. Ihdinaṣ-ṣirāṭal-mustaqīm. Ṣirāṭal-lażīna an'amta 'alayhim ghayril-maghḍūbi 'alayhim wa laḍ-ḍāllīn.",
+    meaning: "Dengan nama Allah Yang Maha Pemurah lagi Maha Penyayang. Segala puji bagi Allah Tuhan sekalian alam... Tunjukilah kami jalan yang lurus.",
+    meaningEn: "In the name of Allah, the Most Gracious, the Most Merciful. All praise is for Allah, Lord of all worlds... Guide us along the Straight Path.",
+    note: "Dalam mazhab Hanafi, Basmalah dibaca secara sirr (perlahan) sebelum Al-Fatihah, bukan sebagai sebahagian Al-Fatihah.",
+    noteEn: "In the Hanafi school, Basmalah is recited silently before Al-Fatihah, not as part of it.",
+    hasAudio: true,
+  },
+  {
+    id: 5,
+    name: "Surah Lazim",
+    nameEn: "A Short Surah",
+    pose: "qiyam",
+    arabic: "قُلْ هُوَ اللّٰهُ أَحَدٌ ۝ اللّٰهُ الصَّمَدُ ۝ لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ",
+    transliteration: "Qul huwallāhu aḥad. Allāhuṣ-ṣamad. Lam yalid wa lam yūlad. Wa lam yakul lahū kufuwan aḥad.",
+    meaning: "Katakanlah: Dialah Allah Yang Maha Esa. Allah tempat bergantung. Dia tidak beranak dan tidak diperanakkan. Dan tidak ada sesuatu yang setara dengan-Nya.",
+    meaningEn: "Say: He is Allah, the One. Allah, the Eternal Refuge. He neither begets nor is born. Nor is there to Him any equivalent.",
+    note: "Sunat membaca surah selepas Al-Fatihah pada dua rakaat pertama.",
+    noteEn: "Recommended to recite a surah after Al-Fatihah in the first two rak'ahs.",
+    hasAudio: true,
+  },
+  {
+    id: 6,
+    name: "Rukuk",
+    nameEn: "Bowing",
+    pose: "ruku",
+    arabic: "سُبْحَانَ رَبِّيَ الْعَظِيمِ",
+    transliteration: "Subḥāna rabbiyal-'aẓīm",
+    meaning: "Maha Suci Tuhanku Yang Maha Agung. (Dibaca 3 kali)",
+    meaningEn: "Glory to my Lord, the Most Great. (Recited 3 times)",
+    note: "Membongkok dengan tangan di atas lutut, belakang lurus. Jari direnggangkan.",
+    noteEn: "Bow with the hands on the knees and the back straight. Fingers spread.",
+    hasAudio: true,
+  },
+  {
+    id: 7,
+    name: "Iktidal",
+    nameEn: "Rising from Bowing",
+    pose: "itidal",
+    arabic: "سَمِعَ اللّٰهُ لِمَنْ حَمِدَهُ ۝ رَبَّنَا لَكَ الْحَمْدُ",
+    transliteration: "Sami'allāhu liman ḥamidah. Rabbanā lakal-ḥamd",
+    meaning: "Allah mendengar siapa yang memuji-Nya. Wahai Tuhan kami, bagi-Mu segala pujian.",
+    meaningEn: "Allah hears whoever praises Him. Our Lord, to You belongs all praise.",
+    note: "Bangun tegak semula dengan tenang. Tidak disunatkan membaca qunut pada solat Subuh dalam mazhab Hanafi.",
+    noteEn: "Rise back upright calmly. Qunut is not sunnah in Fajr in the Hanafi school.",
+    hasAudio: true,
+  },
+  {
+    id: 8,
+    name: "Sujud Pertama",
+    nameEn: "First Prostration",
+    pose: "sujud",
+    arabic: "سُبْحَانَ رَبِّيَ الْأَعْلَى",
+    transliteration: "Subḥāna rabbiyal-a'lā",
+    meaning: "Maha Suci Tuhanku Yang Maha Tinggi. (Dibaca 3 kali)",
+    meaningEn: "Glory to my Lord, the Most High. (Recited 3 times)",
+    note: "Tujuh anggota sujud: dahi & hidung, dua tapak tangan, dua lutut, hujung dua kaki.",
+    noteEn: "Seven points of prostration: forehead & nose, both palms, both knees, and the tips of both feet.",
+    hasAudio: true,
+  },
+  {
+    id: 9,
+    name: "Duduk Antara Dua Sujud",
+    nameEn: "Sitting Between Prostrations",
+    pose: "duduk",
+    arabic: "رَبِّ اغْفِرْ لِي وَارْحَمْنِي وَاجْبُرْنِي وَارْفَعْنِي وَارْزُقْنِي وَاهْدِنِي وَعَافِنِي وَاعْفُ عَنِّي",
+    transliteration: "Rabbighfir lī, warḥamnī, wajburnī, warfa'nī, warzuqnī, wahdinī, wa 'āfinī, wa'fu 'annī",
+    meaning: "Wahai Tuhanku, ampunilah aku, kasihanilah aku, cukupkanlah kekuranganku, angkatlah darjatku, berilah aku rezeki, berilah aku petunjuk, sihatkanlah aku, dan maafkanlah aku.",
+    meaningEn: "O my Lord, forgive me, have mercy on me, support me, raise my rank, provide for me, guide me, grant me well-being, and pardon me.",
+    hasAudio: true,
+  },
+  {
+    id: 10,
+    name: "Sujud Kedua",
+    nameEn: "Second Prostration",
+    pose: "sujud",
+    arabic: "سُبْحَانَ رَبِّيَ الْأَعْلَى",
+    transliteration: "Subḥāna rabbiyal-a'lā",
+    meaning: "Maha Suci Tuhanku Yang Maha Tinggi. (Dibaca 3 kali)",
+    meaningEn: "Glory to my Lord, the Most High. (Recited 3 times)",
+    note: "Selepas ini bangun ke rakaat berikutnya, atau duduk tahiyat.",
+    noteEn: "After this, rise for the next rak'ah, or sit for the tashahhud.",
+    hasAudio: true,
+  },
+  {
+    id: 11,
+    name: "Tahiyat Akhir",
+    nameEn: "Final Tashahhud",
+    pose: "tashahhud",
+    arabic: "التَّحِيَّاتُ لِلّٰهِ وَالصَّلَوَاتُ وَالطَّيِّبَاتُ ۝ السَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللّٰهِ وَبَرَكَاتُهُ ۝ السَّلَامُ عَلَيْنَا وَعَلَى عِبَادِ اللّٰهِ الصَّالِحِينَ ۝ أَشْهَدُ أَنْ لَا إِلٰهَ إِلَّا اللّٰهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
+    transliteration: "At-taḥiyyātu lillāhi waṣ-ṣalawātu waṭ-ṭayyibāt. As-salāmu 'alayka ayyuhan-nabiyyu wa raḥmatullāhi wa barakātuh. As-salāmu 'alaynā wa 'alā 'ibādillāhiṣ-ṣāliḥīn. Ashhadu an lā ilāha illallāh, wa ashhadu anna Muḥammadan 'abduhu wa rasūluh.",
+    meaning: "Segala penghormatan, rahmat dan kebaikan adalah milik Allah. Sejahtera ke atas engkau wahai Nabi dan rahmat Allah serta keberkatan-Nya. Sejahtera ke atas kami dan ke atas hamba-hamba Allah yang soleh. Aku bersaksi bahawa tiada Tuhan melainkan Allah, dan aku bersaksi bahawa Muhammad itu hamba dan pesuruh-Nya.",
+    meaningEn: "All greetings, prayers and good things are for Allah. Peace be upon you, O Prophet, and the mercy of Allah and His blessings. Peace be upon us and upon the righteous servants of Allah. I bear witness that there is no god but Allah, and I bear witness that Muhammad is His servant and messenger.",
+    note: "Tahiyat versi Hanafi (diajar oleh Ibn Mas'ud r.a.).",
+    noteEn: "Hanafi version of the tashahhud (as taught by Ibn Mas'ud r.a.).",
+    hasAudio: true,
+  },
+  {
+    id: 12,
+    name: "Selawat",
+    nameEn: "Salutations on the Prophet ﷺ",
+    pose: "tashahhud",
+    arabic: "اللّٰهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ",
+    transliteration: "Allāhumma ṣalli 'alā Muḥammad, wa 'alā āli Muḥammad, kamā ṣallayta 'alā Ibrāhīma wa 'alā āli Ibrāhīm, innaka ḥamīdun majīd.",
+    meaning: "Ya Allah, limpahkanlah rahmat ke atas Nabi Muhammad dan ke atas keluarga Nabi Muhammad, sebagaimana Engkau limpahkan rahmat ke atas Nabi Ibrahim dan keluarga Nabi Ibrahim. Sesungguhnya Engkau Maha Terpuji lagi Maha Mulia.",
+    meaningEn: "O Allah, send Your grace upon Muhammad and upon the family of Muhammad, as You sent Your grace upon Ibrahim and the family of Ibrahim. Indeed, You are Praiseworthy and Glorious.",
+    note: "Selawat Ibrahimiyyah penuh dalam tahiyat akhir.",
+    noteEn: "Full salawat Ibrahimiyyah in the final tashahhud.",
+    hasAudio: true,
+  },
+  {
+    id: 13,
+    name: "Salam",
+    nameEn: "Closing Salam",
+    pose: "salam",
+    arabic: "السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللّٰهِ",
+    transliteration: "As-salāmu 'alaykum wa raḥmatullāh",
+    meaning: "Semoga kesejahteraan dan rahmat Allah ke atas kamu. Dipalingkan muka ke kanan, kemudian ke kiri. Kedua-dua salam adalah wajib dalam mazhab Hanafi.",
+    meaningEn: "Peace and mercy of Allah be upon you. Turn the face to the right, then to the left. Both salams are wajib in the Hanafi school.",
+    note: "Mengakhiri solat — kedua-dua salam adalah wajib menurut Hanafi.",
+    noteEn: "Concludes the prayer — both salams are wajib according to the Hanafi school.",
+    hasAudio: true,
+  },
+];
+
+export const HANAFI_POSTURES: Posture[] = [
+  {
+    pose: "stand",
+    name: "Berdiri (Qiyam)",
+    nameEn: "Standing",
+    align: [
+      "Berdiri tegak, kaki seluas bahu.",
+      "Pandangan pada tempat sujud.",
+      "Badan tenang dan diam, menghadap kiblat.",
+    ],
+    alignEn: [
+      "Stand upright, feet about shoulder-width apart.",
+      "Gaze rests on the place of prostration.",
+      "Body still and calm, facing the qiblah.",
+    ],
+  },
+  {
+    pose: "takbir",
+    name: "Takbiratul Ihram",
+    nameEn: "Opening Takbir",
+    align: [
+      "Lelaki: angkat tangan ke paras telinga. Perempuan: ke paras bahu.",
+      "Tapak tangan menghadap kiblat, jari santai.",
+      "Lafaz 'Allahu Akbar' ketika mengangkat tangan.",
+    ],
+    alignEn: [
+      "Men: raise hands to ear level. Women: to shoulder level.",
+      "Palms face the qiblah, fingers relaxed.",
+      "Say 'Allahu Akbar' as the hands rise.",
+    ],
+  },
+  {
+    pose: "qiyam",
+    name: "Qiyam (Membaca)",
+    nameEn: "Standing & Reciting",
+    align: [
+      "Lelaki: tangan di bawah pusat. Perempuan: tangan di dada.",
+      "Tangan kanan di atas tangan kiri.",
+      "Bahu santai, belakang lurus.",
+    ],
+    alignEn: [
+      "Men: hands below the navel. Women: hands on the chest.",
+      "Right hand over the left.",
+      "Shoulders relaxed, back straight.",
+    ],
+  },
+  {
+    pose: "ruku",
+    name: "Rukuk",
+    nameEn: "Bowing (Ruku')",
+    align: [
+      "Tunduk pada pinggang sehingga belakang mendatar.",
+      "Tangan memegang lutut, jari direnggangkan.",
+      "Belakang dan kepala membentuk satu garisan lurus.",
+    ],
+    alignEn: [
+      "Bend at the waist until the back is level.",
+      "Hands grip the knees, fingers spread.",
+      "Back and head form a straight line.",
+    ],
+  },
+  {
+    pose: "itidal",
+    name: "Iktidal",
+    nameEn: "Rising (I'tidal)",
+    align: [
+      "Bangun semula berdiri tegak sepenuhnya.",
+      "Tangan turun di sisi secara semula jadi.",
+      "Tenang sebentar sebelum gerakan seterusnya. Tidak membaca qunut pada Subuh.",
+    ],
+    alignEn: [
+      "Rise back to a full, upright standing position.",
+      "Arms rest naturally at the sides.",
+      "Settle calmly before the next movement. Qunut is not recited in Fajr.",
+    ],
+  },
+  {
+    pose: "sujud",
+    name: "Sujud",
+    nameEn: "Prostration (Sujud)",
+    align: [
+      "Tujuh anggota mencecah lantai: dahi & hidung, dua tapak tangan, dua lutut, hujung jari dua kaki.",
+      "Siku diangkat, tidak melekat pada lantai atau rusuk.",
+      "Jari menghala ke arah kiblat.",
+    ],
+    alignEn: [
+      "Seven parts touch the floor: forehead & nose, both palms, both knees, toes of both feet.",
+      "Elbows lifted away from the floor and the sides.",
+      "Fingers point toward the qiblah.",
+    ],
+  },
+  {
+    pose: "duduk",
+    name: "Duduk Antara Dua Sujud",
+    nameEn: "Sitting Between Prostrations",
+    align: [
+      "Duduk tenang, tapak kaki kiri dibentang di bawah.",
+      "Kaki kanan ditegakkan, jari melentur ke arah kiblat.",
+      "Tangan di atas paha berhampiran lutut.",
+    ],
+    alignEn: [
+      "Sit calmly with the left foot laid flat beneath you.",
+      "Right foot upright, toes bent toward the qiblah.",
+      "Hands rest on the thighs near the knees.",
+    ],
+  },
+  {
+    pose: "tashahhud",
+    name: "Tahiyat (Tasyahhud)",
+    nameEn: "Sitting for Tashahhud",
+    align: [
+      "Duduk seperti antara dua sujud pada setiap tahiyat — tiada tawarruk.",
+      "Tangan kanan di atas paha kanan, jari telunjuk diangkat ketika syahadah tanpa digerak-gerakkan.",
+      "Tangan kiri terbuka di atas paha kiri.",
+    ],
+    alignEn: [
+      "Sit as between prostrations for every tashahhud — no tawarruk position.",
+      "Right hand on the right thigh, index finger raised at the shahadah without continuous motion.",
+      "Left hand rests open on the left thigh.",
+    ],
+  },
+  {
+    pose: "salam",
+    name: "Salam",
+    nameEn: "Closing Salam",
+    align: [
+      "Palingkan kepala ke kanan, kemudian ke kiri.",
+      "Ucap 'Assalamualaikum wa rahmatullah' setiap arah.",
+      "Kedua-dua salam adalah wajib menurut Hanafi.",
+    ],
+    alignEn: [
+      "Turn the head to the right, then to the left.",
+      "Say 'As-salamu alaykum wa rahmatullah' to each side.",
+      "Both salams are wajib according to the Hanafi school.",
+    ],
+  },
+];
+
+// ============================================================================
+// WUDU — Step-by-step ablution guide
+// Same pattern as Kaifiat: videos, recitations, alignment notes.
+// ============================================================================
+export interface WuduStep {
+  id: number;
+  name: string;
+  nameEn: string;
+  pose: string;
+  arabic?: string;
+  transliteration?: string;
+  meaning: string;
+  meaningEn: string;
+  note?: string;
+  noteEn?: string;
+  hasAudio?: boolean;
+}
+
+export const WUDU_STEPS: WuduStep[] = [
+  {
+    id: 1,
+    name: "Niat Wuduk",
+    nameEn: "Intention for Wudu",
+    pose: "niyyah",
+    meaning: "Berniat di dalam hati untuk mengangkat hadas kecil kerana Allah Ta'ala. Membaca basmalah: 'Bismillahirrahmanirrahim'.",
+    meaningEn: "Intend in the heart to remove minor ritual impurity for the sake of Allah. Recite the basmalah: 'Bismillahirrahmanirrahim'.",
+    note: "Niat di dalam hati. Sunat membaca basmalah.",
+    noteEn: "The intention is in the heart. It is sunnah to recite the basmalah.",
+  },
+  {
+    id: 2,
+    name: "Membasuh Kedua Tangan",
+    nameEn: "Washing Both Hands",
+    pose: "wash-hands",
+    meaning: "Membasuh kedua-dua tangan hingga ke pergelangan tangan sebanyak 3 kali. Mulakan dengan tangan kanan, kemudian kiri. Bersihkan celah-celah jari.",
+    meaningEn: "Wash both hands up to the wrists 3 times. Start with the right hand, then the left. Clean between the fingers.",
+    note: "Sunat membasuh tangan sebelum memulakan wuduk.",
+    noteEn: "It is sunnah to wash the hands before beginning wudu.",
+  },
+  {
+    id: 3,
+    name: "Berkumur",
+    nameEn: "Rinsing the Mouth",
+    pose: "rinse-mouth",
+    meaning: "Berkumur-kumur sebanyak 3 kali. Masukkan air ke dalam mulut, kumur dengan sempurna, kemudian buang.",
+    meaningEn: "Rinse the mouth 3 times. Take water into the mouth, rinse thoroughly, then spit it out.",
+    note: "Sunat berkumur dengan bersungguh-sungguh kecuali ketika berpuasa.",
+    noteEn: "It is sunnah to rinse vigorously except when fasting.",
+  },
+  {
+    id: 4,
+    name: "Membersihkan Hidung",
+    nameEn: "Cleaning the Nose",
+    pose: "clean-nose",
+    meaning: "Masukkan air ke dalam hidung dan hembus keluar sebanyak 3 kali. Gunakan tangan kiri untuk menghembus.",
+    meaningEn: "Draw water into the nostrils and expel it 3 times. Use the left hand to expel.",
+    note: "Sunat menghirup air ke pangkal hidung kecuali ketika berpuasa.",
+    noteEn: "It is sunnah to draw water deeply into the nose except when fasting.",
+  },
+  {
+    id: 5,
+    name: "Membasuh Muka",
+    nameEn: "Washing the Face",
+    pose: "wash-face",
+    meaning: "Basuh muka sebanyak 3 kali. Had muka: dari tempat tumbuh rambut di dahi hingga bawah dagu, dan dari anak telinga kanan ke anak telinga kiri. Ratakan air ke seluruh muka termasuk janggut yang nipis.",
+    meaningEn: "Wash the face 3 times. Boundaries: from the hairline on the forehead to below the chin, and from ear to ear. Ensure water reaches all parts of the face including thin beard hair.",
+    note: "Wajib meratakan air ke seluruh muka dalam satu basuhan.",
+    noteEn: "It is obligatory to ensure water covers the entire face in one wash.",
+  },
+  {
+    id: 6,
+    name: "Membasuh Tangan hingga Siku",
+    nameEn: "Washing Arms to Elbows",
+    pose: "wash-arms",
+    meaning: "Basuh kedua-dua tangan hingga ke siku sebanyak 3 kali. Mulakan dengan tangan kanan, kemudian kiri. Pastikan air sampai ke siku dan celah-celah jari.",
+    meaningEn: "Wash both arms up to the elbows 3 times. Start with the right arm, then the left. Ensure water reaches the elbows and between the fingers.",
+    note: "Siku termasuk dalam anggota yang wajib dibasuh.",
+    noteEn: "The elbows are included in the parts that must be washed.",
+  },
+  {
+    id: 7,
+    name: "Menyapu Kepala",
+    nameEn: "Wiping the Head",
+    pose: "wipe-head",
+    meaning: "Sapu sebahagian kepala dengan air. Mulakan dari depan kepala hingga ke belakang, kemudian kembalikan ke depan. Cukup sekali sapuan yang merangkumi sebahagian besar kepala.",
+    meaningEn: "Wipe part of the head with water. Start from the front of the head to the back, then return to the front. One thorough wipe covering most of the head suffices.",
+    note: "Dalam mazhab Hanafi, menyapu 1/4 kepala sudah memadai. Dalam mazhab Syafie, memadai dengan menyapu sebahagian kepala walaupun sedikit.",
+    noteEn: "In the Hanafi school, wiping 1/4 of the head is sufficient. In the Shafi'i school, wiping even a small portion suffices.",
+  },
+  {
+    id: 8,
+    name: "Menyapu Telinga",
+    nameEn: "Wiping the Ears",
+    pose: "wipe-ears",
+    meaning: "Sapu kedua-dua telinga dengan air. Gunakan jari telunjuk untuk bahagian dalam telinga dan ibu jari untuk bahagian luar. Cukup sekali sapuan.",
+    meaningEn: "Wipe both ears with water. Use the index finger for the inside of the ear and the thumb for the outside. One wipe is sufficient.",
+    note: "Menyapu telinga adalah sunat, dilakukan selepas menyapu kepala dengan baki air yang sama.",
+    noteEn: "Wiping the ears is sunnah, done after wiping the head using the same water.",
+  },
+  {
+    id: 9,
+    name: "Membasuh Kaki hingga Buku Lali",
+    nameEn: "Washing Feet to Ankles",
+    pose: "wash-feet",
+    meaning: "Basuh kedua-dua kaki hingga ke buku lali sebanyak 3 kali. Mulakan dengan kaki kanan, kemudian kiri. Bersihkan celah-celah jari kaki dengan jari kelingking tangan kiri.",
+    meaningEn: "Wash both feet up to the ankles 3 times. Start with the right foot, then the left. Clean between the toes with the little finger of the left hand.",
+    note: "Buku lali termasuk dalam anggota yang wajib dibasuh.",
+    noteEn: "The ankles are included in the parts that must be washed.",
+  },
+  {
+    id: 10,
+    name: "Doa Selepas Wuduk",
+    nameEn: "Supplication After Wudu",
+    pose: "dua-wudu",
+    arabic: "أَشْهَدُ أَنْ لَا إِلٰهَ إِلَّا اللّٰهُ وَحْدَهُ لَا شَرِيكَ لَهُ، وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
+    transliteration: "Ashhadu an lā ilāha illallāh, waḥdahu lā sharīka lah, wa ashhadu anna Muḥammadan 'abduhu wa rasūluh.",
+    meaning: "Aku bersaksi bahawa tiada Tuhan melainkan Allah, Yang Maha Esa, tiada sekutu bagi-Nya, dan aku bersaksi bahawa Nabi Muhammad itu hamba dan pesuruh-Nya.",
+    meaningEn: "I bear witness that there is no god but Allah, alone without partner, and I bear witness that Muhammad is His servant and messenger.",
+    note: "Sunat membaca doa ini selepas wuduk. Pintu-pintu syurga dibuka bagi yang membacanya.",
+    noteEn: "It is sunnah to recite this after wudu. The gates of Paradise are opened for the one who recites it.",
+    hasAudio: true,
+  },
 ];

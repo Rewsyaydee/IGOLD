@@ -1,9 +1,12 @@
 import { NAV_ITEMS, SITE } from "../data";
+import { APP_CONFIG } from "../config";
 import { useLang } from "../lang";
 
 export function Footer() {
   const { L } = useLang();
   const go = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  const { developer, org } = APP_CONFIG;
+
   return (
     <footer style={{ borderTop: "1px solid var(--line)", background: "var(--bg-alt)" }}>
       <div style={{ maxWidth: "var(--maxw)", margin: "0 auto", padding: "clamp(3rem, 6vw, 4.5rem) clamp(1.25rem, 5vw, 3rem)" }}>
@@ -20,8 +23,8 @@ export function Footer() {
             </p>
             <p style={{ color: "var(--muted)", fontSize: "0.78rem", marginTop: "1rem", lineHeight: 1.6, opacity: 0.7 }}>
               {L(
-                "Religious content follows the Shafi'i school. Please refer to a qualified ustaz / the IGOLD academic team for verification.",
-                "Kandungan agama mengikut mazhab Syafie. Sila rujuk ustaz / pasukan akademik IGOLD untuk pengesahan.",
+                "Religious content follows the Shafi'i and Hanafi schools. Please refer to a qualified ustaz / the IGOLD academic team for verification.",
+                "Kandungan agama mengikut mazhab Syafie dan Hanafi. Sila rujuk ustaz / pasukan akademik IGOLD untuk pengesahan.",
               )}
             </p>
           </div>
@@ -38,9 +41,23 @@ export function Footer() {
         <div className="geo-rule" style={{ margin: "2.5rem 0 1.5rem" }}>
           <svg width="22" height="22" viewBox="0 0 100 100"><polygon points="50,10 90,50 50,90 10,50" fill="none" stroke="var(--gold-600)" strokeWidth="5" /></svg>
         </div>
-        <p style={{ textAlign: "center", color: "var(--muted)", fontSize: "0.8rem", margin: 0 }}>
-          © {new Date().getFullYear()} {SITE.brand} · IIUM. {L("Built with love for the ummah.", "Dibina dengan penuh kasih untuk ummah.")} 🤲
-        </p>
+
+        <div style={{ textAlign: "center" }}>
+          <p style={{ color: "var(--muted)", fontSize: "0.8rem", margin: "0 0 0.5rem" }}>
+            &copy; {new Date().getFullYear()} {SITE.brand} &middot; {org.copyright}. {L("Built with love for the ummah.", "Dibina dengan penuh kasih untuk ummah.")} &#129782;
+          </p>
+          <p style={{ color: "var(--muted)", fontSize: "0.76rem", margin: 0, opacity: 0.75 }}>
+            {L("Developed by", "Dibangunkan oleh")}{" "}
+            <a
+              href={developer.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "var(--gold-ink)", textDecoration: "underline", fontWeight: 500 }}
+            >
+              {developer.name} &middot; {developer.websiteLabel}
+            </a>
+          </p>
+        </div>
       </div>
     </footer>
   );

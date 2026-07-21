@@ -1,7 +1,8 @@
 import { useRef, useState } from "react";
-import { RUKUN } from "../data";
+import { RUKUN, HANAFI_RUKUN } from "../data";
 import { useReveal } from "../useReveal";
 import { useLang } from "../lang";
+import { useMadhhab } from "../madhhab";
 
 const TYPE_LABEL: Record<string, { en: string; bm: string }> = {
   Qauli: { en: "Spoken act", bm: "Perbuatan lidah" },
@@ -11,19 +12,30 @@ const TYPE_LABEL: Record<string, { en: string; bm: string }> = {
 
 export function Rukun() {
   const { L } = useLang();
+  const { madhhab } = useMadhhab();
   const ref = useRef<HTMLElement>(null);
   const [open, setOpen] = useState<number | null>(null);
   useReveal(ref, { stagger: 0.04 });
+
+  const rukunList = madhhab === "hanafi" ? HANAFI_RUKUN : RUKUN;
 
   return (
     <section id="rukun" ref={ref} className="section">
       <div className="section-head">
         <span className="eyebrow reveal">{L("Pillars", "Rukun")}</span>
-        <h2 className="section-title reveal">{L("The 13 Pillars of Prayer", "13 Rukun Solat")}</h2>
+        <h2 className="section-title reveal">
+          {madhhab === "hanafi"
+            ? L("Pillars & Obligations of Prayer (Hanafi)", "Rukun & Wajib Solat (Hanafi)")
+            : L("The 13 Pillars of Prayer (Shafi'i)", "13 Rukun Solat (Syafie)")}
+        </h2>
         <p className="section-sub reveal">
           {L(
-            "The pillars are the essential acts that make up the prayer. If one is missed, the prayer is invalid. Hover or tap a card for details.",
-            "Rukun adalah perkara wajib yang membentuk solat. Jika tertinggal satu rukun, solat tidak sah. Tuding atau tekan kad untuk butiran.",
+            madhhab === "hanafi"
+              ? "The Hanafi school distinguishes between fardh (obligatory pillars) and wajib (necessary acts). Both are essential for a valid prayer. Hover or tap a card for details."
+              : "The pillars are the essential acts that make up the prayer. If one is missed, the prayer is invalid. Hover or tap a card for details.",
+            madhhab === "hanafi"
+              ? "Mazhab Hanafi membezakan antara fardhu (rukun wajib) dan wajib (perkara perlu). Kedua-duanya penting untuk solat yang sah. Tuding atau tekan kad untuk butiran."
+              : "Rukun adalah perkara wajib yang membentuk solat. Jika tertinggal satu rukun, solat tidak sah. Tuding atau tekan kad untuk butiran.",
           )}
         </p>
       </div>
@@ -35,7 +47,7 @@ export function Rukun() {
           gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
         }}
       >
-        {RUKUN.map(r => {
+        {rukunList.map(r => {
           const isOpen = open === r.id;
           const type = TYPE_LABEL[r.type];
           return (

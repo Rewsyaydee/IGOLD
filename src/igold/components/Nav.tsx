@@ -1,6 +1,59 @@
 import { useEffect, useState } from "react";
 import { NAV_ITEMS, SITE } from "../data";
+import { APP_CONFIG } from "../config";
 import { useLang } from "../lang";
+import { useMadhhab, type Madhhab } from "../madhhab";
+import { ModelSelector } from "./ModelSelector";
+
+function MadhhabSelector() {
+  const { madhhab, setMadhhab } = useMadhhab();
+  const options: { value: Madhhab; label: string }[] = [
+    { value: "shafii", label: "Syafi'e" },
+    { value: "hanafi", label: "Hanafi" },
+  ];
+  return (
+    <div
+      role="group"
+      aria-label="Madhhab / Mazhab"
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        border: "1px solid var(--line)",
+        borderRadius: 100,
+        padding: 3,
+        gap: 2,
+        background: "var(--gold-tint-soft)",
+        marginLeft: "0.3rem",
+      }}
+    >
+      {options.map(o => {
+        const on = madhhab === o.value;
+        return (
+          <button
+            key={o.value}
+            onClick={() => setMadhhab(o.value)}
+            aria-pressed={on}
+            style={{
+              border: "none",
+              cursor: "pointer",
+              borderRadius: 100,
+              padding: "0.32rem 0.7rem",
+              fontSize: "0.74rem",
+              fontWeight: 700,
+              letterSpacing: "0.06em",
+              fontFamily: "var(--font-body)",
+              transition: "all 0.3s var(--ease)",
+              background: on ? "linear-gradient(120deg, var(--gold-500), var(--gold-600))" : "transparent",
+              color: on ? "var(--white)" : "var(--muted)",
+            }}
+          >
+            {o.label}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
 
 function LangToggle({ compact = false }: { compact?: boolean }) {
   const { lang, setLang } = useLang();
@@ -108,6 +161,12 @@ export function Nav() {
             <polygon points="50,8 60,38 92,38 66,57 76,90 50,70 24,90 34,57 8,38 40,38" fill="none" stroke="var(--gold-500)" strokeWidth="4" />
           </svg>
           <span className="display gold-text" style={{ fontSize: "1.2rem", letterSpacing: "0.14em" }}>{SITE.brand}</span>
+          <img
+            src={APP_CONFIG.branding.iiumLogo}
+            alt="IIUM"
+            style={{ height: 26, width: "auto", marginLeft: 4, opacity: 0.85 }}
+            onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+          />
         </button>
 
         {/* desktop */}
@@ -136,6 +195,8 @@ export function Nav() {
             </button>
           ))}
           <LangToggle />
+          <MadhhabSelector />
+          <ModelSelector />
         </div>
 
         {/* mobile: lang toggle + burger */}

@@ -79,7 +79,7 @@ export function Hero() {
   }, []);
 
   const trust = [
-    { icon: BookOpenCheck, en: "Shafi'i school", bm: "Mazhab Syafi'i" },
+    { icon: BookOpenCheck, en: "Shafi'i & Hanafi schools", bm: "Mazhab Syafi'i & Hanafi" },
     { icon: ShieldCheck, en: "IGOLD academic review", bm: "Semakan akademik IGOLD" },
     { icon: Globe2, en: "Malaysia · New Zealand", bm: "Malaysia · New Zealand" },
     { icon: HeartHandshake, en: "Free & open for all", bm: "Percuma & terbuka" },

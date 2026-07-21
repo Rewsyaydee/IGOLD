@@ -33,6 +33,14 @@ export const AUDIO_URLS: Record<string, string> = {
   // step-5 (Surah Lazim) & step-12 (Selawat) — no dedicated file yet (placeholder)
   // Extra recitations available (pending section decision):
   //   /audio/08_tahiyatawal.m4a, /audio/11_qunutsubuh.m4a, /audio/12_sujudtilawah.m4a
+  // --- Niyyah audio (one file per prayer) ---
+  "niyyah-subuh": "/audio/niyyah/subuh.mp3",
+  "niyyah-zohor": "/audio/niyyah/zohor.mp3",
+  "niyyah-asar": "/audio/niyyah/asar.mp3",
+  "niyyah-maghrib": "/audio/niyyah/maghrib.mp3",
+  "niyyah-isyak": "/audio/niyyah/isyak.mp3",
+  // --- Wudu audio ---
+  "wudu-10": "/audio/wudu/dua-wudu.mp3",
 };
 
 let ctx: AudioContext | null = null;
