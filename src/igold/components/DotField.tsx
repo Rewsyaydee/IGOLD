@@ -53,6 +53,9 @@ const DotField = memo(({
     if (!canvas) return;
     const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;
+
+    const c = canvas;
+    const c2d = ctx;
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     let resizeTimer: ReturnType<typeof setTimeout>;
 
@@ -62,15 +65,15 @@ const DotField = memo(({
     }
 
     function doResize() {
-      const rect = canvas.parentElement!.getBoundingClientRect();
+      const rect = c.parentElement!.getBoundingClientRect();
       const w = rect.width;
       const h = rect.height;
 
-      canvas.width = w * dpr;
-      canvas.height = h * dpr;
-      canvas.style.width = `${w}px`;
-      canvas.style.height = `${h}px`;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      c.width = w * dpr;
+      c.height = h * dpr;
+      c.style.width = `${w}px`;
+      c.style.height = `${h}px`;
+      c2d.setTransform(dpr, 0, 0, dpr, 0, 0);
 
       sizeRef.current = {
         w,
@@ -145,19 +148,19 @@ const DotField = memo(({
         glowEl.style.opacity = String(glowOpacity.current);
       }
 
-      ctx.clearRect(0, 0, w, h);
+      c2d.clearRect(0, 0, w, h);
 
-      const grad = ctx.createLinearGradient(0, 0, w, h);
+      const grad = c2d.createLinearGradient(0, 0, w, h);
       grad.addColorStop(0, p.gradientFrom);
       grad.addColorStop(1, p.gradientTo);
-      ctx.fillStyle = grad;
+      c2d.fillStyle = grad;
 
       const cr = p.cursorRadius;
       const crSq = cr * cr;
       const rad = p.dotRadius / 2;
       const isBulge = p.bulgeOnly;
 
-      ctx.beginPath();
+      c2d.beginPath();
 
       for (let i = 0; i < len; i++) {
         const d = dots[i];
@@ -203,19 +206,19 @@ const DotField = memo(({
         if (p.sparkle) {
           const hash = ((i * 2654435761) ^ (frameCount >> 3)) >>> 0;
           if ((hash % 100) < 3) {
-            ctx.moveTo(drawX + rad * 1.8, drawY);
-            ctx.arc(drawX, drawY, rad * 1.8, 0, TWO_PI);
+            c2d.moveTo(drawX + rad * 1.8, drawY);
+            c2d.arc(drawX, drawY, rad * 1.8, 0, TWO_PI);
           } else {
-            ctx.moveTo(drawX + rad, drawY);
-            ctx.arc(drawX, drawY, rad, 0, TWO_PI);
+            c2d.moveTo(drawX + rad, drawY);
+            c2d.arc(drawX, drawY, rad, 0, TWO_PI);
           }
         } else {
-          ctx.moveTo(drawX + rad, drawY);
-          ctx.arc(drawX, drawY, rad, 0, TWO_PI);
+          c2d.moveTo(drawX + rad, drawY);
+          c2d.arc(drawX, drawY, rad, 0, TWO_PI);
         }
       }
 
-      ctx.fill();
+      c2d.fill();
 
       rafRef.current = requestAnimationFrame(tick);
     }
