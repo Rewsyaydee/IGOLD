@@ -8,7 +8,55 @@ import { useReveal } from "../useReveal";
 import { useLang } from "../lang";
 import { useMadhhab } from "../madhhab";
 import { useModel } from "../model";
-import { buildKaifiatVideoMap } from "../mediaRegistry";
+import { MEDIA_MODELS, MEDIA_MODEL_LABELS, buildKaifiatVideoMap } from "../mediaRegistry";
+
+function ModelPills() {
+  const { model, setModel } = useModel();
+  const { L } = useLang();
+  return (
+    <div
+      role="group"
+      aria-label="Instructional model"
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        border: "1px solid var(--line)",
+        borderRadius: 100,
+        padding: 3,
+        gap: 2,
+        background: "var(--surface)",
+        flexShrink: 0,
+      }}
+    >
+      {MEDIA_MODELS.map(m => {
+        const labels = MEDIA_MODEL_LABELS[m];
+        const on = model === m;
+        return (
+          <button
+            key={m}
+            onClick={() => setModel(m)}
+            aria-pressed={on}
+            style={{
+              border: "none",
+              cursor: "pointer",
+              borderRadius: 100,
+              padding: "0.28rem 0.6rem",
+              fontSize: "0.68rem",
+              fontWeight: 700,
+              letterSpacing: "0.04em",
+              fontFamily: "var(--font-body)",
+              transition: "all 0.3s var(--ease)",
+              background: on ? "linear-gradient(120deg, var(--gold-500), var(--gold-600))" : "transparent",
+              color: on ? "var(--white)" : "var(--muted)",
+            }}
+          >
+            {L(labels.en, labels.bm)}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
 
 export function Kaifiat() {
   const { L } = useLang();
@@ -26,6 +74,8 @@ export function Kaifiat() {
   const step = steps[i];
   const pct = ((i + 1) / steps.length) * 100;
   const videoMap = buildKaifiatVideoMap(model);
+
+  useEffect(() => { setVidErr({}); }, [model]);
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -54,12 +104,19 @@ export function Kaifiat() {
   return (
     <section id="kaifiat" ref={ref} className="section">
       <div className="section-head">
-        <span className="eyebrow k-reveal">{L("Step by Step", "Cara Solat")}</span>
-        <h2 className="section-title k-reveal">{L("How to Pray", "Kaifiat Solat")}</h2>
-        <p className="section-sub k-reveal">
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem", flexWrap: "wrap" }}>
+          <div>
+            <span className="eyebrow k-reveal">{L("Step by Step", "Cara Solat")}</span>
+            <h2 className="section-title k-reveal" style={{ marginBottom: 0 }}>{L("How to Pray", "Kaifiat Solat")}</h2>
+          </div>
+          <div className="k-reveal">
+            <ModelPills />
+          </div>
+        </div>
+        <p className="section-sub k-reveal" style={{ marginTop: "0.6rem" }}>
           {L(
-            `Follow every step from the intention to the closing salam — complete with recitations, transliteration, meaning, and audio. (${madhhab === "hanafi" ? "Hanafi" : "Shafi'i"} school)`,
-            `Ikuti setiap langkah dari niat sehingga salam — lengkap dengan bacaan, sebutan rumi, maksud, dan butang audio. (Mazhab ${madhhab === "hanafi" ? "Hanafi" : "Syafie"})`,
+            `Follow every step — complete with recitations, transliteration, meaning, and audio. (${madhhab === "hanafi" ? "Hanafi" : "Shafi'i"} school)`,
+            `Ikuti setiap langkah — lengkap dengan bacaan, sebutan rumi, maksud, dan butang audio. (Mazhab ${madhhab === "hanafi" ? "Hanafi" : "Syafie"})`,
           )}
         </p>
       </div>

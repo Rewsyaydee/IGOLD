@@ -3,19 +3,19 @@ import { Check } from "lucide-react";
 import { POSTURES, HANAFI_POSTURES } from "../data";
 import { useLang } from "../lang";
 import { useMadhhab } from "../madhhab";
-import { useModel } from "../model";
 import { buildKaifiatVideoMap } from "../mediaRegistry";
+
+const DEFAULT_MODEL = "default";
 
 export default function PostureExplorer() {
   const { L } = useLang();
   const { madhhab } = useMadhhab();
-  const { model } = useModel();
   const [active, setActive] = useState(0);
 
   const postureData = madhhab === "hanafi" ? HANAFI_POSTURES : POSTURES;
   const p = postureData[active];
   const align = L(p.alignEn, p.align);
-  const videoMap = buildKaifiatVideoMap(model);
+  const videoMap = buildKaifiatVideoMap(DEFAULT_MODEL);
 
   return (
     <section id="explorer" className="band">
@@ -47,7 +47,7 @@ export default function PostureExplorer() {
             }}
           >
             <video
-              key={`${model}-${p.pose}`}
+              key={`${DEFAULT_MODEL}-${p.pose}`}
               src={videoMap[p.pose]}
               autoPlay
               muted

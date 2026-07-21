@@ -6,12 +6,10 @@ Place IIUM and IGOLD branding files here.
 
 | File | Description | Format | Recommended size |
 |------|-------------|--------|------------------|
-| `iium-logo.svg` | IIUM logo in full color for light backgrounds | SVG | 200×60 viewBox |
-| `iium-logo-white.svg` | IIUM logo in white/monochrome for dark backgrounds | SVG | 200×60 viewBox |
+| `iium-logo.png` | IIUM logo in full color for light backgrounds | PNG | ~200px wide |
+| `iium-logo-white.png` | IIUM logo in white/monochrome for dark backgrounds | PNG | ~200px wide |
 
 ## Notes
 
-- SVG is preferred for logos — it scales cleanly at any resolution.
-- Keep file sizes small (< 30 KB per SVG).
-- The IIUM logo is displayed in the nav bar (light background) and footer.
-- Place the files directly in this directory — the app references them as `/branding/iium-logo.svg`.
+- PNG is the current format. SVG is also acceptable if you have it.
+- Keep file sizes small (< 50 KB per file).

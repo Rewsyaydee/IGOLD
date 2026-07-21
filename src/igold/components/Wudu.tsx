@@ -5,12 +5,12 @@ import { WUDU_STEPS } from "../data";
 import { playAudio, hasRealAudio } from "../audio";
 import { useReveal } from "../useReveal";
 import { useLang } from "../lang";
-import { useModel } from "../model";
 import { getMediaPath } from "../mediaRegistry";
+
+const DEFAULT_MODEL = "default";
 
 export default function Wudu() {
   const { L } = useLang();
-  const { model } = useModel();
   const ref = useRef<HTMLElement>(null);
   const figureRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -21,7 +21,7 @@ export default function Wudu() {
 
   const step = WUDU_STEPS[i];
   const pct = ((i + 1) / WUDU_STEPS.length) * 100;
-  const videoSrc = getMediaPath(model, "wudu", step.pose);
+  const videoSrc = getMediaPath(DEFAULT_MODEL, "wudu", step.pose);
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -86,7 +86,7 @@ export default function Wudu() {
           <div ref={figureRef} style={{ position: "relative", height: "clamp(340px, 54vh, 480px)", aspectRatio: "9 / 16", maxWidth: "100%", borderRadius: 18, overflow: "hidden", background: "var(--navy-800)", boxShadow: "0 10px 30px -14px rgba(22,34,63,0.4)", border: "1px solid var(--line-soft)" }}>
             {!vidErr[step.pose] ? (
               <video
-                key={step.pose}
+                key={`${DEFAULT_MODEL}-${step.pose}`}
                 src={videoSrc}
                 autoPlay
                 muted
@@ -100,7 +100,7 @@ export default function Wudu() {
             ) : (
               <div style={{ display: "grid", placeItems: "center", width: "100%", height: "100%", padding: "2rem", color: "var(--muted)", fontSize: "0.9rem", textAlign: "center" }}>
                 <p>{L("Video coming soon.", "Video akan datang.")}</p>
-                <p style={{ fontSize: "0.75rem", opacity: 0.6 }}>{L("Place MP4 in", "Letak MP4 di")} public/media/{model}/wudu/{step.pose}.mp4</p>
+                <p style={{ fontSize: "0.75rem", opacity: 0.6 }}>{L("Place MP4 in", "Letak MP4 di")} public/media/default/wudu/{step.pose}.mp4</p>
               </div>
             )}
             <div style={{ position: "absolute", inset: "0 0 auto 0", height: "24%", background: "linear-gradient(to bottom, rgba(6,13,32,0.7), transparent)", pointerEvents: "none", zIndex: 1 }} />

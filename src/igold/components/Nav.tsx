@@ -3,7 +3,6 @@ import { NAV_ITEMS, SITE } from "../data";
 import { APP_CONFIG } from "../config";
 import { useLang } from "../lang";
 import { useMadhhab, type Madhhab } from "../madhhab";
-import { ModelSelector } from "./ModelSelector";
 
 function MadhhabSelector() {
   const { madhhab, setMadhhab } = useMadhhab();
@@ -196,7 +195,6 @@ export function Nav() {
           ))}
           <LangToggle />
           <MadhhabSelector />
-          <ModelSelector />
         </div>
 
         {/* mobile: lang toggle + burger */}

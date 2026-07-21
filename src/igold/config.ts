@@ -39,8 +39,8 @@ export const APP_CONFIG = {
 
   // ---- Branding asset paths (relative to /public/) ----------------
   branding: {
-    iiumLogo: "/branding/iium-logo.svg",
-    iiumLogoWhite: "/branding/iium-logo-white.svg",
+    iiumLogo: "/branding/iium-logo.png",
+    iiumLogoWhite: "/branding/iium-logo-white.png",
     favicon: "/favicon.png",
   },
 } as const;
