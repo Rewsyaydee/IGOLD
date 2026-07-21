@@ -3,7 +3,7 @@
 // Shafi'i and Hanafi are supported. Extend this file to add more schools.
 // ============================================================================
 
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { createContext, useContext, useState, type ReactNode } from "react";
 
 export type Madhhab = "shafii" | "hanafi";
 

@@ -3,7 +3,7 @@
 // Allows switching between different figure models in the media.
 // ============================================================================
 
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { createContext, useContext, useState, type ReactNode } from "react";
 import type { MediaModel } from "./mediaRegistry";
 
 interface ModelCtx {
