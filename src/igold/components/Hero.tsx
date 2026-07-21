@@ -3,59 +3,7 @@ import { gsap } from "gsap";
 import { BookOpenCheck, Globe2, HeartHandshake, ShieldCheck } from "lucide-react";
 import { SITE } from "../data";
 import { useLang } from "../lang";
-
-/** Static Islamic geometric rosette (8-point khatam star), gold line-art.
- *  Purely decorative, aria-hidden. Gently rotates unless reduced-motion. */
-function GeoMotif() {
-  return (
-    <div
-      aria-hidden="true"
-      className="hero-motif"
-      style={{
-        position: "absolute",
-        inset: 0,
-        display: "grid",
-        placeItems: "center",
-        zIndex: 0,
-        pointerEvents: "none",
-        opacity: 0.5,
-      }}
-    >
-      <svg
-        width="min(92vw, 760px)"
-        height="min(92vw, 760px)"
-        viewBox="0 0 200 200"
-        fill="none"
-        style={{ display: "block" }}
-      >
-        <g stroke="var(--gold-500)" strokeWidth="0.6" opacity="0.6">
-          <circle cx="100" cy="100" r="92" />
-          <circle cx="100" cy="100" r="70" />
-          <circle cx="100" cy="100" r="46" />
-        </g>
-        {/* two overlaid squares → 8-point star */}
-        <g stroke="var(--gold-600)" strokeWidth="0.8" opacity="0.75">
-          <rect x="32" y="32" width="136" height="136" transform="rotate(0 100 100)" />
-          <rect x="32" y="32" width="136" height="136" transform="rotate(45 100 100)" />
-        </g>
-        {/* inner rosette petals */}
-        <g stroke="var(--gold-400)" strokeWidth="0.7" opacity="0.7">
-          {Array.from({ length: 8 }).map((_, i) => (
-            <line
-              key={i}
-              x1="100"
-              y1="100"
-              x2="100"
-              y2="8"
-              transform={`rotate(${i * 45} 100 100)`}
-            />
-          ))}
-        </g>
-        <circle cx="100" cy="100" r="14" stroke="var(--gold-600)" strokeWidth="0.9" />
-      </svg>
-    </div>
-  );
-}
+import DotField from "./DotField";
 
 export function Hero() {
   const { L } = useLang();
@@ -72,8 +20,6 @@ export function Hero() {
         .from(".hero-sub", { opacity: 0, y: 18, duration: 0.7 }, "-=0.4")
         .from(".hero-cta", { opacity: 0, y: 18, duration: 0.6, stagger: 0.1 }, "-=0.4")
         .from(".trust-pill", { opacity: 0, y: 14, duration: 0.5, stagger: 0.08 }, "-=0.3");
-      // slow, subtle rotation of the geometric motif
-      gsap.to(".hero-motif svg", { rotate: 360, duration: 240, repeat: -1, ease: "none", transformOrigin: "50% 50%" });
     }, root);
     return () => ctx.revert();
   }, []);
@@ -99,7 +45,19 @@ export function Hero() {
           "radial-gradient(circle at 50% 30%, #fffdf8 0%, var(--cream) 55%, var(--cream-2) 100%)",
       }}
     >
-      <GeoMotif />
+      <div style={{ position: "absolute", inset: 0, zIndex: 1, pointerEvents: "none" }}>
+        <DotField
+          dotRadius={1.5}
+          dotSpacing={14}
+          bulgeStrength={67}
+          glowRadius={160}
+          sparkle={false}
+          waveAmplitude={0}
+          gradientFrom="rgba(201, 162, 39, 0.28)"
+          gradientTo="rgba(22, 34, 63, 0.16)"
+          glowColor="rgba(201, 162, 39, 0.05)"
+        />
+      </div>
 
       <div style={{ position: "relative", zIndex: 2, padding: "7rem 1.5rem 3rem", maxWidth: 900 }}>
         <div
@@ -142,7 +100,6 @@ export function Hero() {
         </div>
       </div>
 
-      {/* scroll cue */}
       <div style={{ position: "absolute", bottom: 26, left: "50%", transform: "translateX(-50%)", zIndex: 2, color: "var(--muted)", fontSize: "0.72rem", letterSpacing: "0.25em", textTransform: "uppercase", display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
         {L("Scroll", "Skrol")}
         <span style={{ width: 1, height: 34, background: "linear-gradient(var(--gold-500), transparent)" }} />
