@@ -17,10 +17,9 @@
   --logo: 36px;
   --pill-pad-x: 18px;
   --pill-gap: 3px;
-  width: 100%;
+  width: max-content;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   box-sizing: border-box;
   padding: 0.7rem clamp(1.25rem, 5vw, 3rem);
   max-width: 1200px;
@@ -42,6 +41,7 @@
   height: var(--nav-h);
   background: var(--base, #c9a227);
   border-radius: 9999px;
+  padding-right: 4px;
 }
 
 .pill-logos {
@@ -99,7 +99,7 @@
   white-space: nowrap;
   cursor: pointer;
   position: relative;
-  overflow: visible;
+  overflow: hidden;
   font-family: "Inter", system-ui, sans-serif;
 }
 
@@ -140,18 +140,6 @@
   will-change: transform, opacity;
 }
 
-.pill.is-active::after {
-  content: '';
-  position: absolute;
-  bottom: -6px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 12px;
-  height: 12px;
-  background: var(--pill-text, #16223f);
-  border-radius: 50px;
-  z-index: 4;
-}
 
 .pill-toggle.is-toggle-on {
   background: var(--pill-bg, #f7f2e8);
