@@ -60,7 +60,7 @@ function ModelPills() {
 
 export function Kaifiat() {
   const { L } = useLang();
-  const { madhhab } = useMadhhab();
+  const { madhhab, setMadhhab } = useMadhhab();
   const { model } = useModel();
   const ref = useRef<HTMLElement>(null);
   const figureRef = useRef<HTMLDivElement>(null);
@@ -123,10 +123,35 @@ export function Kaifiat() {
             <ModelPills />
           </div>
         </div>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.6rem", marginTop: "0.4rem", flexWrap: "wrap" }}>
+          <div className="k-reveal" style={{ display: "flex", gap: 3, background: "var(--gold-tint-soft)", borderRadius: 100, padding: 3, border: "1px solid var(--line)" }}>
+            {(["shafii", "hanafi"] as const).map(m => (
+              <button
+                key={m}
+                onClick={() => setMadhhab(m)}
+                style={{
+                  border: "none",
+                  cursor: "pointer",
+                  borderRadius: 100,
+                  padding: "0.28rem 0.6rem",
+                  fontSize: "0.68rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.04em",
+                  fontFamily: "var(--font-body)",
+                  transition: "all 0.3s var(--ease)",
+                  background: madhhab === m ? "linear-gradient(120deg, var(--gold-500), var(--gold-600))" : "transparent",
+                  color: madhhab === m ? "var(--white)" : "var(--muted)",
+                }}
+              >
+                {m === "shafii" ? "Syafi'e" : "Hanafi"}
+              </button>
+            ))}
+          </div>
+        </div>
         <p className="section-sub k-reveal" style={{ marginTop: "0.6rem" }}>
           {L(
-            `Follow every step — complete with recitations, transliteration, meaning, and audio. (${madhhab === "hanafi" ? "Hanafi" : "Shafi'i"} school)`,
-            `Ikuti setiap langkah — lengkap dengan bacaan, sebutan rumi, maksud, dan butang audio. (Mazhab ${madhhab === "hanafi" ? "Hanafi" : "Syafie"})`,
+            "Follow every step — complete with recitations, transliteration, meaning, and audio.",
+            "Ikuti setiap langkah — lengkap dengan bacaan, sebutan rumi, maksud, dan butang audio.",
           )}
         </p>
       </div>

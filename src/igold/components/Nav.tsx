@@ -2,15 +2,11 @@ import { useEffect, useState } from "react";
 import { NAV_ITEMS } from "../data";
 import { APP_CONFIG } from "../config";
 import { useLang } from "../lang";
-import { useMadhhab } from "../madhhab";
 import { PillNav } from "./PillNav";
 
 export function Nav() {
   const { lang, L, toggle: toggleLang } = useLang();
-  const { madhhab, setMadhhab } = useMadhhab();
   const [scrolled, setScrolled] = useState(false);
-
-  const toggleMadhhab = () => setMadhhab(madhhab === "shafii" ? "hanafi" : "shafii");
 
   const navItems = NAV_ITEMS.map(item => ({
     label: L(item.labelEn, item.label),
@@ -48,14 +44,12 @@ export function Nav() {
         logoIIUMAlt="IIUM"
         items={navItems}
         lang={lang}
-        madhhab={madhhab}
         onToggleLang={toggleLang}
-        onToggleMadhhab={toggleMadhhab}
         onNavigate={id => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" })}
-        baseColor="var(--cream)"
-        pillColor="var(--gold-500)"
+        baseColor="var(--gold-500)"
+        pillColor="var(--cream)"
         pillTextColor="var(--ink)"
-        hoveredPillTextColor="var(--white)"
+        hoveredPillTextColor="var(--ink)"
       />
     </header>
   );

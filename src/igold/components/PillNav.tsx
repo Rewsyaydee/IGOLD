@@ -13,9 +13,7 @@ interface PillNavProps {
   logoIIUMAlt?: string;
   items: PillNavItem[];
   lang: string;
-  madhhab: string;
   onToggleLang: () => void;
-  onToggleMadhhab: () => void;
   onNavigate: (href: string) => void;
   className?: string;
   ease?: string;
@@ -32,15 +30,13 @@ export function PillNav({
   logoIIUMAlt = "IIUM",
   items,
   lang,
-  madhhab,
   onToggleLang,
-  onToggleMadhhab,
   onNavigate,
   className = "",
   ease = "power3.easeOut",
-  baseColor = "#f7f2e8",
-  pillColor = "#c9a227",
-  hoveredPillTextColor = "#ffffff",
+  baseColor = "#c9a227",
+  pillColor = "#f7f2e8",
+  hoveredPillTextColor = "#16223f",
   pillTextColor = "#16223f",
   initialLoadAnimation = true,
 }: PillNavProps) {
@@ -188,57 +184,69 @@ export function PillNav({
     });
   };
 
+  const closeMobileMenu = () => {
+    if (!isMobileMenuOpen) return;
+    setIsMobileMenuOpen(false);
+
+    const hamburger = hamburgerRef.current;
+    if (hamburger) {
+      const lines = hamburger.querySelectorAll(".hamburger-line");
+      gsap.to(lines[0], { rotation: 0, y: 0, duration: 0.3, ease });
+      gsap.to(lines[1], { rotation: 0, y: 0, duration: 0.3, ease });
+    }
+
+    const menu = mobileMenuRef.current;
+    if (menu) {
+      gsap.to(menu, {
+        opacity: 0,
+        y: 10,
+        scaleY: 1,
+        duration: 0.2,
+        ease,
+        transformOrigin: "top center",
+        onComplete: () => {
+          gsap.set(menu, { visibility: "hidden" });
+        },
+      });
+    }
+  };
+
   const toggleMobileMenu = () => {
-    const newState = !isMobileMenuOpen;
-    setIsMobileMenuOpen(newState);
+    if (isMobileMenuOpen) {
+      closeMobileMenu();
+      return;
+    }
+
+    setIsMobileMenuOpen(true);
 
     const hamburger = hamburgerRef.current;
     const menu = mobileMenuRef.current;
 
     if (hamburger) {
       const lines = hamburger.querySelectorAll(".hamburger-line");
-      if (newState) {
-        gsap.to(lines[0], { rotation: 45, y: 3, duration: 0.3, ease });
-        gsap.to(lines[1], { rotation: -45, y: -3, duration: 0.3, ease });
-      } else {
-        gsap.to(lines[0], { rotation: 0, y: 0, duration: 0.3, ease });
-        gsap.to(lines[1], { rotation: 0, y: 0, duration: 0.3, ease });
-      }
+      gsap.to(lines[0], { rotation: 45, y: 3, duration: 0.3, ease });
+      gsap.to(lines[1], { rotation: -45, y: -3, duration: 0.3, ease });
     }
 
     if (menu) {
-      if (newState) {
-        gsap.set(menu, { visibility: "visible" });
-        gsap.fromTo(
-          menu,
-          { opacity: 0, y: 10, scaleY: 1 },
-          {
-            opacity: 1,
-            y: 0,
-            scaleY: 1,
-            duration: 0.3,
-            ease,
-            transformOrigin: "top center",
-          },
-        );
-      } else {
-        gsap.to(menu, {
-          opacity: 0,
-          y: 10,
+      gsap.set(menu, { visibility: "visible" });
+      gsap.fromTo(
+        menu,
+        { opacity: 0, y: 10, scaleY: 1 },
+        {
+          opacity: 1,
+          y: 0,
           scaleY: 1,
-          duration: 0.2,
+          duration: 0.3,
           ease,
           transformOrigin: "top center",
-          onComplete: () => {
-            gsap.set(menu, { visibility: "hidden" });
-          },
-        });
-      }
+        },
+      );
     }
   };
 
   const go = (href: string) => {
-    setIsMobileMenuOpen(false);
+    closeMobileMenu();
     onNavigate(href);
   };
 
@@ -296,28 +304,12 @@ export function PillNav({
             <li role="none">
               <button
                 role="menuitem"
-                className={`pill ${lang === "en" ? "is-toggle-on" : "is-toggle-off"}`}
+                className={`pill pill-toggle ${lang === "en" ? "is-toggle-on" : "is-toggle-off"}`}
                 aria-label="Toggle language"
                 onClick={onToggleLang}
               >
                 <span className="label-stack">
-                  <span className="pill-label" style={{ zIndex: 2, position: "relative" }}>
-                    {lang === "en" ? "EN" : "BM"}
-                  </span>
-                </span>
-              </button>
-            </li>
-            <li role="none">
-              <button
-                role="menuitem"
-                className={`pill ${madhhab === "shafii" ? "is-toggle-on" : "is-toggle-off"}`}
-                aria-label="Toggle madhhab"
-                onClick={onToggleMadhhab}
-              >
-                <span className="label-stack">
-                  <span className="pill-label" style={{ zIndex: 2, position: "relative" }}>
-                    {madhhab === "shafii" ? "Syafi'e" : "Hanafi"}
-                  </span>
+                  <span className="pill-label">{lang === "en" ? "EN" : "BM"}</span>
                 </span>
               </button>
             </li>
@@ -326,15 +318,13 @@ export function PillNav({
 
         <div className="mobile-only">
           <button
-            className={`pill ${lang === "en" ? "is-toggle-on" : "is-toggle-off"}`}
+            className={`pill pill-toggle ${lang === "en" ? "is-toggle-on" : "is-toggle-off"}`}
             aria-label="Toggle language"
             onClick={onToggleLang}
             style={{ padding: "0 10px", fontSize: "12px", height: "32px" }}
           >
             <span className="label-stack">
-              <span className="pill-label" style={{ zIndex: 2, position: "relative" }}>
-                {lang === "en" ? "EN" : "BM"}
-              </span>
+              <span className="pill-label">{lang === "en" ? "EN" : "BM"}</span>
             </span>
           </button>
           <button
@@ -375,20 +365,6 @@ export function PillNav({
             onClick={onToggleLang}
           >
             BM
-          </button>
-        </div>
-        <div className="mobile-toggle-row">
-          <button
-            className={`mobile-toggle-btn ${madhhab === "shafii" ? "on" : "off"}`}
-            onClick={onToggleMadhhab}
-          >
-            Syafi'e
-          </button>
-          <button
-            className={`mobile-toggle-btn ${madhhab === "hanafi" ? "on" : "off"}`}
-            onClick={onToggleMadhhab}
-          >
-            Hanafi
           </button>
         </div>
       </div>

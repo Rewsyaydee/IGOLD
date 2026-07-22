@@ -12,7 +12,7 @@ const TYPE_LABEL: Record<string, { en: string; bm: string }> = {
 
 export function Rukun() {
   const { L } = useLang();
-  const { madhhab } = useMadhhab();
+  const { madhhab, setMadhhab } = useMadhhab();
   const ref = useRef<HTMLElement>(null);
   const [open, setOpen] = useState<number | null>(null);
   useReveal(ref, { stagger: 0.04 });
@@ -22,12 +22,39 @@ export function Rukun() {
   return (
     <section id="rukun" ref={ref} className="section">
       <div className="section-head">
-        <span className="eyebrow reveal">{L("Pillars", "Rukun")}</span>
-        <h2 className="section-title reveal">
-          {madhhab === "hanafi"
-            ? L("Pillars & Obligations of Prayer (Hanafi)", "Rukun & Wajib Solat (Hanafi)")
-            : L("The 13 Pillars of Prayer (Shafi'i)", "13 Rukun Solat (Syafie)")}
-        </h2>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem", flexWrap: "wrap" }}>
+          <div>
+            <span className="eyebrow reveal">{L("Pillars", "Rukun")}</span>
+            <h2 className="section-title reveal" style={{ marginBottom: 0 }}>
+              {madhhab === "hanafi"
+                ? L("Pillars & Obligations of Prayer (Hanafi)", "Rukun & Wajib Solat (Hanafi)")
+                : L("The 13 Pillars of Prayer (Shafi'i)", "13 Rukun Solat (Syafie)")}
+            </h2>
+          </div>
+          <div className="reveal" style={{ display: "flex", gap: 3, background: "var(--gold-tint-soft)", borderRadius: 100, padding: 3, border: "1px solid var(--line)" }}>
+            {(["shafii", "hanafi"] as const).map(m => (
+              <button
+                key={m}
+                onClick={() => setMadhhab(m)}
+                style={{
+                  border: "none",
+                  cursor: "pointer",
+                  borderRadius: 100,
+                  padding: "0.32rem 0.7rem",
+                  fontSize: "0.72rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.04em",
+                  fontFamily: "var(--font-body)",
+                  transition: "all 0.3s var(--ease)",
+                  background: madhhab === m ? "linear-gradient(120deg, var(--gold-500), var(--gold-600))" : "transparent",
+                  color: madhhab === m ? "var(--white)" : "var(--muted)",
+                }}
+              >
+                {m === "shafii" ? "Syafi'e" : "Hanafi"}
+              </button>
+            ))}
+          </div>
+        </div>
         <p className="section-sub reveal">
           {L(
             madhhab === "hanafi"

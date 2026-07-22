@@ -9,7 +9,7 @@ const DEFAULT_MODEL = "default";
 
 export default function PostureExplorer() {
   const { L } = useLang();
-  const { madhhab } = useMadhhab();
+  const { madhhab, setMadhhab } = useMadhhab();
   const [active, setActive] = useState(0);
 
   const postureData = madhhab === "hanafi" ? HANAFI_POSTURES : POSTURES;
@@ -21,8 +21,35 @@ export default function PostureExplorer() {
     <section id="explorer" className="band">
       <div className="section">
         <div className="section-head">
-          <span className="eyebrow">{L("Postures", "Posisi")}</span>
-          <h2 className="section-title">{L("Explore Each Posture", "Terokai Setiap Posisi")}</h2>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem", flexWrap: "wrap" }}>
+            <div>
+              <span className="eyebrow">{L("Postures", "Posisi")}</span>
+              <h2 className="section-title" style={{ marginBottom: 0 }}>{L("Explore Each Posture", "Terokai Setiap Posisi")}</h2>
+            </div>
+            <div style={{ display: "flex", gap: 3, background: "var(--gold-tint-soft)", borderRadius: 100, padding: 3, border: "1px solid var(--line)" }}>
+              {(["shafii", "hanafi"] as const).map(m => (
+                <button
+                  key={m}
+                  onClick={() => setMadhhab(m)}
+                  style={{
+                    border: "none",
+                    cursor: "pointer",
+                    borderRadius: 100,
+                    padding: "0.32rem 0.7rem",
+                    fontSize: "0.72rem",
+                    fontWeight: 700,
+                    letterSpacing: "0.04em",
+                    fontFamily: "var(--font-body)",
+                    transition: "all 0.3s var(--ease)",
+                    background: madhhab === m ? "linear-gradient(120deg, var(--gold-500), var(--gold-600))" : "transparent",
+                    color: madhhab === m ? "var(--white)" : "var(--muted)",
+                  }}
+                >
+                  {m === "shafii" ? "Syafi'e" : "Hanafi"}
+                </button>
+              ))}
+            </div>
+          </div>
           <p className="section-sub">
             {L(
               "Tap a posture to watch it up close and read how the body should be aligned in each position.",
