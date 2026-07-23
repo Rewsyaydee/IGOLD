@@ -11,7 +11,6 @@ export function Janazah() {
   const { L } = useLang();
   const ref = useRef<HTMLElement>(null);
   const [playingId, setPlayingId] = useState<string | null>(null);
-  const [open, setOpen] = useState<number | null>(null);
   useReveal(ref, { stagger: 0.08 });
 
   const onPlay = (id: number) => {
@@ -70,77 +69,63 @@ export function Janazah() {
         </div>
       </div>
 
-      <div
-        style={{
-          display: "grid",
-          gap: "1rem",
-          gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
-        }}
-      >
+      <div style={{ display: "flex", flexDirection: "column", gap: "1rem", maxWidth: 920, margin: "0 auto" }}>
         {JANAZAH_STEPS.map(s => {
           const key = `janazah-${s.id}`;
-          const isOpen = open === s.id;
           return (
-            <button
-              key={s.id}
-              className={`hover-card reveal${isOpen ? " is-open" : ""}`}
-              aria-expanded={isOpen}
-              onClick={() => setOpen(isOpen ? null : s.id)}
-            >
-              <span className="hover-card__num display">{String(s.id).padStart(2, "0")}</span>
-              <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "0.6rem", width: "100%" }}>
-                <h3 style={{ margin: "0 2.5rem 0 0", fontSize: "1.08rem", fontWeight: 600, lineHeight: 1.3 }}>
-                  {L(s.nameEn, s.name)}
-                </h3>
+            <article key={s.id} className="card reveal" style={{ display: "flex", flexDirection: "column", gap: "0.8rem", padding: "1.6rem" }}>
+              <div style={{ display: "flex", alignItems: "flex-start", gap: "1rem" }}>
+                <span className="display gold-gradient" style={{ fontSize: "2rem", lineHeight: 1, flexShrink: 0 }}>
+                  {String(s.id).padStart(2, "0")}
+                </span>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <h3 style={{ margin: 0, fontSize: "1.1rem", fontWeight: 600, lineHeight: 1.3 }}>
+                    {L(s.nameEn, s.name)}
+                  </h3>
+                </div>
                 {s.hasAudio && (
                   <button
-                    onClick={e => { e.stopPropagation(); onPlay(s.id); }}
+                    onClick={() => onPlay(s.id)}
                     aria-label={playingId === key ? L("Stop", "Hentikan") : L("Listen to", "Dengar")}
                     style={{
                       flexShrink: 0,
                       display: "grid",
                       placeItems: "center",
-                      width: 36,
-                      height: 36,
+                      width: 40,
+                      height: 40,
                       borderRadius: "50%",
                       border: "1px solid var(--line)",
                       background: playingId === key ? "var(--gold-500)" : "var(--gold-tint)",
                       cursor: "pointer",
                     }}
                   >
-                    {playingId === key ? <Square size={14} color="var(--white)" /> : <Volume2 size={16} color="var(--gold-500)" />}
+                    {playingId === key ? <Square size={15} color="var(--white)" /> : <Volume2 size={18} color="var(--gold-500)" />}
                   </button>
                 )}
               </div>
 
-              <div className="hover-card__detail">
-                <div>
-                  {s.arabic && (
-                    <div className="arabic" style={{ fontSize: "1.3rem", color: "var(--ink)", marginBottom: "0.5rem", lineHeight: 1.9 }}>
-                      {s.arabic}
-                    </div>
-                  )}
-                  {s.transliteration && (
-                    <p style={{ margin: "0.2rem 0 0.5rem", color: "var(--gold-ink)", fontStyle: "italic", fontSize: "0.88rem", lineHeight: 1.5 }}>
-                      {s.transliteration}
-                    </p>
-                  )}
-                  <p style={{ margin: 0, color: "var(--body)", fontSize: "0.95rem", lineHeight: 1.6 }}>
-                    {L(s.meaningEn, s.meaning)}
-                  </p>
-                  {s.note && (
-                    <p style={{ marginTop: "0.6rem", fontSize: "0.82rem", color: "var(--muted)", borderTop: "1px solid var(--line-soft)", paddingTop: "0.5rem" }}>
-                      ℹ︎ {L(s.noteEn ?? s.note, s.note)}
-                    </p>
-                  )}
-                  {!hasRealAudio(key) && (
-                    <span style={{ display: "inline-block", marginTop: "0.5rem", fontSize: "0.7rem", color: "var(--muted)" }}>{L("sample tone", "audio contoh")}</span>
-                  )}
+              {s.arabic && (
+                <div className="arabic" style={{ fontSize: "1.35rem", color: "var(--ink)", lineHeight: 1.9, padding: "0.6rem 1rem", background: "var(--surface-inset)", borderRadius: 10 }}>
+                  {s.arabic}
                 </div>
-              </div>
-
-              <span className="hover-card__hint">{isOpen ? L("Tap to close", "Tekan untuk tutup") : L("Hover / tap", "Tuding / tekan")}</span>
-            </button>
+              )}
+              {s.transliteration && (
+                <p style={{ margin: 0, color: "var(--gold-ink)", fontStyle: "italic", fontSize: "0.92rem", lineHeight: 1.5 }}>
+                  {s.transliteration}
+                </p>
+              )}
+              <p style={{ margin: 0, color: "var(--body)", fontSize: "0.98rem", lineHeight: 1.6 }}>
+                {L(s.meaningEn, s.meaning)}
+              </p>
+              {s.note && (
+                <p style={{ margin: 0, fontSize: "0.84rem", color: "var(--muted)", borderTop: "1px solid var(--line-soft)", paddingTop: "0.6rem" }}>
+                  ℹ︎ {L(s.noteEn ?? s.note, s.note)}
+                </p>
+              )}
+              {!hasRealAudio(key) && (
+                <span style={{ fontSize: "0.7rem", color: "var(--muted)" }}>{L("sample tone", "audio contoh")}</span>
+              )}
+            </article>
           );
         })}
       </div>
