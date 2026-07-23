@@ -41,6 +41,12 @@ export const AUDIO_URLS: Record<string, string> = {
   "niyyah-isyak": "/audio/niyyah/isyak.mp3",
   // --- Wudu audio ---
   "wudu-10": "/audio/wudu/dua-wudu.mp3",
+  // --- Janazah audio ---
+  "janazah-1": "/audio/janazah/niyyah.mp3",
+  "janazah-2": "/audio/janazah/takbir-1-fatihah.mp3",
+  "janazah-3": "/audio/janazah/takbir-2-selawat.mp3",
+  "janazah-4": "/audio/janazah/takbir-3-doa.mp3",
+  "janazah-5": "/audio/janazah/takbir-4-salam.mp3",
 };
 
 let ctx: AudioContext | null = null;

@@ -12,6 +12,7 @@ import { Syarat } from "./components/Syarat";
 import { Rukun } from "./components/Rukun";
 import { Niyyah } from "./components/Niyyah";
 import { Kaifiat } from "./components/Kaifiat";
+import { Janazah } from "./components/Janazah";
 import { Bacaan } from "./components/Bacaan";
 import { Quiz } from "./components/Quiz";
 import { Contact } from "./components/Contact";
@@ -42,6 +43,7 @@ export function IgoldSite() {
                 </Suspense>
               )}
               <Kaifiat />
+              {APP_CONFIG.features.janazah && <Janazah />}
               <Suspense fallback={<div style={{ minHeight: "40vh" }} aria-hidden="true" />}>
                 <PostureExplorer />
               </Suspense>

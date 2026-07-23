@@ -19,7 +19,7 @@ export const APP_CONFIG = {
   features: {
     wudu: true,
     niyyah: true,
-    janazah: false,
+    janazah: true,
   },
 
   // ---- Developer (you) --------------------------------------------

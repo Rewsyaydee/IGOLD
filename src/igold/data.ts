@@ -733,6 +733,7 @@ export const NAV_ITEMS = [
   { id: "bacaan", label: "Bacaan", labelEn: "Recitations" },
   { id: "kuiz", label: "Kuiz", labelEn: "Quiz" },
   { id: "hubungi", label: "Hubungi", labelEn: "Contact" },
+  { id: "janazah", label: "Solat Jenazah", labelEn: "Janazah Prayer" },
 ];
 
 // ============================================================================
@@ -1262,6 +1263,86 @@ export const WUDU_STEPS: WuduStep[] = [
     meaningEn: "I bear witness that there is no god but Allah, alone without partner, and I bear witness that Muhammad is His servant and messenger.",
     note: "Sunat membaca doa ini selepas wuduk. Pintu-pintu syurga dibuka bagi yang membacanya.",
     noteEn: "It is sunnah to recite this after wudu. The gates of Paradise are opened for the one who recites it.",
+    hasAudio: true,
+  },
+];
+
+// ============================================================================
+// JANAZAH — Funeral prayer recitations (Shafi'i)
+// Hover-reveal cards with play/stop audio toggle.
+// ============================================================================
+export interface JanazahStep {
+  id: number;
+  name: string;
+  nameEn: string;
+  arabic?: string;
+  transliteration?: string;
+  meaning: string;
+  meaningEn: string;
+  note?: string;
+  noteEn?: string;
+  hasAudio?: boolean;
+}
+
+export const JANAZAH_STEPS: JanazahStep[] = [
+  {
+    id: 1,
+    name: "Niat Solat Jenazah",
+    nameEn: "Intention for Janazah Prayer",
+    arabic: "أُصَلِّي عَلَى هٰذَا الْمَيِّتِ أَرْبَعَ تَكْبِيرَاتٍ فَرْضَ الْكِفَايَةِ مَأْمُومًا لِلّٰهِ تَعَالَى",
+    transliteration: "Uṣallī 'alā hāżal-mayyiti arba'a takbīrātin farḍal-kifāyati ma'mūman lillāhi ta'ālā",
+    meaning: "Sahaja aku solat jenazah ke atas mayat ini empat takbir fardhu kifayah sebagai makmum kerana Allah Ta'ala.",
+    meaningEn: "I intend to perform the funeral prayer over this deceased with four takbirs, a communal obligation, as a follower, for the sake of Allah Most High.",
+    note: "Niat berbeza mengikut jantina mayat: 'hāżihil-mayyitati' untuk perempuan. Niat di dalam hati.",
+    noteEn: "The intention differs by gender: 'hāżihil-mayyitati' for female. The intention is in the heart.",
+    hasAudio: true,
+  },
+  {
+    id: 2,
+    name: "Takbir Pertama — Al-Fatihah",
+    nameEn: "First Takbir — Al-Fatihah",
+    arabic: "الْحَمْدُ لِلّٰهِ رَبِّ الْعٰلَمِينَ ۝ الرَّحْمٰنِ الرَّحِيمِ ۝ مٰلِكِ يَوْمِ الدِّينِ ۝ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ۝ اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ ۝ صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ",
+    transliteration: "Al-ḥamdu lillāhi rabbil-'ālamīn · Ar-raḥmānir-raḥīm · Māliki yawmid-dīn · Iyyāka na'budu wa iyyāka nasta'īn · Ihdinaṣ-ṣirāṭal-mustaqīm · Ṣirāṭal-lażīna an'amta 'alayhim ghayril-maghḍūbi 'alayhim wa laḍ-ḍāllīn",
+    meaning: "Selepas takbir pertama, baca surah Al-Fatihah. Dilakukan secara sirr (perlahan) walaupun solat jenazah berjemaah.",
+    meaningEn: "After the first takbir, recite Surah Al-Fatihah. This is done silently even in congregational janazah prayer.",
+    note: "Membaca Al-Fatihah adalah rukun dalam solat jenazah mengikut mazhab Syafie.",
+    noteEn: "Reciting Al-Fatihah is a pillar of the janazah prayer in the Shafi'i school.",
+    hasAudio: true,
+  },
+  {
+    id: 3,
+    name: "Takbir Kedua — Selawat",
+    nameEn: "Second Takbir — Salawat",
+    arabic: "اللّٰهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ وَعَلَى آلِ سَيِّدِنَا مُحَمَّدٍ كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ وَبَارِكْ عَلَى سَيِّدِنَا مُحَمَّدٍ وَعَلَى آلِ سَيِّدِنَا مُحَمَّدٍ كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ فِي الْعَالَمِينَ إِنَّكَ حَمِيدٌ مَجِيدٌ",
+    transliteration: "Allāhumma ṣalli 'alā sayyidinā Muḥammad, wa 'alā āli sayyidinā Muḥammad, kamā ṣallayta 'alā Ibrāhīma wa 'alā āli Ibrāhīm, wa bārik 'alā sayyidinā Muḥammad, wa 'alā āli sayyidinā Muḥammad, kamā bārakta 'alā Ibrāhīma wa 'alā āli Ibrāhīm, fil-'ālamīn, innaka ḥamīdun majīd",
+    meaning: "Selepas takbir kedua, baca selawat Ibrahimiyyah. Ya Allah, limpahkanlah rahmat ke atas junjungan kami Nabi Muhammad...",
+    meaningEn: "After the second takbir, recite the salawat Ibrahimiyyah. O Allah, send Your grace upon our master Muhammad...",
+    note: "Selawat yang paling sempurna dibaca di sini. Cukup dengan selawat ringkas jika tidak mampu.",
+    noteEn: "The most complete salawat is recited here. A shorter version suffices if unable.",
+    hasAudio: true,
+  },
+  {
+    id: 4,
+    name: "Takbir Ketiga — Doa",
+    nameEn: "Third Takbir — Supplication",
+    arabic: "اللّٰهُمَّ اغْفِرْ لَهُ وَارْحَمْهُ وَعَافِهِ وَاعْفُ عَنْهُ وَأَكْرِمْ نُزُلَهُ وَوَسِّعْ مَدْخَلَهُ وَاغْسِلْهُ بِالْمَاءِ وَالثَّلْجِ وَالْبَرَدِ وَنَقِّهِ مِنَ الْخَطَايَا كَمَا نَقَّيْتَ الثَّوْبَ الْأَبْيَضَ مِنَ الدَّنَسِ",
+    transliteration: "Allāhummaghfir lahu, warḥamhu, wa 'āfihi, wa'fu 'anhu, wa akrim nuzulahu, wa wassi' madkhalahu, waghsilhu bil-mā'i wath-thalji wal-barad, wa naqqihi minal-khaṭāyā kamā naqqaytath-thawbal-abyaḍa minad-danas",
+    meaning: "Ya Allah, ampunilah dia, kasihanilah dia, sejahterakanlah dia, maafkanlah dia, muliakanlah tempat tinggalnya, luaskanlah tempat masuknya, bersihkanlah dia dengan air, salji, dan embun, dan sucikanlah dia daripada dosa-dosa...",
+    meaningEn: "O Allah, forgive him, have mercy on him, grant him well-being, pardon him, honour his resting place, expand his entrance, wash him with water, snow, and hail, and cleanse him of sins as a white garment is cleansed of dirt...",
+    note: "Doa khusus untuk mayat. Ganti lafaz 'hu' (dia lelaki) kepada 'hā' untuk mayat perempuan. Sunat ditambah doa untuk keluarga dan umat Islam.",
+    noteEn: "A specific supplication for the deceased. Change 'hu' (him) to 'hā' (her) for a female deceased. Sunnah to add prayers for the family and the Muslim ummah.",
+    hasAudio: true,
+  },
+  {
+    id: 5,
+    name: "Takbir Keempat — Salam",
+    nameEn: "Fourth Takbir — Salam",
+    arabic: "السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللّٰهِ",
+    transliteration: "As-salāmu 'alaykum wa raḥmatullāh",
+    meaning: "Selepas takbir keempat, beri salam ke kanan dan ke kiri. Ini menandakan tamatnya solat jenazah.",
+    meaningEn: "After the fourth takbir, give salam to the right and then to the left. This concludes the janazah prayer.",
+    note: "Salam dilakukan selepas takbir keempat. Sesetengah ulama membaca doa ringkas sebelum salam.",
+    noteEn: "The salam is given after the fourth takbir. Some scholars recite a brief du'a before the salam.",
     hasAudio: true,
   },
 ];
