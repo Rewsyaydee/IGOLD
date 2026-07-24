@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback, useEffect } from "react";
+import { useRef, useCallback, useEffect } from "react";
 import "./LineSidebar.css";
 
 const FALLOFF_CURVES: Record<string, (p: number) => number> = {
