@@ -13,6 +13,7 @@ interface PillNavProps {
   logoIIUMAlt?: string;
   items: PillNavItem[];
   lang: string;
+  activeHref: string | undefined;
   onToggleLang: () => void;
   onNavigate: (href: string) => void;
   className?: string;
@@ -30,6 +31,7 @@ export function PillNav({
   logoIIUMAlt = "IIUM",
   items,
   lang,
+  activeHref,
   onToggleLang,
   onNavigate,
   className = "",
@@ -40,7 +42,6 @@ export function PillNav({
   pillTextColor = "#16223f",
   initialLoadAnimation = true,
 }: PillNavProps) {
-  const [activeHref, setActiveHref] = useState<string | undefined>(items[0]?.href);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const circleRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const tlRefs = useRef<(gsap.core.Timeline | null)[]>([]);
@@ -51,21 +52,6 @@ export function PillNav({
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const navItemsRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    const ids = items.map(n => n.href);
-    const onScroll = () => {
-      let current = ids[0];
-      for (const id of ids) {
-        const el = document.getElementById(id);
-        if (el && el.getBoundingClientRect().top <= 120) current = id;
-      }
-      setActiveHref(current);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [items]);
 
   useEffect(() => {
     const layout = () => {

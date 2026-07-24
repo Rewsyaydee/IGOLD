@@ -6,6 +6,12 @@
   z-index: 50;
 }
 
+@media (min-width: 761px) {
+  .pill-nav-hidden-desktop .pill-nav-container {
+    display: none;
+  }
+}
+
 @media (max-width: 760px) {
   .pill-nav-container {
     width: 100%;
