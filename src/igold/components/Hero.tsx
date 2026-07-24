@@ -33,6 +33,7 @@ export function Hero() {
 
   return (
     <section
+      id="hero"
       ref={root}
       style={{
         position: "relative",
