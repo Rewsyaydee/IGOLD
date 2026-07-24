@@ -729,11 +729,11 @@ export const NAV_ITEMS = [
   { id: "niyyah", label: "Niat Solat", labelEn: "Intentions" },
   { id: "wudu", label: "Wuduk", labelEn: "Wudu" },
   { id: "kaifiat", label: "Cara Solat", labelEn: "Steps" },
+  { id: "janazah", label: "Solat Jenazah", labelEn: "Janazah Prayer" },
   { id: "explorer", label: "Posisi", labelEn: "Postures" },
   { id: "bacaan", label: "Bacaan", labelEn: "Recitations" },
   { id: "kuiz", label: "Kuiz", labelEn: "Quiz" },
   { id: "hubungi", label: "Hubungi", labelEn: "Contact" },
-  { id: "janazah", label: "Solat Jenazah", labelEn: "Janazah Prayer" },
 ];
 
 // ============================================================================
