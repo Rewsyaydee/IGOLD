@@ -42,8 +42,8 @@ export const KAIFIAT_POSES: Pose[] = [
   "ruku",
   "itidal",
   "sujud",
-  "secondsujud",
   "duduk",
+  "secondsujud",
   "tashahhud",
   "salam",
 ];

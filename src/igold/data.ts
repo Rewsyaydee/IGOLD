@@ -170,6 +170,7 @@ export const POSE_VIDEO: Record<Pose, string> = {
   itidal: "/kaifiat/itidal.mp4",
   sujud: "/kaifiat/sujud.mp4",
   duduk: "/kaifiat/duduk.mp4",
+  secondsujud: "/kaifiat/secondsujud.mp4",
   tashahhud: "/kaifiat/tashahhud.mp4",
   salam: "/kaifiat/salam.mp4",
 };
