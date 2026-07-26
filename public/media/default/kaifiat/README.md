@@ -12,6 +12,7 @@ Place kaifiat (solat posture) video files here for the **default** instructional
 | `ruku.mp4` | Bowing (Ruku') | MP4 | 9:16 portrait, muted, looping, ~3–6 s |
 | `itidal.mp4` | Rising (I'tidal) | MP4 | 9:16 portrait, muted, looping, ~3–6 s |
 | `sujud.mp4` | Prostration (Sujud) | MP4 | 9:16 portrait, muted, looping, ~3–6 s |
+| `secondsujud.mp4` | Second Prostration | MP4 | 9:16 portrait, muted, looping, ~3–6 s |
 | `duduk.mp4` | Sitting Between Sujud | MP4 | 9:16 portrait, muted, looping, ~3–6 s |
 | `tashahhud.mp4` | Tashahhud Sitting | MP4 | 9:16 portrait, muted, looping, ~3–6 s |
 | `salam.mp4` | Closing Salam | MP4 | 9:16 portrait, muted, looping, ~3–6 s |

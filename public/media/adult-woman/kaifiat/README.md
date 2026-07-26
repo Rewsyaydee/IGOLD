@@ -6,8 +6,8 @@ Place kaifiat (solat posture) videos here featuring an **adult woman** figure.
 
 Same as the default model. Copy the file list from `../../default/kaifiat/README.md`.
 
-All 9 pose videos are needed:
-`stand.mp4`, `takbir.mp4`, `qiyam.mp4`, `ruku.mp4`, `itidal.mp4`, `sujud.mp4`, `duduk.mp4`, `tashahhud.mp4`, `salam.mp4`
+All 10 pose videos are needed:
+`stand.mp4`, `takbir.mp4`, `qiyam.mp4`, `ruku.mp4`, `itidal.mp4`, `sujud.mp4`, `secondsujud.mp4`, `duduk.mp4`, `tashahhud.mp4`, `salam.mp4`
 
 ## Notes
 

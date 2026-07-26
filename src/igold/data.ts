@@ -155,6 +155,7 @@ export type Pose =
   | "ruku"
   | "itidal"
   | "sujud"
+  | "secondsujud"
   | "duduk"
   | "tashahhud"
   | "salam";
@@ -449,7 +450,7 @@ export const STEPS: Step[] = [
     id: 10,
     name: "Sujud Kedua",
     nameEn: "Second Prostration",
-    pose: "sujud",
+    pose: "secondsujud",
     arabic: "سُبْحَانَ رَبِّيَ الْأَعْلَى وَبِحَمْدِهِ",
     transliteration: "Subḥāna rabbiyal-a'lā wa biḥamdih",
     meaning: "Maha Suci Tuhanku Yang Maha Tinggi dan dengan memuji-Nya. (Dibaca 3 kali)",
@@ -955,7 +956,7 @@ export const HANAFI_STEPS: Step[] = [
     id: 10,
     name: "Sujud Kedua",
     nameEn: "Second Prostration",
-    pose: "sujud",
+    pose: "secondsujud",
     arabic: "سُبْحَانَ رَبِّيَ الْأَعْلَى",
     transliteration: "Subḥāna rabbiyal-a'lā",
     meaning: "Maha Suci Tuhanku Yang Maha Tinggi. (Dibaca 3 kali)",
