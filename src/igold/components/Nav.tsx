@@ -9,14 +9,19 @@ export function Nav() {
   const sectionIds = NAV_ITEMS.map(n => n.id);
   const activeHref = useActiveSection(sectionIds);
 
-  const PILL_IDS = ["about", "rukun", "wudu", "kaifiat"];
+  const PILL_IDS = ["about", "rukun", "wudu", "kaifiat", "hubungi"];
 
-  const navItems = NAV_ITEMS
+  const desktopItems = NAV_ITEMS
     .filter(item => PILL_IDS.includes(item.id))
     .map(item => ({
       label: item.id === "kaifiat" ? L("Prayer", "Solat") : L(item.labelEn, item.label),
       href: item.id,
     }));
+
+  const mobileItems = NAV_ITEMS.map(item => ({
+    label: L(item.labelEn, item.label),
+    href: item.id,
+  }));
 
   return (
     <header
@@ -38,7 +43,8 @@ export function Nav() {
         }
         logoIIUM={APP_CONFIG.branding.iiumLogo}
         logoIIUMAlt="IIUM"
-        items={navItems}
+        items={desktopItems}
+        mobileItems={mobileItems}
         lang={lang}
         activeHref={activeHref}
         onToggleLang={toggleLang}

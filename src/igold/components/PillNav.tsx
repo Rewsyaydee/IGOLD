@@ -12,6 +12,7 @@ interface PillNavProps {
   logoIIUM: string;
   logoIIUMAlt?: string;
   items: PillNavItem[];
+  mobileItems?: PillNavItem[];
   lang: string;
   activeHref: string | undefined;
   onToggleLang: () => void;
@@ -30,6 +31,7 @@ export function PillNav({
   logoIIUM,
   logoIIUMAlt = "IIUM",
   items,
+  mobileItems,
   lang,
   activeHref,
   onToggleLang,
@@ -327,7 +329,7 @@ export function PillNav({
 
       <div className="mobile-menu-popover mobile-only" ref={mobileMenuRef} style={cssVars}>
         <ul className="mobile-menu-list">
-          {items.map((item, i) => (
+          {(mobileItems ?? items).map((item, i) => (
             <li key={item.href || `mobile-item-${i}`}>
               <button
                 className={`mobile-menu-link${activeHref === item.href ? " is-active" : ""}`}
