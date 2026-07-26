@@ -1346,3 +1346,181 @@ export const JANAZAH_STEPS: JanazahStep[] = [
     hasAudio: true,
   },
 ];
+
+// ============================================================================
+// WUDU INFO — Obligatory acts, recommended acts, nullifiers, water rulings
+// Reference: Mukhtasar al-Quduri (general fiqh)
+// ============================================================================
+export interface WuduInfo {
+  id: number;
+  title: string;
+  titleEn: string;
+  desc: string;
+  descEn: string;
+}
+
+export const WUDU_RUKUN: WuduInfo[] = [
+  {
+    id: 1,
+    title: "Basuh Muka",
+    titleEn: "Washing the Face",
+    desc: "Membasuh keseluruhan muka — dari tempat tumbuh rambut di dahi hingga bawah dagu, dan dari anak telinga kanan ke anak telinga kiri. Cukup dilakukan sekali.",
+    descEn: "Wash the entire face — from the hairline on the forehead to below the chin, and from ear to ear. Once is sufficient.",
+  },
+  {
+    id: 2,
+    title: "Basuh Dua Tangan",
+    titleEn: "Washing Both Arms",
+    desc: "Membasuh kedua-dua belah tangan termasuk siku. Siku termasuk dalam anggota yang wajib dibasuh. Cukup dilakukan sekali.",
+    descEn: "Wash both arms including the elbows. The elbows are part of the obligatory area. Once is sufficient.",
+  },
+  {
+    id: 3,
+    title: "Sapu Kepala",
+    titleEn: "Wiping the Head",
+    desc: "Menyapu sebahagian kepala, sekadar kadar ubun-ubun (satu perempat kepala sudah memadai). Dilakukan dengan tangan yang basah.",
+    descEn: "Wipe a portion of the head, equivalent to about one quarter of the head. Done with wet hands.",
+  },
+  {
+    id: 4,
+    title: "Basuh Dua Kaki",
+    titleEn: "Washing Both Feet",
+    desc: "Membasuh kedua-dua belah kaki termasuk buku lali. Buku lali termasuk dalam anggota yang wajib dibasuh. Cukup dilakukan sekali.",
+    descEn: "Wash both feet including the ankles. The ankles are part of the obligatory area. Once is sufficient.",
+  },
+];
+
+export const WUDU_SUNAT: WuduInfo[] = [
+  {
+    id: 1,
+    title: "Membaca Basmalah",
+    titleEn: "Reciting the Basmalah",
+    desc: "Membaca 'Bismillahirrahmanirrahim' di permulaan wuduk.",
+    descEn: "Recite 'Bismillahirrahmanirrahim' at the beginning of wudu.",
+  },
+  {
+    id: 2,
+    title: "Basuh Tapak Tangan",
+    titleEn: "Washing the Palms",
+    desc: "Membasuh kedua-dua tapak tangan sebelum memasukkannya ke dalam bekas air.",
+    descEn: "Wash both palms before dipping them into the water container.",
+  },
+  {
+    id: 3,
+    title: "Bersugi (Bersiwak)",
+    titleEn: "Using the Miswak (Siwak)",
+    desc: "Membersihkan gigi dengan siwak atau berus gigi sebelum atau semasa berkumur.",
+    descEn: "Clean the teeth with a miswak or toothbrush before or while rinsing the mouth.",
+  },
+  {
+    id: 4,
+    title: "Berkumur & Memasukkan Air ke Hidung",
+    titleEn: "Rinsing Mouth & Nose",
+    desc: "Berkumur-kumur dan memasukkan air ke dalam hidung secara berasingan, diulang tiga kali setiap satu.",
+    descEn: "Rinse the mouth and draw water into the nose separately, repeating each three times.",
+  },
+  {
+    id: 5,
+    title: "Mengulang Basuhan 3 Kali",
+    titleEn: "Repeating Each Wash 3 Times",
+    desc: "Mengulang setiap basuhan anggota wuduk sebanyak tiga kali untuk menyempurnakan wuduk.",
+    descEn: "Repeat each washing of the wudu limbs three times to perfect the ablution.",
+  },
+  {
+    id: 6,
+    title: "Menyapu Kedua Telinga",
+    titleEn: "Wiping Both Ears",
+    desc: "Menyapu kedua-dua telinga — bahagian luar dengan ibu jari dan bahagian dalam dengan jari telunjuk, menggunakan baki air dari sapuan kepala.",
+    descEn: "Wipe both ears — the outside with the thumbs and the inside with the index fingers, using the remaining water from wiping the head.",
+  },
+  {
+    id: 7,
+    title: "Menyela Janggut & Jari",
+    titleEn: "Combing Through Beard & Fingers",
+    desc: "Menyela-nyela janggut yang tebal agar air sampai ke kulit, dan menyela-nyela jari-jemari tangan serta kaki.",
+    descEn: "Comb through a thick beard so water reaches the skin, and run fingers between the fingers and toes.",
+  },
+  {
+    id: 8,
+    title: "Niat, Tertib & Mendahului Kanan",
+    titleEn: "Intention, Order & Right Side First",
+    desc: "Berniat di dalam hati, menjaga tertib susunan anggota wuduk, dan mendahului anggota sebelah kanan sebelum kiri.",
+    descEn: "Intend in the heart, maintain the proper order of washing the limbs, and start with the right side before the left.",
+  },
+];
+
+export const WUDU_PEMBATAL: WuduInfo[] = [
+  {
+    id: 1,
+    title: "Keluar Benda dari Dua Jalan",
+    titleEn: "Anything Exiting the Two Passages",
+    desc: "Semua benda yang keluar dari qubul dan dubur seperti kencing, najis, dan kentut.",
+    descEn: "Anything that exits from the front or rear passage such as urine, stool, and passing wind.",
+  },
+  {
+    id: 2,
+    title: "Keluar Darah, Nanah atau Air Bisa",
+    titleEn: "Blood, Pus or Discharge Flowing Out",
+    desc: "Keluarnya darah, nanah, atau air bisa dari badan sehingga mengalir keluar daripada tempat asalnya.",
+    descEn: "Blood, pus, or fluid discharge from the body that flows out beyond its point of origin.",
+  },
+  {
+    id: 3,
+    title: "Muntah yang Banyak",
+    titleEn: "Large Amount of Vomit",
+    desc: "Muntah yang banyak sehingga memenuhi mulut membatalkan wuduk.",
+    descEn: "Vomiting a large amount that fills the mouth nullifies wudu.",
+  },
+  {
+    id: 4,
+    title: "Tidur dalam Keadaan Tidak Tetap",
+    titleEn: "Sleeping Without a Firm Position",
+    desc: "Tidur dalam keadaan berbaring, bersandar, atau condong ke sesuatu benda yang mana sekiranya benda sandaran itu dialihkan, dia akan jatuh.",
+    descEn: "Sleeping while lying down, leaning, or reclining against something — if the support were removed, the person would fall.",
+  },
+  {
+    id: 5,
+    title: "Hilang Akal",
+    titleEn: "Loss of Consciousness",
+    desc: "Hilang akal disebabkan pengsan atau gila. Apabila sedar semula, wuduk terbatal dan perlu diperbaharui.",
+    descEn: "Loss of consciousness due to fainting or insanity. Upon regaining consciousness, wudu is nullified and must be renewed.",
+  },
+  {
+    id: 6,
+    title: "Ketawa Terbahak-bahak dalam Solat",
+    titleEn: "Loud Laughter During Prayer",
+    desc: "Ketawa terbahak-bahak (qahqahah) di dalam solat yang mempunyai ruku' dan sujud (solat biasa) membatalkan wuduk dan solat.",
+    descEn: "Loud laughter (qahqahah) during a prayer that contains bowing and prostration nullifies both the wudu and the prayer.",
+  },
+];
+
+export const WUDU_HUKUM_AIR: WuduInfo[] = [
+  {
+    id: 1,
+    title: "Air Suci & Menyucikan",
+    titleEn: "Purifying Water",
+    desc: "Air yang boleh digunakan untuk bersuci: air hujan, air sungai/lembah, air mata air, air perigi, air laut. Termasuk air yang bercampur dengan benda suci tanpa mengubah sifat semula jadinya (seperti sabun atau za'faran).",
+    descEn: "Water valid for purification: rainwater, river/valley water, spring water, well water, sea water. Includes water mixed with something pure that does not change its natural properties (such as soap or saffron).",
+  },
+  {
+    id: 2,
+    title: "Air Tidak Sah Digunakan",
+    titleEn: "Invalid Water for Purification",
+    desc: "Air yang tidak sah digunakan untuk bersuci: air perahan daripada pokok atau buah (seperti jus), cuka, air mawar, air rebusan kacang, dan kuah daging.",
+    descEn: "Water not valid for purification: liquid extracted from trees or fruit (such as juice), vinegar, rose water, water from boiled legumes, and meat broth.",
+  },
+  {
+    id: 3,
+    title: "Air Tenang yang Sedikit",
+    titleEn: "Small Amount of Still Water",
+    desc: "Air kurang dari dua kolah: jika terjatuh najis ke dalamnya walaupun sedikit, air itu serta-merta menjadi najis dan tidak boleh digunakan untuk wuduk atau mandi.",
+    descEn: "Water less than two qullahs (approximately 216 litres): if impurity falls into it even in a small amount, the water immediately becomes impure and cannot be used for wudu or bathing.",
+  },
+  {
+    id: 4,
+    title: "Haiwan Tidak Menajiskan Air",
+    titleEn: "Animals That Do Not Pollute Water",
+    desc: "Kematian haiwan yang tidak mempunyai darah mengalir di dalam air (seperti lalat, nyamuk, tebuan, dan kala jengking) atau haiwan yang hidup di dalam air (seperti ikan, katak, dan ketam) tidak menyebabkan air itu menjadi najis.",
+    descEn: "The death in water of animals without flowing blood (such as flies, mosquitoes, wasps, and scorpions) or animals that live in water (such as fish, frogs, and crabs) does not make the water impure.",
+  },
+];

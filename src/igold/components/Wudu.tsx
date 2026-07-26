@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { Volume2 } from "lucide-react";
-import { WUDU_STEPS } from "../data";
+import { WUDU_STEPS, WUDU_RUKUN, WUDU_SUNAT, WUDU_PEMBATAL, WUDU_HUKUM_AIR, type WuduInfo } from "../data";
 import { playAudio, hasRealAudio } from "../audio";
 import { useReveal } from "../useReveal";
 import { useLang } from "../lang";
@@ -159,6 +159,82 @@ export default function Wudu() {
           {toast}
         </div>
       )}
+
+      <InfoPanel
+        title={L("Obligatory Acts of Wudu", "Rukun Wuduk (Wajib)")}
+        subtitle={L("If any of these are missed, wudu is invalid.", "Jika mana-mana perkara ini tertinggal, wuduk tidak sah.")}
+        items={WUDU_RUKUN}
+        L={L}
+      />
+
+      <InfoPanel
+        title={L("Recommended Acts of Wudu", "Sunat Wuduk (Digalakkan)")}
+        subtitle={L("Performing these acts increases the reward of wudu.", "Melakukan amalan ini menambahkan pahala wuduk.")}
+        items={WUDU_SUNAT}
+        L={L}
+      />
+
+      <InfoPanel
+        title={L("Nullifiers of Wudu", "Pembatal Wuduk (Nawaqidh)")}
+        subtitle={L("These things invalidate wudu and require it to be renewed.", "Perkara-perkara ini membatalkan wuduk dan mewajibkan wuduk diperbaharui.")}
+        items={WUDU_PEMBATAL}
+        L={L}
+      />
+
+      <InfoPanel
+        title={L("Water Rulings for Purification", "Hukum Air untuk Bersuci")}
+        subtitle={L("Understanding what water can and cannot be used for wudu.", "Memahami air yang boleh dan tidak boleh digunakan untuk berwuduk.")}
+        items={WUDU_HUKUM_AIR}
+        L={L}
+      />
     </section>
+  );
+}
+
+function InfoPanel({ title, subtitle, items, L }: { title: string; subtitle: string; items: WuduInfo[]; L: (en: string, bm: string) => string }) {
+  const [open, setOpen] = useState<number | null>(null);
+
+  return (
+    <div style={{ marginTop: "3rem" }}>
+      <div style={{ marginBottom: "1.6rem" }}>
+        <h3 className="display" style={{ fontSize: "clamp(1.3rem, 3vw, 1.8rem)", fontWeight: 700, margin: "0 0 0.4rem", color: "var(--ink)" }}>
+          {title}
+        </h3>
+        <p style={{ color: "var(--muted)", fontSize: "0.92rem", margin: 0 }}>{subtitle}</p>
+      </div>
+
+      <div
+        style={{
+          display: "grid",
+          gap: "1rem",
+          gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
+        }}
+      >
+        {items.map(s => {
+          const isOpen = open === s.id;
+          return (
+            <button
+              key={s.id}
+              className={`hover-card${isOpen ? " is-open" : ""}`}
+              aria-expanded={isOpen}
+              onClick={() => setOpen(isOpen ? null : s.id)}
+            >
+              <span className="hover-card__num display">{String(s.id).padStart(2, "0")}</span>
+              <h4 style={{ margin: "0 2.5rem 0 0", fontSize: "1.05rem", fontWeight: 600, lineHeight: 1.3 }}>
+                {L(s.titleEn, s.title)}
+              </h4>
+              <div className="hover-card__detail">
+                <div>
+                  <p style={{ margin: 0, color: "var(--body)", fontSize: "0.95rem", lineHeight: 1.6 }}>
+                    {L(s.descEn, s.desc)}
+                  </p>
+                </div>
+              </div>
+              <span className="hover-card__hint">{isOpen ? L("Tap to close", "Tekan untuk tutup") : L("Hover / tap", "Tuding / tekan")}</span>
+            </button>
+          );
+        })}
+      </div>
+    </div>
   );
 }
