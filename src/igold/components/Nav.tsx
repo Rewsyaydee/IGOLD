@@ -9,10 +9,14 @@ export function Nav() {
   const sectionIds = NAV_ITEMS.map(n => n.id);
   const activeHref = useActiveSection(sectionIds);
 
-  const navItems = NAV_ITEMS.map(item => ({
-    label: L(item.labelEn, item.label),
-    href: item.id,
-  }));
+  const PILL_IDS = ["about", "rukun", "wudu", "kaifiat"];
+
+  const navItems = NAV_ITEMS
+    .filter(item => PILL_IDS.includes(item.id))
+    .map(item => ({
+      label: item.id === "kaifiat" ? L("Prayer", "Solat") : L(item.labelEn, item.label),
+      href: item.id,
+    }));
 
   return (
     <header
