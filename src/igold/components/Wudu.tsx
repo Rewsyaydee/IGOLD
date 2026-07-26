@@ -1,6 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { Volume2 } from "lucide-react";
+import {
+  ScanFace, Hand, Brain, Footprints,
+  MessageSquare, HandPlatter, Sparkles, Droplets, Repeat, Ear, BetweenHorizontalStart, ListOrdered,
+  ArrowDownToLine, Droplet, Frown, BedSingle, Zap, Smile,
+  Ban, Container, Fish,
+} from "lucide-react";
 import { WUDU_STEPS, WUDU_RUKUN, WUDU_SUNAT, WUDU_PEMBATAL, WUDU_HUKUM_AIR, type WuduInfo } from "../data";
 import { playAudio, hasRealAudio } from "../audio";
 import { useReveal } from "../useReveal";
@@ -164,6 +170,7 @@ export default function Wudu() {
         title={L("Obligatory Acts of Wudu", "Rukun Wuduk (Wajib)")}
         subtitle={L("If any of these are missed, wudu is invalid.", "Jika mana-mana perkara ini tertinggal, wuduk tidak sah.")}
         items={WUDU_RUKUN}
+        icons={[ScanFace, Hand, Brain, Footprints]}
         L={L}
       />
 
@@ -171,6 +178,7 @@ export default function Wudu() {
         title={L("Recommended Acts of Wudu", "Sunat Wuduk (Digalakkan)")}
         subtitle={L("Performing these acts increases the reward of wudu.", "Melakukan amalan ini menambahkan pahala wuduk.")}
         items={WUDU_SUNAT}
+        icons={[MessageSquare, HandPlatter, Sparkles, Droplets, Repeat, Ear, BetweenHorizontalStart, ListOrdered]}
         L={L}
       />
 
@@ -178,6 +186,7 @@ export default function Wudu() {
         title={L("Nullifiers of Wudu", "Pembatal Wuduk (Nawaqidh)")}
         subtitle={L("These things invalidate wudu and require it to be renewed.", "Perkara-perkara ini membatalkan wuduk dan mewajibkan wuduk diperbaharui.")}
         items={WUDU_PEMBATAL}
+        icons={[ArrowDownToLine, Droplet, Frown, BedSingle, Zap, Smile]}
         L={L}
       />
 
@@ -185,15 +194,14 @@ export default function Wudu() {
         title={L("Water Rulings for Purification", "Hukum Air untuk Bersuci")}
         subtitle={L("Understanding what water can and cannot be used for wudu.", "Memahami air yang boleh dan tidak boleh digunakan untuk berwuduk.")}
         items={WUDU_HUKUM_AIR}
+        icons={[Droplets, Ban, Container, Fish]}
         L={L}
       />
     </section>
   );
 }
 
-function InfoPanel({ title, subtitle, items, L }: { title: string; subtitle: string; items: WuduInfo[]; L: (en: string, bm: string) => string }) {
-  const [open, setOpen] = useState<number | null>(null);
-
+function InfoPanel({ title, subtitle, items, icons, L }: { title: string; subtitle: string; items: WuduInfo[]; icons: React.ComponentType<{ size?: number; color?: string }>[]; L: (en: string, bm: string) => string }) {
   return (
     <div style={{ marginTop: "3rem" }}>
       <div style={{ marginBottom: "1.6rem" }}>
@@ -203,35 +211,39 @@ function InfoPanel({ title, subtitle, items, L }: { title: string; subtitle: str
         <p style={{ color: "var(--muted)", fontSize: "0.92rem", margin: 0 }}>{subtitle}</p>
       </div>
 
-      <div
-        style={{
-          display: "grid",
-          gap: "1rem",
-          gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-        }}
-      >
-        {items.map(s => {
-          const isOpen = open === s.id;
+      <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+        {items.map((s, idx) => {
+          const Icon = icons[idx];
           return (
-            <button
-              key={s.id}
-              className={`hover-card${isOpen ? " is-open" : ""}`}
-              aria-expanded={isOpen}
-              onClick={() => setOpen(isOpen ? null : s.id)}
-            >
-              <span className="hover-card__num display">{String(s.id).padStart(2, "0")}</span>
-              <h4 style={{ margin: "0 2.5rem 0 0", fontSize: "1.05rem", fontWeight: 600, lineHeight: 1.3 }}>
-                {L(s.titleEn, s.title)}
-              </h4>
-              <div className="hover-card__detail">
-                <div>
-                  <p style={{ margin: 0, color: "var(--body)", fontSize: "0.95rem", lineHeight: 1.6 }}>
-                    {L(s.descEn, s.desc)}
-                  </p>
+            <article key={s.id} className="card" style={{ display: "flex", gap: "1rem", alignItems: "flex-start", padding: "1.3rem 1.5rem" }}>
+              <span
+                style={{
+                  display: "grid",
+                  placeItems: "center",
+                  width: 46,
+                  height: 46,
+                  borderRadius: 13,
+                  flexShrink: 0,
+                  background: "var(--gold-tint)",
+                  border: "1px solid var(--line)",
+                }}
+              >
+                {Icon && <Icon size={22} color="var(--gold-500)" />}
+              </span>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ display: "flex", alignItems: "baseline", gap: "0.6rem", marginBottom: "0.4rem" }}>
+                  <span className="display gold-text" style={{ fontSize: "1.1rem", fontWeight: 600 }}>
+                    {String(s.id).padStart(2, "0")}
+                  </span>
+                  <h4 style={{ margin: 0, fontSize: "1.05rem", fontWeight: 600, lineHeight: 1.3 }}>
+                    {L(s.titleEn, s.title)}
+                  </h4>
                 </div>
+                <p style={{ margin: 0, color: "var(--body)", fontSize: "0.95rem", lineHeight: 1.6 }}>
+                  {L(s.descEn, s.desc)}
+                </p>
               </div>
-              <span className="hover-card__hint">{isOpen ? L("Tap to close", "Tekan untuk tutup") : L("Hover / tap", "Tuding / tekan")}</span>
-            </button>
+            </article>
           );
         })}
       </div>
