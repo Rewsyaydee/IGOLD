@@ -3,12 +3,6 @@
   flex-wrap: wrap;
   white-space: pre-wrap;
   position: relative;
-  overflow: hidden;
-}
-
-.text-rotate-inner {
-  display: inline-block;
-  white-space: pre;
 }
 
 .text-rotate-sr-only {
