@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Convex generated files
+# NOTE: committed intentionally so CI/Vercel builds (tsc) can resolve
+# `convex/_generated/api`. Regenerate with `npx convex dev` if convex/ changes.
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+bun.lockb
+
+# Temp/test output
+tmp/
+test-results/
+playwright-report/
+# Internal working notes
+PHASE2_TODO.md
