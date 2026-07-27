@@ -4,8 +4,7 @@ import { BookOpenCheck, Globe2, HeartHandshake, ShieldCheck } from "lucide-react
 import { SITE } from "../data";
 import { useLang } from "../lang";
 import DotField from "./DotField";
-import RotatingText from "./RotatingText";
-import "./RotatingText.css";
+import { FlipWord } from "./FlipWord";
 
 export function Hero() {
   const { L } = useLang();
@@ -80,20 +79,7 @@ export function Hero() {
         <h1 className="display" style={{ fontSize: "clamp(2.6rem, 9vw, 5.6rem)", margin: 0, color: "var(--ink)" }}>
           <span className="hero-line" style={{ display: "block" }}>
             {L("Learn to", "Belajar")}{" "}
-            <RotatingText
-              texts={rotatingWords}
-              mainClassName="gold-gradient overflow-hidden"
-              splitLevelClassName="overflow-hidden"
-              splitBy="words"
-              staggerFrom="last"
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              exit={{ y: "-120%" }}
-              staggerDuration={0.025}
-              transition={{ type: "spring", damping: 30, stiffness: 400 }}
-              rotationInterval={2000}
-              style={{ display: "inline-flex" }}
-            />
+            <FlipWord texts={rotatingWords} className="gold-gradient" />
           </span>
           <span className="hero-line" style={{ display: "block" }}>{L("with Confidence", "dengan Yakin")}</span>
         </h1>
