@@ -1,20 +1,22 @@
 'use client';
 
-import { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useState, type HTMLAttributes } from 'react';
+import { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useState, type HTMLAttributes, type ComponentPropsWithoutRef } from 'react';
 import { motion, AnimatePresence, type Transition } from 'motion/react';
 
 import './RotatingText.css';
+
+type MotionSpanProps = ComponentPropsWithoutRef<typeof motion.span>;
 
 function cn(...classes: (string | undefined | false)[]) {
   return classes.filter(Boolean).join(' ');
 }
 
-export interface RotatingTextProps extends HTMLAttributes<HTMLSpanElement> {
+export interface RotatingTextProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'onDrag'> {
   texts: string[];
   transition?: Transition;
-  initial?: Record<string, unknown>;
-  animate?: Record<string, unknown>;
-  exit?: Record<string, unknown>;
+  initial?: MotionSpanProps['initial'];
+  animate?: MotionSpanProps['animate'];
+  exit?: MotionSpanProps['exit'];
   animatePresenceMode?: 'wait' | 'sync' | 'popLayout';
   animatePresenceInitial?: boolean;
   rotationInterval?: number;
