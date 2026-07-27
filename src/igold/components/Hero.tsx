@@ -84,6 +84,7 @@ export function Hero() {
               texts={rotatingWords}
               mainClassName="gold-gradient overflow-hidden"
               splitLevelClassName="overflow-hidden"
+              splitBy="words"
               staggerFrom="last"
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
