@@ -82,7 +82,8 @@ export function Hero() {
             {L("Learn to", "Belajar")}{" "}
             <RotatingText
               texts={rotatingWords}
-              mainClassName="gold-gradient"
+              mainClassName="gold-gradient overflow-hidden"
+              splitLevelClassName="overflow-hidden"
               staggerFrom="last"
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
