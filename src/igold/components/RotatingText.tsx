@@ -11,7 +11,7 @@ function cn(...classes: (string | undefined | false)[]) {
   return classes.filter(Boolean).join(' ');
 }
 
-export interface RotatingTextProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'onDrag'> {
+export interface RotatingTextProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'onDrag' | 'onDragStart' | 'onDragEnd' | 'onAnimationStart' | 'onAnimationEnd' | 'onAnimationIteration'> {
   texts: string[];
   transition?: Transition;
   initial?: MotionSpanProps['initial'];
