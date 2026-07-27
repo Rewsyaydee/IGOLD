@@ -90,7 +90,6 @@ export function Hero() {
               staggerDuration={0.025}
               transition={{ type: "spring", damping: 30, stiffness: 400 }}
               rotationInterval={2000}
-              style={{ display: "inline-flex" }}
             />
           </span>
           <span className="hero-line" style={{ display: "block" }}>{L("with Confidence", "dengan Yakin")}</span>
