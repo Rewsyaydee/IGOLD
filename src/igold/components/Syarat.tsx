@@ -5,6 +5,8 @@ import {
   Clock,
   Compass,
   Droplets,
+  Maximize2,
+  Minimize2,
   MoonStar,
   Shirt,
   Sparkles,
@@ -29,7 +31,18 @@ export function Syarat() {
   const { L } = useLang();
   const ref = useRef<HTMLElement>(null);
   const [open, setOpen] = useState<number | null>(null);
+  const [expandAll, setExpandAll] = useState(false);
   useReveal(ref, { stagger: 0.07 });
+
+  const toggleAll = () => {
+    if (expandAll) {
+      setExpandAll(false);
+      setOpen(null);
+    } else {
+      setExpandAll(true);
+      setOpen(null);
+    }
+  };
 
   return (
     <section id="syarat" ref={ref} className="section">
@@ -42,6 +55,28 @@ export function Syarat() {
             "Lapan syarat yang perlu dipenuhi sebelum solat dianggap sah. Tuding atau tekan kad untuk baca lanjut.",
           )}
         </p>
+        <div className="reveal" style={{ marginTop: "0.8rem" }}>
+          <button
+            onClick={toggleAll}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              padding: "0.45rem 1rem",
+              fontSize: "0.78rem",
+              fontWeight: 500,
+              fontFamily: "var(--font-body)",
+              color: "var(--gold-ink)",
+              background: "var(--gold-tint)",
+              border: "1px solid var(--line)",
+              borderRadius: 100,
+              cursor: "pointer",
+            }}
+          >
+            {expandAll ? <Minimize2 size={14} /> : <Maximize2 size={14} />}
+            {expandAll ? L("Collapse all", "Tutup semua") : L("Expand all", "Buka semua")}
+          </button>
+        </div>
       </div>
 
       <div
@@ -53,13 +88,16 @@ export function Syarat() {
       >
         {SYARAT.map(s => {
           const Icon = ICONS[s.icon] ?? BookOpen;
-          const isOpen = open === s.id;
+          const isOpen = expandAll || open === s.id;
           return (
             <button
               key={s.id}
               className={`hover-card reveal${isOpen ? " is-open" : ""}`}
               aria-expanded={isOpen}
-              onClick={() => setOpen(isOpen ? null : s.id)}
+              onClick={() => {
+                if (expandAll) return;
+                setOpen(isOpen ? null : s.id);
+              }}
             >
               <span className="hover-card__num display">{String(s.id).padStart(2, "0")}</span>
               <div style={{ display: "flex", alignItems: "center", gap: "0.85rem" }}>

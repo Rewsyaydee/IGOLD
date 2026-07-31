@@ -1,7 +1,9 @@
 import { useRef, useState } from "react";
-import { RUKUN } from "../data";
+import { Maximize2, Minimize2 } from "lucide-react";
+import { RUKUN, HANAFI_RUKUN } from "../data";
 import { useReveal } from "../useReveal";
 import { useLang } from "../lang";
+import { useMadhhab } from "../madhhab";
 
 const TYPE_LABEL: Record<string, { en: string; bm: string }> = {
   Qauli: { en: "Spoken act", bm: "Perbuatan lidah" },
@@ -11,21 +13,92 @@ const TYPE_LABEL: Record<string, { en: string; bm: string }> = {
 
 export function Rukun() {
   const { L } = useLang();
+  const { madhhab, setMadhhab } = useMadhhab();
   const ref = useRef<HTMLElement>(null);
   const [open, setOpen] = useState<number | null>(null);
+  const [expandAll, setExpandAll] = useState(false);
   useReveal(ref, { stagger: 0.04 });
+
+  const toggleAll = () => {
+    if (expandAll) {
+      setExpandAll(false);
+      setOpen(null);
+    } else {
+      setExpandAll(true);
+      setOpen(null);
+    }
+  };
+
+  const rukunList = madhhab === "hanafi" ? HANAFI_RUKUN : RUKUN;
 
   return (
     <section id="rukun" ref={ref} className="section">
       <div className="section-head">
-        <span className="eyebrow reveal">{L("Pillars", "Rukun")}</span>
-        <h2 className="section-title reveal">{L("The 13 Pillars of Prayer", "13 Rukun Solat")}</h2>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem", flexWrap: "wrap" }}>
+          <div>
+            <span className="eyebrow reveal">{L("Pillars", "Rukun")}</span>
+            <h2 className="section-title reveal" style={{ marginBottom: 0 }}>
+              {madhhab === "hanafi"
+                ? L("Pillars & Obligations of Prayer (Hanafi)", "Rukun & Wajib Solat (Hanafi)")
+                : L("The 13 Pillars of Prayer (Shafi'i)", "13 Rukun Solat (Syafie)")}
+            </h2>
+          </div>
+          <div className="reveal" style={{ display: "flex", gap: 3, background: "var(--gold-tint-soft)", borderRadius: 100, padding: 3, border: "1px solid var(--line)" }}>
+            {(["shafii", "hanafi"] as const).map(m => (
+              <button
+                key={m}
+                onClick={() => setMadhhab(m)}
+                style={{
+                  border: "none",
+                  cursor: "pointer",
+                  borderRadius: 100,
+                  padding: "0.32rem 0.7rem",
+                  fontSize: "0.72rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.04em",
+                  fontFamily: "var(--font-body)",
+                  transition: "all 0.3s var(--ease)",
+                  background: madhhab === m ? "linear-gradient(120deg, var(--gold-500), var(--gold-600))" : "transparent",
+                  color: madhhab === m ? "var(--white)" : "var(--muted)",
+                }}
+              >
+                {m === "shafii" ? "Syafi'e" : "Hanafi"}
+              </button>
+            ))}
+          </div>
+        </div>
         <p className="section-sub reveal">
           {L(
-            "The pillars are the essential acts that make up the prayer. If one is missed, the prayer is invalid. Hover or tap a card for details.",
-            "Rukun adalah perkara wajib yang membentuk solat. Jika tertinggal satu rukun, solat tidak sah. Tuding atau tekan kad untuk butiran.",
+            madhhab === "hanafi"
+              ? "The Hanafi school distinguishes between fardh (obligatory pillars) and wajib (necessary acts). Both are essential for a valid prayer. Hover or tap a card for details."
+              : "The pillars are the essential acts that make up the prayer. If one is missed, the prayer is invalid. Hover or tap a card for details.",
+            madhhab === "hanafi"
+              ? "Mazhab Hanafi membezakan antara fardhu (rukun wajib) dan wajib (perkara perlu). Kedua-duanya penting untuk solat yang sah. Tuding atau tekan kad untuk butiran."
+              : "Rukun adalah perkara wajib yang membentuk solat. Jika tertinggal satu rukun, solat tidak sah. Tuding atau tekan kad untuk butiran.",
           )}
         </p>
+        <div className="reveal" style={{ marginTop: "0.8rem" }}>
+          <button
+            onClick={toggleAll}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              padding: "0.45rem 1rem",
+              fontSize: "0.78rem",
+              fontWeight: 500,
+              fontFamily: "var(--font-body)",
+              color: "var(--gold-ink)",
+              background: "var(--gold-tint)",
+              border: "1px solid var(--line)",
+              borderRadius: 100,
+              cursor: "pointer",
+            }}
+          >
+            {expandAll ? <Minimize2 size={14} /> : <Maximize2 size={14} />}
+            {expandAll ? L("Collapse all", "Tutup semua") : L("Expand all", "Buka semua")}
+          </button>
+        </div>
       </div>
 
       <div
@@ -35,15 +108,18 @@ export function Rukun() {
           gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
         }}
       >
-        {RUKUN.map(r => {
-          const isOpen = open === r.id;
+        {rukunList.map(r => {
+          const isOpen = expandAll || open === r.id;
           const type = TYPE_LABEL[r.type];
           return (
             <button
               key={r.id}
               className={`hover-card reveal${isOpen ? " is-open" : ""}`}
               aria-expanded={isOpen}
-              onClick={() => setOpen(isOpen ? null : r.id)}
+              onClick={() => {
+                if (expandAll) return;
+                setOpen(isOpen ? null : r.id);
+              }}
             >
               <span className="hover-card__num display">{String(r.id).padStart(2, "0")}</span>
               <h3 style={{ margin: "0 3rem 0 0", fontSize: "1.08rem", fontWeight: 600, lineHeight: 1.3 }}>
