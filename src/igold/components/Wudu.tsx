@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
-import { Volume2 } from "lucide-react";
+import { Square, Volume2 } from "lucide-react";
 import {
   ScanFace, Hand, Brain, Footprints,
   MessageSquare, HandPlatter, Sparkles, Droplets, Repeat, Ear, BetweenHorizontalStart, ListOrdered,
@@ -8,7 +8,7 @@ import {
   Ban, Container, Fish,
 } from "lucide-react";
 import { WUDU_STEPS, WUDU_RUKUN, WUDU_SUNAT, WUDU_PEMBATAL, WUDU_HUKUM_AIR, type WuduInfo } from "../data";
-import { playAudio, hasRealAudio } from "../audio";
+import { playAudio, stopAudio, hasRealAudio } from "../audio";
 import { useReveal } from "../useReveal";
 import { useLang } from "../lang";
 import { getMediaPath } from "../mediaRegistry";
@@ -23,6 +23,7 @@ export default function Wudu() {
   const [i, setI] = useState(0);
   const [toast, setToast] = useState<string | null>(null);
   const [vidErr, setVidErr] = useState<Record<string, boolean>>({});
+  const [playingId, setPlayingId] = useState<string | null>(null);
   useReveal(ref, { stagger: 0.1, selector: ".w-reveal" });
 
   const step = WUDU_STEPS[i];
@@ -43,8 +44,16 @@ export default function Wudu() {
     return () => { tl.kill(); };
   }, [i]);
 
+  const audioKey = `wudu-${step.id}`;
+
   const onAudio = () => {
-    const kind = playAudio(`wudu-${step.id}`);
+    if (playingId === audioKey) {
+      stopAudio();
+      setPlayingId(null);
+      return;
+    }
+    const kind = playAudio(audioKey);
+    setPlayingId(audioKey);
     if (kind === "placeholder") {
       setToast(L("Sample recitation tone — the real audio will be added later.", "Audio recitation contoh — fail audio sebenar akan ditambah kemudian."));
       setTimeout(() => setToast(null), 2600);
@@ -143,8 +152,8 @@ export default function Wudu() {
           )}
 
           {step.hasAudio && (
-            <button className="w-anim" onClick={onAudio} style={{ marginTop: "1rem", alignSelf: "flex-start", display: "inline-flex", alignItems: "center", gap: "0.6rem", background: "var(--gold-tint)", border: "1px solid var(--line)", color: "var(--gold-ink)", padding: "0.7rem 1.2rem", borderRadius: 100, cursor: "pointer", fontWeight: 500, fontFamily: "var(--font-body)" }}>
-              <Volume2 size={18} /> {L("Listen to recitation", "Dengar bacaan")} {!hasRealAudio(`wudu-${step.id}`) && <span style={{ fontSize: "0.7rem", opacity: 0.6 }}>{L("(sample)", "(contoh)")}</span>}
+            <button className="w-anim" onClick={onAudio} style={{ marginTop: "1rem", alignSelf: "flex-start", display: "inline-flex", alignItems: "center", gap: "0.6rem", background: playingId === audioKey ? "var(--gold-500)" : "var(--gold-tint)", border: "1px solid var(--line)", color: playingId === audioKey ? "var(--white)" : "var(--gold-ink)", padding: "0.7rem 1.2rem", borderRadius: 100, cursor: "pointer", fontWeight: 500, fontFamily: "var(--font-body)" }}>
+              {playingId === audioKey ? <Square size={18} /> : <Volume2 size={18} />} {playingId === audioKey ? L("Stop", "Hentikan") : L("Listen to recitation", "Dengar bacaan")} {!hasRealAudio(audioKey) && <span style={{ fontSize: "0.7rem", opacity: 0.6 }}>{L("(sample)", "(contoh)")}</span>}
             </button>
           )}
         </div>
