@@ -53,23 +53,6 @@ export function Bacaan() {
             </div>
             <div className="arabic" style={{ fontSize: "1.5rem", color: "var(--ink)", margin: "0.5rem 0", lineHeight: 1.9 }}>{b.arabic}</div>
             <p style={{ margin: "0.2rem 0 0", color: "var(--gold-ink)", fontStyle: "italic", fontSize: "0.9rem" }}>{b.transliteration}</p>
-            {b.pending && (
-              <span
-                style={{
-                  marginTop: "0.9rem",
-                  alignSelf: "flex-start",
-                  fontSize: "0.68rem",
-                  letterSpacing: "0.04em",
-                  color: "var(--gold-ink)",
-                  background: "var(--gold-tint)",
-                  border: "1px solid var(--line)",
-                  borderRadius: 100,
-                  padding: "0.28rem 0.7rem",
-                }}
-              >
-                ⚠️ {L("Pending ustaz review", "Menunggu semakan ustaz")}
-              </span>
-            )}
             {!hasRealAudio(b.id) && <span style={{ marginTop: "auto", paddingTop: "0.6rem", fontSize: "0.7rem", color: "var(--muted)" }}>{L("sample tone", "audio contoh")}</span>}
           </article>
         ))}

@@ -98,7 +98,7 @@ export default function Wudu() {
                 muted
                 loop
                 playsInline
-                preload="auto"
+                preload="metadata"
                 aria-label={`${L("Demonstration of", "Demonstrasi")} ${L(step.nameEn, step.name)}`}
                 onError={() => setVidErr(e => ({ ...e, [step.pose]: true }))}
                 style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}

@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { Maximize2, Minimize2 } from "lucide-react";
 import { RUKUN, HANAFI_RUKUN } from "../data";
 import { useReveal } from "../useReveal";
 import { useLang } from "../lang";
@@ -15,7 +16,18 @@ export function Rukun() {
   const { madhhab, setMadhhab } = useMadhhab();
   const ref = useRef<HTMLElement>(null);
   const [open, setOpen] = useState<number | null>(null);
+  const [expandAll, setExpandAll] = useState(false);
   useReveal(ref, { stagger: 0.04 });
+
+  const toggleAll = () => {
+    if (expandAll) {
+      setExpandAll(false);
+      setOpen(null);
+    } else {
+      setExpandAll(true);
+      setOpen(null);
+    }
+  };
 
   const rukunList = madhhab === "hanafi" ? HANAFI_RUKUN : RUKUN;
 
@@ -65,6 +77,28 @@ export function Rukun() {
               : "Rukun adalah perkara wajib yang membentuk solat. Jika tertinggal satu rukun, solat tidak sah. Tuding atau tekan kad untuk butiran.",
           )}
         </p>
+        <div className="reveal" style={{ marginTop: "0.8rem" }}>
+          <button
+            onClick={toggleAll}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              padding: "0.45rem 1rem",
+              fontSize: "0.78rem",
+              fontWeight: 500,
+              fontFamily: "var(--font-body)",
+              color: "var(--gold-ink)",
+              background: "var(--gold-tint)",
+              border: "1px solid var(--line)",
+              borderRadius: 100,
+              cursor: "pointer",
+            }}
+          >
+            {expandAll ? <Minimize2 size={14} /> : <Maximize2 size={14} />}
+            {expandAll ? L("Collapse all", "Tutup semua") : L("Expand all", "Buka semua")}
+          </button>
+        </div>
       </div>
 
       <div
@@ -75,14 +109,17 @@ export function Rukun() {
         }}
       >
         {rukunList.map(r => {
-          const isOpen = open === r.id;
+          const isOpen = expandAll || open === r.id;
           const type = TYPE_LABEL[r.type];
           return (
             <button
               key={r.id}
               className={`hover-card reveal${isOpen ? " is-open" : ""}`}
               aria-expanded={isOpen}
-              onClick={() => setOpen(isOpen ? null : r.id)}
+              onClick={() => {
+                if (expandAll) return;
+                setOpen(isOpen ? null : r.id);
+              }}
             >
               <span className="hover-card__num display">{String(r.id).padStart(2, "0")}</span>
               <h3 style={{ margin: "0 3rem 0 0", fontSize: "1.08rem", fontWeight: 600, lineHeight: 1.3 }}>

@@ -40,6 +40,7 @@ export const AUDIO_URLS: Record<string, string> = {
   "niyyah-maghrib": "/audio/niyyah/maghrib.mp3",
   "niyyah-isyak": "/audio/niyyah/isyak.mp3",
   // --- Wudu audio ---
+  "wudu-1": "/audio/wudu/niyyah.mp3",
   "wudu-10": "/audio/wudu/dua-wudu.mp3",
   // --- Janazah audio ---
   "janazah-1": "/audio/janazah/niyyah.mp3",

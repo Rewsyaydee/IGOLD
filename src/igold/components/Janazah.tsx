@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Square, Volume2 } from "lucide-react";
+import { Square, Volume2, Play } from "lucide-react";
 import { JANAZAH_STEPS } from "../data";
 import { playAudio, stopAudio, hasRealAudio } from "../audio";
 import { useReveal } from "../useReveal";
@@ -11,6 +11,7 @@ export function Janazah() {
   const { L } = useLang();
   const ref = useRef<HTMLElement>(null);
   const [playingId, setPlayingId] = useState<string | null>(null);
+  const [ytLoaded, setYtLoaded] = useState(false);
   useReveal(ref, { stagger: 0.08 });
 
   const onPlay = (id: number) => {
@@ -51,20 +52,60 @@ export function Janazah() {
           }}
         >
           <div style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}>
-            <iframe
-              src={`https://www.youtube.com/embed/${YOUTUBE_ID}`}
-              title={L("Janazah Prayer Demonstration", "Demonstrasi Solat Jenazah")}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                borderRadius: 20,
-              }}
-            />
+            {ytLoaded ? (
+              <iframe
+                src={`https://www.youtube.com/embed/${YOUTUBE_ID}?autoplay=1`}
+                title={L("Janazah Prayer Demonstration", "Demonstrasi Solat Jenazah")}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  borderRadius: 20,
+                }}
+              />
+            ) : (
+              <button
+                onClick={() => setYtLoaded(true)}
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "1rem",
+                  background: "linear-gradient(135deg, var(--navy-800) 0%, var(--navy-900) 100%)",
+                  border: "none",
+                  cursor: "pointer",
+                  borderRadius: 20,
+                  fontFamily: "var(--font-body)",
+                }}
+              >
+                <span
+                  style={{
+                    display: "grid",
+                    placeItems: "center",
+                    width: 72,
+                    height: 72,
+                    borderRadius: "50%",
+                    background: "var(--gold-500)",
+                    boxShadow: "0 0 32px rgba(212,175,55,0.35)",
+                  }}
+                >
+                  <Play size={30} fill="var(--white)" color="var(--white)" style={{ marginLeft: 3 }} />
+                </span>
+                <div style={{ color: "var(--cream)", fontSize: "1rem", fontWeight: 500 }}>
+                  {L("Click to load video", "Klik untuk muat video")}
+                </div>
+                <span style={{ color: "var(--muted)", fontSize: "0.78rem" }}>
+                  {L("YouTube video — loads third-party content", "Video YouTube — memuat kandungan pihak ketiga")}
+                </span>
+              </button>
+            )}
           </div>
         </div>
       </div>

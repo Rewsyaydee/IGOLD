@@ -15,6 +15,7 @@ export function Quiz() {
   const [picked, setPicked] = useState<number | null>(null);
   const [score, setScore] = useState(0);
   const [done, setDone] = useState(false);
+  const [wrong, setWrong] = useState<number[]>([]);
 
   const q = QUIZ[idx];
 
@@ -26,6 +27,7 @@ export function Quiz() {
       setScore(s => s + 1);
       gsap.fromTo(cardRef.current, { boxShadow: "0 0 0 0 rgba(212,175,55,0)" }, { boxShadow: "0 0 0 3px rgba(212,175,55,0.5)", duration: 0.4, yoyo: true, repeat: 1 });
     } else {
+      setWrong(w => [...w, idx]);
       gsap.fromTo(cardRef.current, { x: 0 }, { x: 8, duration: 0.07, repeat: 5, yoyo: true, ease: "power1.inOut", clearProps: "x" });
     }
   };
@@ -43,6 +45,7 @@ export function Quiz() {
     setIdx(0);
     setPicked(null);
     setScore(0);
+    setWrong([]);
     setDone(false);
   };
 
@@ -122,9 +125,29 @@ export function Quiz() {
           <div style={{ textAlign: "center", padding: "1rem 0" }}>
             <div className="display gold-gradient" style={{ fontSize: "4.5rem", lineHeight: 1 }}>{pct}%</div>
             <p style={{ fontSize: "1.3rem", fontWeight: 600, margin: "0.8rem 0 0.3rem" }}>{verdict}</p>
-            <p style={{ color: "var(--muted)", margin: "0 0 2rem" }}>
+            <p style={{ color: "var(--muted)", margin: "0 0 1.8rem" }}>
               {L(`You answered ${score} out of ${QUIZ.length} questions correctly.`, `Anda menjawab ${score} daripada ${QUIZ.length} soalan dengan betul.`)}
             </p>
+            {wrong.length > 0 && (
+              <div style={{ textAlign: "left", marginBottom: "2rem" }}>
+                <h4 style={{ margin: "0 0 0.8rem", fontSize: "0.95rem", fontWeight: 600, color: "var(--ink)" }}>
+                  {L("Review missed questions:", "Semak soalan yang tersilap:")}
+                </h4>
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.8rem" }}>
+                  {wrong.map(wi => {
+                    const qq = QUIZ[wi];
+                    return (
+                      <div key={wi} style={{ padding: "0.8rem 1rem", background: "var(--surface-inset)", borderRadius: 10, border: "1px solid var(--line-soft)" }}>
+                        <p style={{ margin: "0 0 0.4rem", fontSize: "0.9rem", fontWeight: 500 }}>{L(qq.qEn, qq.q)}</p>
+                        <p style={{ margin: 0, fontSize: "0.84rem", color: "var(--gold-ink)" }}>
+                          ✓ {L(qq.optionsEn, qq.options)[qq.answer]}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
             <button className="btn btn-ghost" onClick={restart} style={{ justifyContent: "center" }}>
               <RotateCcw size={16} /> {L("Try Again", "Cuba Lagi")}
             </button>

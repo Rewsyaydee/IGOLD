@@ -508,8 +508,7 @@ export interface Bacaan {
   whenEn: string;
   arabic: string;
   transliteration: string;
-  /** When true, Arabic/transliteration still awaits ustaz verification. */
-  pending?: boolean;
+
 }
 
 export const BACAAN: Bacaan[] = [
@@ -575,9 +574,8 @@ export const BACAAN: Bacaan[] = [
     whenEn: "First sitting (tashahhud)",
     arabic:
       "التَّحِيَّاتُ الْمُبَارَكَاتُ الصَّلَوَاتُ الطَّيِّبَاتُ لِلّٰهِ، السَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللّٰهِ وَبَرَكَاتُهُ، السَّلَامُ عَلَيْنَا وَعَلَى عِبَادِ اللّٰهِ الصَّالِحِينَ، أَشْهَدُ أَنْ لَا إِلَٰهَ إِلَّا اللّٰهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا رَسُولُ اللّٰهِ",
-    transliteration:
+      transliteration:
       "At-taḥiyyātul mubārakātuṣ ṣalawātuṭ ṭayyibātu lillāh. As-salāmu 'alayka ayyuhan-nabiyyu wa raḥmatullāhi wa barakātuh. As-salāmu 'alaynā wa 'alā 'ibādillāhiṣ ṣāliḥīn. Ashhadu an lā ilāha illallāh, wa ashhadu anna Muḥammadar rasūlullāh",
-    pending: true,
   },
   {
     id: "qunutsubuh",
@@ -587,9 +585,8 @@ export const BACAAN: Bacaan[] = [
     whenEn: "Standing after bowing, 2nd rak'ah of Fajr",
     arabic:
       "اللّٰهُمَّ اهْدِنِي فِيمَنْ هَدَيْتَ، وَعَافِنِي فِيمَنْ عَافَيْتَ، وَتَوَلَّنِي فِيمَنْ تَوَلَّيْتَ، وَبَارِكْ لِي فِيمَا أَعْطَيْتَ، وَقِنِي شَرَّ مَا قَضَيْتَ",
-    transliteration:
+      transliteration:
       "Allāhummahdinī fīman hadayt, wa 'āfinī fīman 'āfayt, wa tawallanī fīman tawallayt, wa bārik lī fīmā a'ṭayt, wa qinī sharra mā qaḍayt",
-    pending: true,
   },
   {
     id: "sujudtilawah",
@@ -599,9 +596,8 @@ export const BACAAN: Bacaan[] = [
     whenEn: "During the prostration of recitation",
     arabic:
       "سَجَدَ وَجْهِيَ لِلَّذِي خَلَقَهُ وَصَوَّرَهُ، وَشَقَّ سَمْعَهُ وَبَصَرَهُ بِحَوْلِهِ وَقُوَّتِهِ، فَتَبَارَكَ اللّٰهُ أَحْسَنُ الْخَالِقِينَ",
-    transliteration:
+      transliteration:
       "Sajada wajhiya lillażī khalaqahu wa ṣawwarahu, wa shaqqa sam'ahu wa baṣarahu biḥawlihi wa quwwatih, fa tabārakallāhu aḥsanul khāliqīn",
-    pending: true,
   },
 ];
 
@@ -1167,10 +1163,13 @@ export const WUDU_STEPS: WuduStep[] = [
     name: "Niat Wuduk",
     nameEn: "Intention for Wudu",
     pose: "niyyah",
-    meaning: "Berniat di dalam hati untuk mengangkat hadas kecil kerana Allah Ta'ala. Membaca basmalah: 'Bismillahirrahmanirrahim'.",
-    meaningEn: "Intend in the heart to remove minor ritual impurity for the sake of Allah. Recite the basmalah: 'Bismillahirrahmanirrahim'.",
+    arabic: "نَوَيْتُ الْوُضُوْءَ لِلّٰهِ تَعَالَى",
+    transliteration: "Nawaitul wudlû-a lillâhi ta'âlâ",
+    meaning: "Saya niat berwudhu karena Allah Ta'ala.",
+    meaningEn: "I intend to perform wudu for the sake of Allah Ta'ala.",
     note: "Niat di dalam hati. Sunat membaca basmalah.",
     noteEn: "The intention is in the heart. It is sunnah to recite the basmalah.",
+    hasAudio: true,
   },
   {
     id: 2,
@@ -1257,10 +1256,10 @@ export const WUDU_STEPS: WuduStep[] = [
     name: "Doa Selepas Wuduk",
     nameEn: "Supplication After Wudu",
     pose: "dua-wudu",
-    arabic: "أَشْهَدُ أَنْ لَا إِلٰهَ إِلَّا اللّٰهُ وَحْدَهُ لَا شَرِيكَ لَهُ، وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
-    transliteration: "Ashhadu an lā ilāha illallāh, waḥdahu lā sharīka lah, wa ashhadu anna Muḥammadan 'abduhu wa rasūluh.",
-    meaning: "Aku bersaksi bahawa tiada Tuhan melainkan Allah, Yang Maha Esa, tiada sekutu bagi-Nya, dan aku bersaksi bahawa Nabi Muhammad itu hamba dan pesuruh-Nya.",
-    meaningEn: "I bear witness that there is no god but Allah, alone without partner, and I bear witness that Muhammad is His servant and messenger.",
+    arabic: "أَشْهَدُ أَنْ لَا إِلٰهَ إِلَّا اللّٰهُ وَحْدَهُ لَا شَرِيكَ لَهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ. اَللّٰهُمَّ اجْعَلْنِي مِنَ التَّوَّابِينَ وَاجْعَلْنِي مِنَ الْمُتَطَهِّرِينَ",
+    transliteration: "Asyhadu allâ ilâha illallâhu waḫdahû lâ syarîka lahu wa asyhadu anna muḫammadan 'abduhû wa rasûluhû, allâhummaj'alnî minat tawwâbîna waj'alnî minal mutathahhirîn(a)",
+    meaning: "Aku bersaksi bahwa tidak ada Tuhan selain Allah Yang Maha Esa, tidak ada sekutu bagi-Nya, dan aku bersaksi bahwa Nabi Muhammad adalah hamba dan utusan Allah. Ya Allah, jadikanlah aku termasuk dalam golongan orang-orang yang bertobat dan jadikanlah aku termasuk dalam golongan orang-orang yang bersuci (shalih).",
+    meaningEn: "I bear witness that there is no god but Allah, alone without partner, and I bear witness that Muhammad is His servant and messenger. O Allah, make me among those who repent and make me among those who purify themselves.",
     note: "Sunat membaca doa ini selepas wuduk. Pintu-pintu syurga dibuka bagi yang membacanya.",
     noteEn: "It is sunnah to recite this after wudu. The gates of Paradise are opened for the one who recites it.",
     hasAudio: true,
