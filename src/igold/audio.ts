@@ -30,9 +30,8 @@ export const AUDIO_URLS: Record<string, string> = {
   "step-10": "/audio/06_sujud.m4a",      // Sujud kedua
   "step-11": "/audio/09_tahiyatakhir.m4a", // Tahiyat Akhir
   "step-13": "/audio/10_salam.mp3",      // Salam
-  // step-5 (Surah Lazim) & step-12 (Selawat) — no dedicated file yet (placeholder)
-  // Extra recitations available (pending section decision):
-  //   /audio/08_tahiyatawal.m4a, /audio/11_qunutsubuh.m4a, /audio/12_sujudtilawah.m4a
+  "step-5": "/audio/05_surahlazim.mp3", // Surah Lazim (Al-Ikhlas)
+  "step-12": "/audio/12_selawat.m4a",   // Selawat
   // --- Niyyah audio (one file per prayer) ---
   "niyyah-subuh": "/audio/niyyah/subuh.mp3",
   "niyyah-zohor": "/audio/niyyah/zohor.mp3",
@@ -45,7 +44,7 @@ export const AUDIO_URLS: Record<string, string> = {
   // --- Janazah audio ---
   "janazah-1": "/audio/janazah/niyyah.mp3",
   "janazah-2": "/audio/janazah/takbir-1-fatihah.mp3",
-  "janazah-3": "/audio/janazah/takbir-2-selawat.mp3",
+  "janazah-3": "/audio/janazah/takbir-2-selawat.m4a",
   "janazah-4": "/audio/janazah/takbir-3-doa.mp3",
   "janazah-5": "/audio/janazah/takbir-4-salam.mp3",
 };
