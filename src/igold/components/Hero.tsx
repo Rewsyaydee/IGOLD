@@ -1,4 +1,4 @@
-import { ArrowRight, BookOpen, Check, Headphones, Play, Sparkles } from "lucide-react";
+import { BookOpen, Check, Droplets, HandHeart, Headphones, Languages, Sparkles } from "lucide-react";
 import { useLang } from "../lang";
 import "./HeroConcept.css";
 export function Hero(){
@@ -11,7 +11,14 @@ export function Hero(){
     <div className="journey-tag"><Sparkles size={14}/>{L("Learn with clarity. Pray with confidence.","Belajar dengan jelas. Solat dengan yakin.")}</div>
     <h1>{L("Your guided path to","Panduan langkah demi langkah untuk")} <em>{L("meaningful prayer.","solat yang bermakna.")}</em></h1>
     <p>{L("From your first takbir to your final salam, master every step through visual guidance, Arabic recitations and trusted scholarship.","Daripada takbir pertama hingga salam terakhir, kuasai setiap langkah melalui panduan visual, bacaan Arab dan ilmu yang dipercayai.")}</p>
-    <div className="journey-actions"><button onClick={()=>go("kaifiat")}><Play size={16} fill="currentColor"/>{L("Start learning","Mula belajar")}</button><button onClick={()=>go("about")}>{L("How it works","Cara ia berfungsi")}<ArrowRight size={16}/></button></div>
+    <nav className="journey-shortcuts" aria-label={L("Prayer guide shortcuts","Pintasan panduan solat")}>
+     {[
+      {id:"niyyah",icon:HandHeart,en:"Intentions",bm:"Niat",sub:"Set your purpose"},
+      {id:"wudu",icon:Droplets,en:"Wudu",bm:"Wuduk",sub:"Prepare with care"},
+      {id:"kaifiat",icon:BookOpen,en:"Prayer",bm:"Solat",sub:"Follow every step"},
+      {id:"bacaan",icon:Languages,en:"Recitations",bm:"Bacaan",sub:"Listen & practise"},
+     ].map(({id,icon:Icon,en,bm,sub},i)=><button key={id} onClick={()=>go(id)}><b>0{i+1}</b><Icon/><span>{L(en,bm)}<small>{L(sub,{"Set your purpose":"Tetapkan niat","Prepare with care":"Bersuci sempurna","Follow every step":"Ikuti setiap langkah","Listen & practise":"Dengar & berlatih"}[sub]!)}</small></span><i>→</i></button>)}
+    </nav>
     <div className="journey-meta"><div><b>25+</b><span>{L("guided steps","langkah panduan")}</span></div><div><b>2</b><span>{L("schools covered","mazhab diliputi")}</span></div><div><b>100%</b><span>{L("free access","akses percuma")}</span></div></div>
    </div>
    <div className="journey-stage" aria-label={L("Interactive prayer learning preview","Pratonton pembelajaran solat interaktif")}>
