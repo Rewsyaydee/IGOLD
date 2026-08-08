@@ -1,19 +1,28 @@
-import { ArrowDownRight, ArrowUpRight, BookOpen, Globe, ShieldCheck } from "lucide-react";
+import { BookOpenText, Compass, Droplets, HandHeart, Languages } from "lucide-react";
 import { useLang } from "../lang";
 import "./HeroConcept.css";
-export function Hero(){const {L}=useLang();const go=(id:string)=>document.getElementById(id)?.scrollIntoView({behavior:"smooth"});return <section id="hero" className="manu-hero">
- <div className="manu-top"><span>IGOLD / IIUM</span><span>{L("Interactive Solat Guide","Panduan Solat Interaktif")}</span><span>MY — NZ</span></div>
- <div className="manu-grid">
-  <div className="manu-main">
-   <div className="manu-number">01 <span>{L("Knowledge for the ummah","Ilmu untuk ummah")}</span></div>
-   <h1>{L("Learn the","Pelajari")}<br/><em>{L("rhythm","rentak")}</em> {L("of prayer.","solat.")}</h1>
-   <div className="manu-lower"><p>{L("A visual, step-by-step solat guide grounded in trusted scholarship — designed for understanding, remembrance and confidence.","Panduan solat visual langkah demi langkah berasaskan ilmu yang dipercayai — direka untuk kefahaman, ingatan dan keyakinan.")}</p><button onClick={()=>go("kaifiat")}>{L("Explore the guide","Terokai panduan")}<ArrowUpRight/></button></div>
+
+export function Hero(){
+ const {L}=useLang();
+ const go=(id:string)=>document.getElementById(id)?.scrollIntoView({behavior:"smooth"});
+ const links=[
+  {id:"niyyah",icon:HandHeart,en:"Intentions",bm:"Niat",ar:"نِيَّة"},
+  {id:"wudu",icon:Droplets,en:"Wudu",bm:"Wuduk",ar:"وُضُوء"},
+  {id:"kaifiat",icon:BookOpenText,en:"Prayer",bm:"Solat",ar:"صَلَاة"},
+  {id:"bacaan",icon:Languages,en:"Recitations",bm:"Bacaan",ar:"ذِكْر"},
+ ];
+ return <section id="hero" className="atlas-hero">
+  <div className="atlas-pattern" aria-hidden="true"/><div className="atlas-light" aria-hidden="true"/>
+  <header className="atlas-mast"><span><Compass/> IGOLD</span><b>{L("A guide to prayer","Panduan menuju solat")}</b><i>IIUM · MY/NZ</i></header>
+  <div className="atlas-content">
+   <div className="atlas-seal" aria-hidden="true"><span lang="ar">اقْرَأْ</span><i/><b>EST · 2025</b></div>
+   <div className="atlas-eyebrow"><i/>{L("Knowledge made clear","Ilmu yang diperjelas")}<i/></div>
+   <h1>{L("Every prayer begins","Setiap solat bermula")}<br/><em>{L("with understanding.","dengan kefahaman.")}</em></h1>
+   <p>{L("An immersive, trusted companion for learning every intention, movement and recitation — at your pace, wherever you are.","Teman pembelajaran yang mendalam dan dipercayai untuk memahami setiap niat, gerakan dan bacaan — mengikut rentak anda, di mana sahaja.")}</p>
+   <nav className="atlas-shortcuts" aria-label={L("Prayer guide shortcuts","Pintasan panduan solat")}>
+    {links.map(({id,icon:Icon,en,bm,ar},i)=><button key={id} onClick={()=>go(id)} style={{"--order":i} as React.CSSProperties}><small>0{i+1}</small><Icon/><span><b>{L(en,bm)}</b><i lang="ar">{ar}</i></span><em>↗</em></button>)}
+   </nav>
   </div>
-  <aside className="manu-panel">
-   <div className="manu-script" lang="ar"><small>الصَّلَاةُ عِمَادُ الدِّينِ</small><strong>صَلَاة</strong><i/></div>
-   <div className="manu-note"><span>{L("Begin with intention","Bermula dengan niat")}</span><b>{L("Move with knowledge","Bergerak dengan ilmu")}</b><span>{L("Conclude with peace","Akhiri dengan salam")}</span></div>
-   <button className="manu-about" onClick={()=>go("about")}>{L("The story behind IGOLD","Kisah di sebalik IGOLD")}<ArrowDownRight/></button>
-  </aside>
- </div>
- <div className="manu-footer"><span><ShieldCheck/>{L("Academic review","Semakan akademik")}</span><span><BookOpen/>{L("Shafi’i + Hanafi","Syafi’i + Hanafi")}</span><span><Globe/>{L("Free for everyone","Percuma untuk semua")}</span><b>{L("Scroll to discover","Skrol untuk meneroka")} ↓</b></div>
- </section>}
+  <footer className="atlas-foot"><span>{L("Shafi’i + Hanafi","Syafi’i + Hanafi")}</span><span>{L("Academically reviewed","Disemak secara akademik")}</span><span>{L("Free for the ummah","Percuma untuk ummah")}</span></footer>
+ </section>;
+}
