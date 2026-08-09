@@ -8,7 +8,9 @@ import { useReveal } from "../useReveal";
 import { useLang } from "../lang";
 import { useMadhhab } from "../madhhab";
 import { useModel } from "../model";
-import { MEDIA_MODELS, MEDIA_MODEL_LABELS, buildKaifiatVideoMap } from "../mediaRegistry";
+import { MEDIA_MODEL_LABELS, buildKaifiatVideoMap, type MediaModel } from "../mediaRegistry";
+
+const ADULT_MODELS: MediaModel[] = ["default", "adult-woman"];
 
 function ModelPills() {
   const { model, setModel } = useModel();
@@ -28,7 +30,7 @@ function ModelPills() {
         flexShrink: 0,
       }}
     >
-      {MEDIA_MODELS.map(m => {
+      {ADULT_MODELS.map(m => {
         const labels = MEDIA_MODEL_LABELS[m];
         const on = model === m;
         return (

@@ -6,37 +6,42 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Scheherazade+New:wght@400;500;700&display=swap");
 
 :root {
-  /* Core palette */
-  --navy-900: #0a1531;
-  --navy-800: #0f1d40;
-  --navy-700: #16294f;
-  --navy-600: #1d3266;
-  --gold-300: #e6c25a;
-  --gold-400: #d9b24a;
-  --gold-500: #c9a227;
-  --gold-600: #a9851a;
-  --gold-ink: #856812;   /* deep gold — AA-readable on cream */
-  --cream: #f7f2e8;      /* page background */
-  --cream-2: #efe6d4;    /* alt surface / deeper cream */
-  --paper: #fffdf8;      /* card surface */
+  /* iGOLD | IIUM — selected full-site palette */
+  --everglade: #264431;
+  --up-north: #719687;
+  --deep-diving: #5A94A7;
+  --light-veil: #BED9EB;
+  --gilded: #EAA043;
+  --navy-900: var(--everglade);
+  --navy-800: #315743;
+  --navy-700: #3e6b56;
+  --navy-600: var(--up-north);
+  --gold-300: #f2bf76;
+  --gold-400: #eead59;
+  --gold-500: var(--gilded);
+  --gold-600: #c97923;
+  --gold-ink: #98510f;
+  --cream: #e8f2f7;
+  --cream-2: var(--light-veil);
+  --paper: #f7fbfd;
   --white: #ffffff;
-  --ink: #16223f;        /* primary navy text */
+  --ink: #183226;
 
   /* Semantic — CREAM FORWARD */
   --bg: var(--cream);
   --bg-alt: var(--cream-2);
   --fg: var(--ink);
-  --body: rgba(22, 34, 63, 0.82);       /* body copy */
-  --muted: rgba(22, 34, 63, 0.58);      /* secondary text */
-  --line: rgba(22, 34, 63, 0.14);       /* hairline */
-  --line-soft: rgba(22, 34, 63, 0.08);
-  --surface: var(--paper);              /* cards */
-  --surface-inset: rgba(22, 34, 63, 0.035); /* subtle inset (quiz options, inputs) */
-  --gold-tint: rgba(201, 162, 39, 0.14);    /* icon chip / accent bg */
-  --gold-tint-soft: rgba(201, 162, 39, 0.08);
-  --scrim: rgba(8, 16, 38, 0.92);       /* dark overlay (toast, video labels) */
-  --shadow-sm: 0 4px 16px -10px rgba(22, 34, 63, 0.28);
-  --shadow-md: 0 14px 40px -18px rgba(22, 34, 63, 0.32);
+  --body: rgba(24, 50, 38, 0.84);
+  --muted: rgba(24, 50, 38, 0.62);
+  --line: rgba(38, 68, 49, 0.18);
+  --line-soft: rgba(38, 68, 49, 0.09);
+  --surface: var(--paper);
+  --surface-inset: rgba(90, 148, 167, 0.08);
+  --gold-tint: rgba(234, 160, 67, 0.17);
+  --gold-tint-soft: rgba(234, 160, 67, 0.10);
+  --scrim: rgba(28, 55, 39, 0.94);
+  --shadow-sm: 0 8px 24px -16px rgba(38, 68, 49, 0.35);
+  --shadow-md: 0 24px 60px -30px rgba(38, 68, 49, 0.46);
 
   --font-display: "Playfair Display", Georgia, serif;
   --font-body: "Inter", system-ui, sans-serif;
@@ -403,4 +408,68 @@ body { margin: 0; }
 
 @media (min-width: 761px) {
   .nav-mobile { display: none !important; }
+}
+
+/* ========================================================================== */
+/* iGOLD | IIUM — Sacred Atlas full-site visual system                       */
+/* ========================================================================== */
+.igold main { background: var(--everglade); }
+.igold main > section { position: relative; isolation: isolate; transition: background-color .8s var(--ease), color .8s var(--ease); }
+.igold main > section:not(#hero)::before { content:""; position:absolute; inset:0; z-index:-1; pointer-events:none; opacity:.22; background-image:linear-gradient(30deg,currentColor 1px,transparent 1px),linear-gradient(150deg,currentColor 1px,transparent 1px); background-size:92px 160px; mask-image:linear-gradient(to bottom,transparent,#000 18%,#000 82%,transparent); }
+.igold main > section.section { max-width:none; width:100%; padding-inline:max(clamp(1.25rem,5vw,3rem),calc((100vw - var(--maxw))/2)); }
+.igold main > #explorer > .section { max-width:var(--maxw); }
+
+/* Explicit alternating sequence: dark and light, section by section. */
+.igold :is(#syarat,#niyyah,#kaifiat,#explorer,#kuiz) {
+  --fg:#f2f8f5; --ink:#f2f8f5; --body:rgba(242,248,245,.82); --muted:rgba(190,217,235,.72);
+  --line:rgba(190,217,235,.22); --line-soft:rgba(190,217,235,.12); --surface:rgba(255,255,255,.075);
+  --surface-inset:rgba(190,217,235,.075); --gold-ink:#ffc16f; --bg:var(--everglade); --bg-alt:#315743;
+  color:var(--fg); background:linear-gradient(145deg,var(--everglade),#315743 58%,var(--deep-diving));
+}
+.igold :is(#about,#rukun,#wudu,#janazah,#bacaan,#hubungi) {
+  --fg:#183226; --ink:#183226; --body:rgba(24,50,38,.84); --muted:rgba(24,50,38,.63);
+  --line:rgba(38,68,49,.18); --line-soft:rgba(38,68,49,.09); --surface:rgba(247,251,253,.78);
+  --surface-inset:rgba(90,148,167,.09); --gold-ink:#98510f; --bg:var(--light-veil); --bg-alt:#dcebf2;
+  color:var(--fg); background:linear-gradient(145deg,var(--light-veil),#e8f2f7 58%,var(--up-north));
+}
+.igold :is(#syarat,#niyyah,#kaifiat,#explorer,#kuiz) .section-title,
+.igold :is(#syarat,#niyyah,#kaifiat,#explorer,#kuiz) h3 { color:#f2f8f5; }
+.igold :is(#syarat,#niyyah,#kaifiat,#explorer,#kuiz) .eyebrow { color:#ffc16f; }
+
+/* Seamless cinematic section handoffs. */
+.igold main > section:not(#hero)::after { content:""; position:absolute; top:-1px; left:0; right:0; height:44px; pointer-events:none; background:linear-gradient(to bottom,rgba(38,68,49,.17),transparent); opacity:.55; }
+.igold main > section:not(#hero) > * { transition:transform .85s var(--ease),opacity .75s ease; }
+.igold main > section:not(#hero):not(.section-inview) > * { opacity:.72; transform:translateY(14px); }
+.igold main > section.section { min-height:clamp(520px,70vh,860px); display:flex; flex-direction:column; justify-content:center; }
+
+/* Elevated typography and cards while retaining all content and behavior. */
+.section-head { margin-bottom:clamp(2rem,5vw,3.4rem); }
+.section-title { font-size:clamp(2.35rem,5.8vw,4.6rem); line-height:.94; letter-spacing:-.045em; max-width:18ch; text-wrap:balance; }
+.section-sub { font-size:clamp(.98rem,1.7vw,1.15rem); line-height:1.75; }
+.igold :is(.condition-card,.rukun-card,.niyyah-card,.step-card,.recitation-card,.quiz-card,.contact-card,.wudu-card) { backdrop-filter:blur(18px); border-color:var(--line)!important; box-shadow:var(--shadow-md); transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .4s ease,background .4s ease!important; }
+.igold :is(.condition-card,.rukun-card,.niyyah-card,.step-card,.recitation-card,.quiz-card,.contact-card,.wudu-card):hover { transform:translateY(-7px); border-color:var(--gilded)!important; box-shadow:0 30px 70px -36px rgba(20,46,34,.65); }
+
+/* Universal tactile motion language. */
+.igold a,.igold button { transition:transform .3s var(--ease),color .3s ease,background-color .3s ease,border-color .3s ease,box-shadow .3s ease!important; }
+.igold button:active,.igold a:active { transform:scale(.975); }
+.igold :is(a,button):focus-visible { outline:3px solid var(--gilded); outline-offset:4px; }
+.btn-gold { background:linear-gradient(135deg,var(--gilded),#c97923); color:var(--everglade); box-shadow:0 18px 40px -20px rgba(234,160,67,.85); }
+.btn-ghost { background:color-mix(in srgb,var(--surface) 86%,transparent); color:var(--ink); border-color:var(--line); backdrop-filter:blur(12px); }
+
+/* Navigation adapts to the dark hero but remains highly legible. */
+.pill-nav-header { filter:drop-shadow(0 12px 22px rgba(24,50,38,.18)); }
+.pill-nav-header img { object-fit:contain; }
+.line-sidebar { filter:drop-shadow(0 8px 18px rgba(38,68,49,.15)); }
+
+/* Footer receives the closing dark chapter. */
+.igold footer { background:linear-gradient(135deg,#1d3526,var(--everglade),#315743)!important; color:var(--light-veil)!important; border-color:rgba(190,217,235,.15)!important; }
+
+@media(max-width:760px){
+  .igold main > section.section { min-height:auto; padding-block:clamp(4.5rem,16vw,6.5rem); }
+  .section-title { font-size:clamp(2.2rem,11vw,3.4rem); }
+  .igold main > section:not(#hero)::before { background-size:64px 112px; opacity:.14; }
+}
+@media(prefers-reduced-motion:reduce){
+  .igold main > section > * { opacity:1!important; transform:none!important; }
+  .igold *, .igold *::before, .igold *::after { animation-duration:.01ms!important; animation-iteration-count:1!important; scroll-behavior:auto!important; transition-duration:.01ms!important; }
 }

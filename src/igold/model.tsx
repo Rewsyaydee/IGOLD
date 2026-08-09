@@ -17,8 +17,11 @@ const STORAGE_KEY = "igold-model";
 function initialModel(defaultModel: MediaModel = "default"): MediaModel {
   if (typeof localStorage !== "undefined") {
     const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved && ["default", "adult-woman", "boy", "girl"].includes(saved)) {
+    if (saved && ["default", "adult-woman"].includes(saved)) {
       return saved as MediaModel;
+    }
+    if (saved === "boy" || saved === "girl") {
+      localStorage.setItem(STORAGE_KEY, "default");
     }
   }
   return defaultModel;

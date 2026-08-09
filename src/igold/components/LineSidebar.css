@@ -121,3 +121,6 @@
     display: none;
   }
 }
+
+/* Full-site redesign: legible above alternating light and dark sections */
+.line-sidebar{padding:1rem .7rem!important;border:1px solid rgba(190,217,235,.16);border-radius:20px;background:rgba(38,68,49,.86);backdrop-filter:blur(18px);box-shadow:0 20px 45px -28px rgba(0,0,0,.7)}
