@@ -36,13 +36,22 @@ function IgoldContent() {
   useEffect(() => {
     const onScroll = () => {
       const hero = document.getElementById("hero");
-      if (hero) {
-        setSidebarVisible(window.scrollY >= hero.offsetHeight * 0.7);
-      }
+      if (hero) setSidebarVisible(window.scrollY >= hero.offsetHeight * 0.7);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    if (!loaded || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const sections = Array.from(document.querySelectorAll<HTMLElement>("main > section"));
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(entry => entry.target.classList.toggle("section-inview", entry.isIntersecting)),
+      { threshold: 0.08, rootMargin: "0px 0px -8% 0px" },
+    );
+    sections.forEach(section => observer.observe(section));
+    return () => observer.disconnect();
+  }, [loaded]);
 
   const activeIdx = sectionIds.indexOf(activeHref ?? "");
 
@@ -57,9 +66,9 @@ function IgoldContent() {
       {sidebarVisible && (
         <LineSidebar
           items={sidebarItems}
-          accentColor="var(--gold-500)"
-          textColor="rgba(22, 34, 63, 0.45)"
-          markerColor="rgba(22, 34, 63, 0.18)"
+          accentColor="var(--gilded)"
+          textColor="rgba(232, 242, 247, 0.72)"
+          markerColor="rgba(190, 217, 235, 0.28)"
           markerLength={50}
           maxShift={20}
           itemGap={16}

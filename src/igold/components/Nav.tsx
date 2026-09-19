@@ -36,11 +36,7 @@ export function Nav() {
       }}
     >
       <PillNav
-        logoStar={
-          <svg width="26" height="26" viewBox="0 0 100 100">
-            <polygon points="50,8 60,38 92,38 66,57 76,90 50,70 24,90 34,57 8,38 40,38" fill="none" stroke="var(--gold-500)" strokeWidth="4" />
-          </svg>
-        }
+        logoStar={null}
         logoIIUM={APP_CONFIG.branding.iiumLogo}
         logoIIUMAlt="IIUM"
         items={desktopItems}
@@ -49,10 +45,10 @@ export function Nav() {
         activeHref={activeHref}
         onToggleLang={toggleLang}
         onNavigate={id => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" })}
-        baseColor="var(--gold-500)"
-        pillColor="var(--cream)"
-        pillTextColor="var(--ink)"
-        hoveredPillTextColor="var(--ink)"
+        baseColor="var(--gilded)"
+        pillColor="var(--light-veil)"
+        pillTextColor="var(--everglade)"
+        hoveredPillTextColor="var(--everglade)"
       />
     </header>
   );
