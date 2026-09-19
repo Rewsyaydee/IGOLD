@@ -34,3 +34,7 @@ test-results/
 playwright-report/
 # Internal working notes
 PHASE2_TODO.md
+
+# Pamphlet tooling
+pamphlet/.tokens.json
+pamphlet/.env
