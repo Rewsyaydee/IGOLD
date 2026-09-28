@@ -7,12 +7,16 @@
   "scripts": {
     "shots": "node scripts/shots.mjs",
     "qr": "node scripts/qr.mjs",
+    "qr:verify": "node scripts/qr-verify.mjs",
+    "brand:logo": "node scripts/brand-logo.mjs",
     "pdf": "node scripts/pdf.mjs",
     "canva:auth": "node scripts/canva-auth.mjs",
     "canva:import": "node scripts/canva-import.mjs"
   },
   "devDependencies": {
+    "jsqr": "^1.4.0",
     "playwright": "^1.63.0",
+    "pngjs": "^7.0.0",
     "qrcode": "^1.5.4"
   }
 }

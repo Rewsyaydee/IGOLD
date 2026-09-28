@@ -1,7 +1,7 @@
-import QRCode from "qrcode";
-import { fileURLToPath } from "node:url";
-import { dirname, resolve } from "node:path";
 import { existsSync } from "node:fs";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+import QRCode from "qrcode";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const out = resolve(__dirname, "../assets/qr.png");

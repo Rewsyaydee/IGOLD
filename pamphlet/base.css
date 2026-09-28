@@ -1,0 +1,252 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap");
+
+:root {
+  --everglade: #264431;
+  --everglade-2: #315743;
+  --up-north: #719687;
+  --deep-diving: #5a94a7;
+  --light-veil: #bed9eb;
+  --gilded: #eaa043;
+  --gilded-deep: #c97923;
+  --ink: #183226;
+  --paper: #f7fbfd;
+  --cream: #f7f2e8;
+
+  --display: "Playfair Display", Georgia, serif;
+  --body: "Inter", system-ui, sans-serif;
+  --arabic: "Amiri", serif;
+}
+
+* { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #5b6470;
+  font-family: var(--body);
+  font-size: 9.5pt;
+  color: var(--ink);
+}
+
+@page { size: 297mm 210mm; margin: 0; }
+
+/* ------------------------------------------------------------------ sheet */
+
+.sheet {
+  width: 297mm;
+  height: 210mm;
+  display: grid;
+  grid-template-columns: repeat(3, 99mm);
+  overflow: hidden;
+  page-break-after: always;
+  break-after: page;
+}
+.sheet:last-child { page-break-after: auto; break-after: auto; }
+
+@media screen {
+  body { padding: 26px 0; }
+  .sheet {
+    margin: 0 auto 26px;
+    box-shadow: 0 24px 70px -24px rgba(0, 0, 0, 0.65);
+  }
+  .panel + .panel { border-left: 1px dashed rgba(255, 255, 255, 0.28); }
+}
+
+.panel {
+  width: 99mm;
+  height: 210mm;
+  padding: 9mm 8mm;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* -------------------------------------------------------------- grounds */
+
+.g-dark {
+  color: #f2f8f5;
+  background: linear-gradient(152deg, var(--everglade) 0%, var(--everglade-2) 58%, var(--deep-diving) 128%);
+}
+.g-dark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.12;
+  background-image:
+    linear-gradient(30deg, #fff 1.2px, transparent 1.2px),
+    linear-gradient(150deg, #fff 1.2px, transparent 1.2px);
+  background-size: 36px 63px;
+  pointer-events: none;
+}
+
+.g-light {
+  color: var(--ink);
+  background: linear-gradient(160deg, var(--paper) 0%, #e8f2f7 62%, var(--light-veil) 100%);
+}
+.g-light::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.55;
+  background-image:
+    linear-gradient(30deg, rgba(38, 68, 49, 0.045) 1.2px, transparent 1.2px),
+    linear-gradient(150deg, rgba(38, 68, 49, 0.045) 1.2px, transparent 1.2px);
+  background-size: 36px 63px;
+  pointer-events: none;
+}
+
+.g-gilded {
+  color: var(--everglade);
+  background: linear-gradient(155deg, #f2bf76 0%, var(--gilded) 46%, var(--gilded-deep) 100%);
+}
+.g-gilded::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.16;
+  background-image:
+    linear-gradient(30deg, var(--everglade) 1.2px, transparent 1.2px),
+    linear-gradient(150deg, var(--everglade) 1.2px, transparent 1.2px);
+  background-size: 36px 63px;
+  pointer-events: none;
+}
+
+.panel > * { position: relative; z-index: 1; }
+
+/* --------------------------------------------------------- typography */
+
+.eyebrow {
+  font-size: 7pt;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--gilded);
+}
+.g-light .eyebrow, .g-gilded .eyebrow { color: var(--gilded-deep); }
+.g-gilded .eyebrow { color: var(--everglade); opacity: 0.75; }
+
+.h-xl { font-family: var(--display); font-weight: 600; font-size: 31pt; line-height: 0.98; letter-spacing: -0.025em; margin: 0; }
+.h-lg { font-family: var(--display); font-weight: 600; font-size: 22pt; line-height: 1.0; letter-spacing: -0.02em; margin: 0; }
+.h-md { font-family: var(--display); font-weight: 600; font-size: 15pt; line-height: 1.08; letter-spacing: -0.012em; margin: 0; }
+.h-sm { font-family: var(--display); font-weight: 600; font-size: 12pt; line-height: 1.15; margin: 0; }
+
+.body { font-size: 9.5pt; line-height: 1.62; margin: 0; }
+.desc { font-size: 8.5pt; line-height: 1.5; margin: 0; }
+.small { font-size: 7.5pt; line-height: 1.55; margin: 0; }
+.cap {
+  font-size: 7pt;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.66;
+  margin: 0;
+}
+.em { font-style: italic; color: var(--gilded); }
+.g-light .em { color: var(--gilded-deep); }
+.g-gilded .em { color: var(--everglade); }
+.arabic { font-family: var(--arabic); direction: rtl; }
+
+.muted { opacity: 0.82; }
+.dim { opacity: 0.66; }
+
+/* -------------------------------------------------------------- atoms */
+
+.rule { height: 1px; background: currentColor; opacity: 0.2; margin: 5mm 0; border: 0; }
+.rule-glow { height: 2px; width: 16mm; background: var(--gilded); opacity: 1; margin: 3.5mm 0 0; border: 0; }
+.g-gilded .rule-glow { background: var(--everglade); opacity: 0.5; }
+
+.spacer { flex: 1; }
+
+.tag {
+  display: inline-block;
+  font-size: 6.6pt;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 1.4mm 3mm;
+  border-radius: 100px;
+  border: 0.3mm solid currentColor;
+  opacity: 0.85;
+  white-space: nowrap;
+}
+
+.qr {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.qr-box { display: grid; place-items: center; }
+.qr-box--dark { filter: drop-shadow(0 8px 22px rgba(10, 30, 18, 0.45)); }
+.qr-box--light { filter: drop-shadow(0 10px 26px rgba(20, 46, 34, 0.28)); }
+
+.url {
+  font-family: var(--display);
+  font-size: 13pt;
+  letter-spacing: 0.01em;
+  font-weight: 600;
+}
+
+/* phone screenshot */
+.phone {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 3mm;
+  background: var(--everglade);
+}
+.phone--framed {
+  border: 0.4mm solid rgba(190, 217, 235, 0.3);
+  box-shadow: 0 14px 34px -16px rgba(8, 26, 16, 0.7);
+}
+.phone--light-frame {
+  border: 0.4mm solid rgba(38, 68, 49, 0.2);
+  box-shadow: 0 16px 38px -18px rgba(20, 46, 34, 0.6);
+}
+
+.logo-chip {
+  background: var(--paper);
+  border-radius: 2.6mm;
+  padding: 1.7mm 2.1mm;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 5px 16px -7px rgba(0, 0, 0, 0.45);
+}
+.logo-chip img { height: 10mm; display: block; }
+.logo-plain { height: 11mm; display: block; width: auto; }
+
+/* phone that bleeds off the bottom edge — costs no layout height */
+.bleed-foot {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -30mm;
+  width: 48mm;
+  height: 96mm;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 3.4mm 3.4mm 0 0;
+  border: 0.45mm solid rgba(190, 217, 235, 0.3);
+  border-bottom: 0;
+  box-shadow: 0 -12px 38px -18px rgba(0, 0, 0, 0.7);
+  z-index: 0;
+}
+.g-light .bleed-foot {
+  border-color: rgba(38, 68, 49, 0.22);
+  box-shadow: 0 -12px 34px -18px rgba(20, 46, 34, 0.5);
+}
+.bleed-foot--sm { width: 44mm; height: 86mm; bottom: -26mm; }
+
+.mast {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3mm;
+}
+.mast-label {
+  font-size: 6.8pt;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-weight: 600;
+  opacity: 0.78;
+}

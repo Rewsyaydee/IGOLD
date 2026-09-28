@@ -1,0 +1,162 @@
+@import url("base.css");
+
+/* ============================================================== V2 DAYLIGHT
+   Light-dominant, airy, maximum legibility. One dark anchor panel inside.
+   ========================================================================= */
+
+.v2-cover { text-align: center; }
+
+.v2-mast {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.v2-wordmark {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 30pt;
+  letter-spacing: 0.13em;
+  color: var(--everglade);
+  margin: 0;
+  line-height: 1;
+}
+.v2-wordmark-sub {
+  font-size: 6.8pt;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gilded-deep);
+  margin-top: 2.6mm;
+  font-weight: 600;
+}
+
+.v2-cover-sub {
+  font-size: 9pt;
+  line-height: 1.62;
+  color: rgba(24, 50, 38, 0.84);
+  margin: 0 auto;
+  max-width: 74mm;
+}
+
+.v2-cover-phone {
+  width: 60mm;
+  height: 84mm;
+  margin: 0 auto;
+  border-radius: 3.4mm;
+}
+
+.v2-cover-qr {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4mm;
+}
+.v2-cover-qr .qr-box { width: 21mm; height: 21mm; }
+.v2-cover-qr .url { color: var(--everglade); font-size: 12pt; }
+
+.v2-rule {
+  height: 2.4px;
+  width: 18mm;
+  background: var(--gilded-deep);
+  border: 0;
+  margin: 4mm auto 0;
+}
+.g-dark .v2-rule { background: var(--gilded); }
+
+/* ---------------------------------------------------------------- flap */
+
+.v2-facts { list-style: none; margin: 0; padding: 0; display: grid; gap: 5.4mm; }
+.v2-facts li {
+  padding-left: 4.5mm;
+  border-left: 0.9mm solid var(--gilded-deep);
+}
+.v2-facts b {
+  display: block;
+  font-size: 9.6pt;
+  font-weight: 600;
+  margin-bottom: 1.1mm;
+  letter-spacing: -0.005em;
+}
+.v2-facts p { font-size: 8.4pt; line-height: 1.52; opacity: 0.78; margin: 0; }
+
+.v2-tags { display: flex; gap: 2.4mm; flex-wrap: wrap; }
+.g-light .tag { border-color: rgba(24, 50, 38, 0.4); }
+
+/* -------------------------------------------------------------- headline
+   Big inline stats for the about panel                                    */
+
+.v2-bigstats {
+  font-family: var(--display);
+  font-size: 13pt;
+  line-height: 1.35;
+  color: var(--everglade);
+  letter-spacing: -0.01em;
+}
+.v2-bigstats b { color: var(--gilded-deep); font-weight: 700; }
+.g-dark .v2-bigstats { color: #eef7f2; }
+.g-dark .v2-bigstats b { color: var(--gilded); }
+
+/* -------------------------------------------------------------- modules */
+
+.v2-mods { list-style: none; margin: 0; padding: 0; display: grid; gap: 7mm; }
+.v2-mods li { display: grid; grid-template-columns: 7.5mm 1fr; gap: 3.4mm; align-items: start; }
+.v2-mods .n {
+  font-family: var(--display);
+  font-size: 11pt;
+  color: var(--gilded);
+  line-height: 1.05;
+  padding-top: 0.3mm;
+}
+.v2-mods b { display: block; font-size: 10pt; font-weight: 600; margin-bottom: 1mm; }
+.v2-mods p { font-size: 8.6pt; line-height: 1.55; opacity: 0.78; margin: 0; }
+
+/* ---------------------------------------------------------------- steps */
+
+.v2-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 4.2mm; }
+.v2-steps li {
+  background: rgba(255, 255, 255, 0.6);
+  border: 0.3mm solid rgba(38, 68, 49, 0.14);
+  border-radius: 2.6mm;
+  padding: 3.4mm 4mm;
+  display: grid;
+  grid-template-columns: 7.5mm 1fr;
+  gap: 3.4mm;
+  align-items: start;
+}
+.v2-steps .b {
+  display: grid;
+  place-items: center;
+  width: 7.5mm;
+  height: 7.5mm;
+  border-radius: 50%;
+  background: var(--everglade);
+  color: var(--gilded);
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 9.6pt;
+}
+.v2-steps li > span > b { display: block; font-size: 9.6pt; font-weight: 600; margin-bottom: 0.9mm; }
+.v2-steps p { font-size: 8.4pt; line-height: 1.5; opacity: 0.8; margin: 0; }
+
+/* --------------------------------------------------------------- callout */
+
+.v2-callout {
+  background: rgba(255, 255, 255, 0.66);
+  border: 0.3mm solid rgba(38, 68, 49, 0.14);
+  border-left: 1.1mm solid var(--gilded-deep);
+  border-radius: 2.2mm;
+  padding: 3.6mm 4mm;
+  font-size: 8.4pt;
+  line-height: 1.55;
+}
+.g-dark .v2-callout {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(190, 217, 235, 0.2);
+  border-left-color: var(--gilded);
+}
+
+/* ----------------------------------------------------------------- back */
+
+.v2-back-qr { width: 48mm; height: 48mm; margin: 0 auto; }
+.v2-credit { font-size: 7.6pt; line-height: 1.65; opacity: 0.74; }
+.v2-credit b { font-weight: 600; opacity: 1; }

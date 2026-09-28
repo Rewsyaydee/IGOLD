@@ -1,0 +1,201 @@
+@import url("base.css");
+
+/* ============================================================ V1 MANUSCRIPT
+   Dark-dominant, editorial, scholarly. Gilded hairlines, generous leading.
+   ========================================================================= */
+
+.v1-cover { text-align: center; }
+
+.v1-cover .logo-plain { height: 12mm; }
+
+.v1-mast {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.v1-wordmark {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 27pt;
+  letter-spacing: 0.14em;
+  color: #fff;
+  margin: 0;
+  line-height: 1;
+}
+.v1-wordmark-sub {
+  font-size: 6.6pt;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gilded);
+  margin-top: 2.4mm;
+}
+
+.v1-seal {
+  width: 24mm;
+  height: 24mm;
+  border-radius: 50%;
+  border: 0.4mm solid rgba(234, 160, 67, 0.5);
+  display: grid;
+  place-items: center;
+  position: relative;
+  margin: 0 auto;
+}
+.v1-seal::after {
+  content: "";
+  position: absolute;
+  inset: 1.4mm;
+  border-radius: 50%;
+  border: 0.2mm solid rgba(190, 217, 235, 0.32);
+}
+.v1-seal span {
+  font-family: var(--arabic);
+  font-size: 14pt;
+  color: var(--gilded);
+  line-height: 1;
+}
+
+.v1-cover-head {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 19pt;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  margin: 0;
+  color: #f6fbf8;
+}
+.v1-cover-head em {
+  font-style: italic;
+  color: var(--gilded);
+  display: block;
+}
+
+.v1-cover-sub {
+  font-size: 8.4pt;
+  line-height: 1.6;
+  opacity: 0.8;
+  margin: 0 auto;
+  max-width: 74mm;
+}
+
+.v1-cover-phone {
+  width: 56mm;
+  margin: 0 auto;
+  height: 76mm;
+  border-radius: 3mm;
+  box-shadow: 0 18px 40px -18px rgba(4, 18, 10, 0.8);
+}
+
+.v1-cover-qr {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4mm;
+}
+.v1-cover-qr .qr-box { width: 21mm; height: 21mm; }
+.v1-cover-qr .url { color: #fff; font-size: 12pt; }
+.v1-cover-qr .cap { color: var(--light-veil); opacity: 0.8; }
+
+/* ---------------------------------------------------------------- flap */
+
+.v1-facts { list-style: none; margin: 0; padding: 0; display: grid; gap: 5mm; }
+.v1-facts li { display: grid; grid-template-columns: 8mm 1fr; gap: 3.5mm; }
+.v1-facts .n {
+  font-family: var(--display);
+  font-size: 13pt;
+  color: var(--gilded);
+  line-height: 1;
+  padding-top: 0.4mm;
+}
+.v1-facts b {
+  display: block;
+  font-size: 9.2pt;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  margin-bottom: 1mm;
+}
+.v1-facts p { font-size: 8.2pt; line-height: 1.5; opacity: 0.8; margin: 0; }
+
+.v1-tags { display: flex; gap: 2.4mm; flex-wrap: wrap; }
+
+/* ---------------------------------------------------------------- about */
+
+.v1-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm; }
+.v1-stats div {
+  text-align: center;
+  padding: 4mm 1mm 3.4mm;
+  border-radius: 2.4mm;
+  border: 0.3mm solid rgba(190, 217, 235, 0.26);
+  background: rgba(255, 255, 255, 0.06);
+}
+.v1-stats b {
+  display: block;
+  font-family: var(--display);
+  font-size: 19pt;
+  line-height: 1;
+  color: var(--gilded);
+}
+.v1-stats span {
+  display: block;
+  font-size: 6.4pt;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-top: 2mm;
+  opacity: 0.78;
+}
+
+/* -------------------------------------------------------------- modules */
+
+.v1-mods { list-style: none; margin: 0; padding: 0; display: grid; gap: 5.8mm; }
+.v1-mods li {
+  display: grid;
+  grid-template-columns: 4.4mm 1fr;
+  gap: 3.4mm;
+  align-items: baseline;
+  padding-bottom: 5.4mm;
+  border-bottom: 0.25mm solid rgba(190, 217, 235, 0.2);
+}
+.v1-mods li:last-child { border-bottom: 0; padding-bottom: 0; }
+.v1-mods .d {
+  display: block;
+  width: 1.9mm;
+  height: 1.9mm;
+  border-radius: 50%;
+  background: var(--gilded);
+  margin-top: 1.7mm;
+}
+.v1-mods b { display: block; font-size: 10pt; font-weight: 600; margin-bottom: 1mm; }
+.v1-mods p { font-size: 8.6pt; line-height: 1.55; opacity: 0.78; margin: 0; }
+
+/* ---------------------------------------------------------------- steps */
+
+.v1-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 5mm; }
+.v1-steps li { display: grid; grid-template-columns: 8mm 1fr; gap: 3.5mm; align-items: start; }
+.v1-steps .b {
+  display: grid;
+  place-items: center;
+  width: 8mm;
+  height: 8mm;
+  border-radius: 50%;
+  background: var(--gilded);
+  color: var(--everglade);
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 10pt;
+}
+.v1-steps li > span > b { display: block; font-size: 9.6pt; font-weight: 600; margin-bottom: 1mm; }
+.v1-steps p { font-size: 8.4pt; line-height: 1.5; opacity: 0.8; margin: 0; }
+
+/* ----------------------------------------------------------------- back */
+
+.v1-back-qr { width: 46mm; height: 46mm; margin: 0 auto; }
+
+.v1-note {
+  border-left: 0.8mm solid var(--gilded-deep);
+  padding-left: 3.5mm;
+  font-size: 8.4pt;
+  line-height: 1.55;
+}
+
+.v1-credit { font-size: 7.6pt; line-height: 1.65; opacity: 0.72; }
+.v1-credit b { font-weight: 600; opacity: 1; }

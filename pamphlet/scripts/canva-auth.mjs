@@ -1,9 +1,9 @@
-import { createServer } from "node:http";
-import { readFile, writeFile } from "node:fs/promises";
-import { fileURLToPath } from "node:url";
-import { dirname, resolve } from "node:path";
-import { randomBytes, createHash } from "node:crypto";
 import { exec } from "node:child_process";
+import { createHash, randomBytes } from "node:crypto";
+import { readFile, writeFile } from "node:fs/promises";
+import { createServer } from "node:http";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
@@ -19,7 +19,9 @@ async function loadEnv() {
   try {
     raw = await readFile(ENV_PATH, "utf8");
   } catch {
-    console.error(`\n  Missing ${ENV_PATH}\n  Copy .env.example to .env and fill it in.\n`);
+    console.error(
+      `\n  Missing ${ENV_PATH}\n  Copy .env.example to .env and fill it in.\n`,
+    );
     process.exit(1);
   }
   const env = {};
@@ -31,22 +33,31 @@ async function loadEnv() {
 }
 
 function b64url(buf) {
-  return buf.toString("base64").replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  return buf
+    .toString("base64")
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_")
+    .replace(/=+$/, "");
 }
 
 const env = await loadEnv();
 const clientId = env.CANVA_CLIENT_ID;
 const clientSecret = env.CANVA_CLIENT_SECRET;
-const redirectUri = env.CANVA_REDIRECT_URI ?? "http://127.0.0.1:3001/oauth/redirect";
+const redirectUri =
+  env.CANVA_REDIRECT_URI ?? "http://127.0.0.1:3001/oauth/redirect";
 
 if (!clientId || !clientSecret) {
-  console.error("CANVA_CLIENT_ID and CANVA_CLIENT_SECRET must be set in pamphlet/.env");
+  console.error(
+    "CANVA_CLIENT_ID and CANVA_CLIENT_SECRET must be set in pamphlet/.env",
+  );
   process.exit(1);
 }
 
 const port = Number(new URL(redirectUri).port || 3001);
 const codeVerifier = b64url(randomBytes(96));
-const codeChallenge = b64url(createHash("sha256").update(codeVerifier).digest());
+const codeChallenge = b64url(
+  createHash("sha256").update(codeVerifier).digest(),
+);
 const state = b64url(randomBytes(32));
 
 const authUrl =
@@ -119,7 +130,9 @@ const server = createServer(async (req, res) => {
 
     console.log("\n✓ Authorized. Tokens saved to pamphlet/.tokens.json");
     console.log(`  Scope: ${data.scope ?? "(none reported)"}`);
-    console.log(`  Expires in: ${Math.round((data.expires_in ?? 0) / 60)} minutes\n`);
+    console.log(
+      `  Expires in: ${Math.round((data.expires_in ?? 0) / 60)} minutes\n`,
+    );
     server.close();
     process.exit(0);
   } catch (err) {
@@ -134,7 +147,7 @@ const server = createServer(async (req, res) => {
 server.listen(port, "127.0.0.1", () => {
   console.log(`\nListening on ${redirectUri}`);
   console.log("\nOpen this URL in your browser to authorize:\n");
-  console.log(authUrl + "\n");
+  console.log(`${authUrl}\n`);
   if (process.platform === "win32") exec(`start "" "${authUrl}"`);
 });
 

@@ -1,7 +1,7 @@
-import { chromium } from "playwright";
-import { fileURLToPath } from "node:url";
-import { dirname, resolve } from "node:path";
 import { mkdirSync } from "node:fs";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+import { chromium } from "playwright";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUT = resolve(__dirname, "../assets/shots");
@@ -17,7 +17,16 @@ const DESKTOP = [
   { id: "bacaan", label: "bacaan" },
 ];
 
-const MOBILE = ["hero", "kaifiat"];
+const MOBILE = [
+  "hero",
+  "kaifiat",
+  "wudu",
+  "niyyah",
+  "janazah",
+  "kuiz",
+  "bacaan",
+  "rukun",
+];
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
@@ -34,7 +43,8 @@ async function shoot(browser, { viewport, dpr, ids, suffix, hideChrome }) {
   });
   const page = await context.newPage();
   page.on("console", m => {
-    if (m.type() === "error") console.log(`  [console] ${m.text().slice(0, 120)}`);
+    if (m.type() === "error")
+      console.log(`  [console] ${m.text().slice(0, 120)}`);
   });
 
   console.log(`\n→ ${suffix} @ ${viewport.width}x${viewport.height} @${dpr}x`);
@@ -43,7 +53,8 @@ async function shoot(browser, { viewport, dpr, ids, suffix, hideChrome }) {
 
   if (hideChrome) {
     await page.addStyleTag({
-      content: ".line-sidebar{display:none!important}.pill-nav-hidden-desktop{display:none!important}",
+      content:
+        ".line-sidebar{display:none!important}.pill-nav-hidden-desktop{display:none!important}",
     });
   }
 
@@ -58,7 +69,10 @@ async function shoot(browser, { viewport, dpr, ids, suffix, hideChrome }) {
     await sleep(500);
     await page.evaluate(sel => {
       const node = document.querySelector(sel);
-      if (node) window.scrollTo({ top: node.getBoundingClientRect().top + window.scrollY - 8 });
+      if (node)
+        window.scrollTo({
+          top: node.getBoundingClientRect().top + window.scrollY - 8,
+        });
     }, `#${id}`);
     await settle(page, 1600);
     const file = resolve(OUT, `${suffix}-${id}.png`);

@@ -1,12 +1,24 @@
 import { readFile, writeFile } from "node:fs/promises";
-import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
 const ENV_PATH = resolve(ROOT, ".env");
 const TOKENS_PATH = resolve(ROOT, ".tokens.json");
-const PDF_PATH = resolve(ROOT, "dist/igold-pamphlet.pdf");
+
+const VARIANTS = ["v1-manuscript", "v2-daylight", "v3-gilded"];
+const requested =
+  process.argv.slice(2).find(a => !a.startsWith("--")) ?? "v1-manuscript";
+const slug = VARIANTS.find(v => v.includes(requested.replace(/\.pdf$/, "")));
+if (!slug) {
+  console.error(
+    `Unknown variant "${requested}". Pick one of: ${VARIANTS.join(", ")}`,
+  );
+  process.exit(1);
+}
+const PDF_PATH = resolve(ROOT, `dist/${slug}.pdf`);
+const TITLE = `IGOLD — Prayer Guide Pamphlet (${slug})`;
 
 const API = "https://api.canva.com/rest/v1";
 const TOKEN_URL = `${API}/oauth/token`;
@@ -25,16 +37,20 @@ async function loadEnv() {
 }
 
 async function accessToken(env) {
-  const tokens = JSON.parse(await readFile(TOKENS_PATH, "utf8").catch(() => {
-    console.error(`Missing ${TOKENS_PATH} — run: npm run canva:auth`);
-    process.exit(1);
-  }));
+  const tokens = JSON.parse(
+    await readFile(TOKENS_PATH, "utf8").catch(() => {
+      console.error(`Missing ${TOKENS_PATH} — run: npm run canva:auth`);
+      process.exit(1);
+    }),
+  );
 
   const valid = tokens.expires_at && Date.now() < tokens.expires_at - 60000;
   if (valid) return tokens.access_token;
 
   console.log("Access token expired — refreshing…");
-  const basic = Buffer.from(`${env.CANVA_CLIENT_ID}:${env.CANVA_CLIENT_SECRET}`).toString("base64");
+  const basic = Buffer.from(
+    `${env.CANVA_CLIENT_ID}:${env.CANVA_CLIENT_SECRET}`,
+  ).toString("base64");
   const resp = await fetch(TOKEN_URL, {
     method: "POST",
     headers: {
@@ -78,10 +94,12 @@ async function main() {
     console.error(`Missing ${PDF_PATH} — run: npm run pdf`);
     process.exit(1);
   });
-  console.log(`Uploading ${(pdf.length / 1024).toFixed(0)} KB → Canva…`);
+  console.log(
+    `Importing ${slug} — ${(pdf.length / 1024).toFixed(0)} KB → Canva…`,
+  );
 
   const metadata = JSON.stringify({
-    title_base64: Buffer.from("IGOLD — Prayer Guide Pamphlet").toString("base64"),
+    title_base64: Buffer.from(TITLE).toString("base64"),
     mime_type: "application/pdf",
   });
 

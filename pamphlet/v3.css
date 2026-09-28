@@ -1,0 +1,246 @@
+@import url("base.css");
+
+/* =============================================================== V3 GILDED
+   Bold, poster-like, high contrast. Full-bleed showcase panel.
+   ========================================================================= */
+
+/* --------------------------------------------------------------- cover */
+
+.v3-cover { padding: 9mm 8mm 0; }
+
+.v3-cover .mast-label { color: var(--gilded); }
+
+.v3-wordmark {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 36pt;
+  letter-spacing: 0.1em;
+  color: var(--gilded);
+  margin: 0;
+  line-height: 0.92;
+}
+.v3-wordmark-sub {
+  font-size: 6.8pt;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--light-veil);
+  margin-top: 3mm;
+  opacity: 0.85;
+}
+
+.v3-gildbar {
+  width: 26mm;
+  height: 2.6mm;
+  background: var(--gilded);
+  border: 0;
+  margin: 6mm 0 0;
+}
+
+.v3-cover-head {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 20pt;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: #f6fbf8;
+  margin: 6mm 0 0;
+}
+.v3-cover-head em { font-style: italic; color: var(--gilded); display: block; }
+
+.v3-cover-sub {
+  font-size: 8.4pt;
+  line-height: 1.6;
+  opacity: 0.82;
+  margin: 5mm 0 0;
+  max-width: 52mm;
+}
+
+.v3-cover-phone {
+  position: absolute;
+  right: 7mm;
+  bottom: -28mm;
+  width: 52mm;
+  height: 98mm;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 3.4mm 3.4mm 0 0;
+  border: 0.45mm solid rgba(190, 217, 235, 0.32);
+  border-bottom: 0;
+  box-shadow: 0 -14px 44px -20px rgba(0, 0, 0, 0.75);
+  z-index: 2;
+}
+
+.v3-qr-badge {
+  position: absolute;
+  left: 8mm;
+  bottom: 23mm;
+  width: 25mm;
+  height: 25mm;
+  padding: 1.6mm;
+  background: var(--cream);
+  border-radius: 2.6mm;
+  border: 0.5mm solid var(--gilded);
+  box-shadow: 0 14px 34px -14px rgba(0, 0, 0, 0.7);
+  z-index: 3;
+}
+.v3-qr-badge .qr { display: block; }
+.v3-qr-cap {
+  position: absolute;
+  left: 8mm;
+  bottom: 9mm;
+  font-size: 6.6pt;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--light-veil);
+  opacity: 0.85;
+  z-index: 3;
+  text-align: left;
+  line-height: 1.5;
+}
+
+/* ---------------------------------------------------------------- flap */
+
+.v3-facts { list-style: none; margin: 0; padding: 0; display: grid; gap: 4.6mm; }
+.v3-facts li { display: grid; grid-template-columns: 9mm 1fr; gap: 3mm; align-items: start; }
+.v3-facts .n {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 15pt;
+  line-height: 0.95;
+  color: var(--everglade);
+  opacity: 0.55;
+}
+.v3-facts b { display: block; font-size: 9.6pt; font-weight: 700; margin-bottom: 0.9mm; color: var(--everglade); }
+.v3-facts p { font-size: 8.4pt; line-height: 1.5; margin: 0; color: rgba(38, 68, 49, 0.86); }
+
+.g-gilded .tag { border-color: rgba(38, 68, 49, 0.45); color: var(--everglade); }
+
+/* ------------------------------------------------------- full-bleed shot */
+
+.v3-bleed { padding: 0; }
+.v3-bleed .shot {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  z-index: 0;
+}
+.v3-bleed .scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(to bottom, rgba(20, 44, 30, 0.78) 0%, rgba(20, 44, 30, 0) 20%);
+}
+.v3-bleed .top {
+  position: absolute;
+  top: 9mm;
+  left: 8mm;
+  right: 8mm;
+  z-index: 2;
+}
+.v3-bleed .bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  padding: 7mm 8mm 8mm;
+  color: #f4faf7;
+  background: linear-gradient(160deg, var(--everglade) 0%, #1c3525 100%);
+  border-top: 2.4mm solid var(--gilded);
+}
+.v3-bleed .big {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 24pt;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+.v3-bleed .big em { font-style: italic; color: var(--gilded); }
+
+/* -------------------------------------------------------------- modules */
+
+.v3-intro {
+  font-size: 8.6pt;
+  line-height: 1.56;
+  opacity: 0.84;
+  margin: 0;
+}
+
+.v3-mods { list-style: none; margin: 0; padding: 0; display: grid; gap: 3.9mm; }
+.v3-mods li {
+  display: grid;
+  grid-template-columns: 4.4mm 1fr;
+  gap: 3.2mm;
+  align-items: baseline;
+  padding-bottom: 3.4mm;
+  border-bottom: 0.25mm solid rgba(190, 217, 235, 0.2);
+}
+.v3-mods li:last-child { border-bottom: 0; padding-bottom: 0; }
+.v3-mods .d {
+  display: block;
+  width: 1.9mm;
+  height: 1.9mm;
+  border-radius: 50%;
+  background: var(--gilded);
+  margin-top: 1.6mm;
+}
+.v3-mods b { display: block; font-size: 9.4pt; font-weight: 600; margin-bottom: 0.7mm; }
+.v3-mods p { font-size: 8.1pt; line-height: 1.46; opacity: 0.78; margin: 0; }
+
+/* ---------------------------------------------------------------- steps */
+
+.v3-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 4.6mm; }
+.v3-steps li { display: grid; grid-template-columns: 9mm 1fr; gap: 3mm; align-items: start; }
+.v3-steps .b {
+  display: grid;
+  place-items: center;
+  width: 9mm;
+  height: 9mm;
+  border-radius: 50%;
+  background: var(--everglade);
+  color: var(--gilded);
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 11pt;
+}
+.v3-steps li > span > b { display: block; font-size: 9.8pt; font-weight: 700; margin-bottom: 0.9mm; color: var(--everglade); }
+.v3-steps p { font-size: 8.5pt; line-height: 1.5; margin: 0; color: rgba(38, 68, 49, 0.86); }
+
+.v3-qr-inline { display: flex; align-items: center; gap: 4mm; }
+.v3-qr-inline .qr-box {
+  width: 21mm;
+  height: 21mm;
+  background: var(--cream);
+  border-radius: 2.4mm;
+  padding: 1.4mm;
+  border: 0.45mm solid rgba(38, 68, 49, 0.35);
+}
+.v3-qr-inline .url { color: var(--everglade); font-size: 13pt; }
+
+/* ----------------------------------------------------------------- back */
+
+.v3-back-qr { width: 36mm; height: 36mm; margin: 0 auto; }
+.v3-credit { font-size: 7.6pt; line-height: 1.65; opacity: 0.75; }
+.v3-credit b { font-weight: 600; opacity: 1; }
+
+.v3-num-row { display: flex; gap: 6mm; }
+.v3-num-row div { flex: 1; }
+.v3-num-row b {
+  display: block;
+  font-family: var(--display);
+  font-size: 22pt;
+  line-height: 1;
+  color: var(--gilded-deep);
+}
+.v3-num-row span {
+  display: block;
+  font-size: 6.6pt;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-top: 1.6mm;
+  opacity: 0.7;
+}
