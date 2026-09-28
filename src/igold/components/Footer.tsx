@@ -13,10 +13,11 @@ export function Footer() {
         <div style={{ display: "flex", flexWrap: "wrap", gap: "2.5rem", justifyContent: "space-between", alignItems: "flex-start" }}>
           <div style={{ maxWidth: 360 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: "1rem" }}>
-              <svg width="30" height="30" viewBox="0 0 100 100">
-                <polygon points="50,8 60,38 92,38 66,57 76,90 50,70 24,90 34,57 8,38 40,38" fill="none" stroke="var(--gold-500)" strokeWidth="4" />
-              </svg>
-              <span className="display gold-text" style={{ fontSize: "1.3rem", letterSpacing: "0.14em" }}>{SITE.brand}</span>
+              <img
+                src={APP_CONFIG.branding.igoldLogoLight}
+                alt={SITE.brand}
+                style={{ height: 72, width: "auto", display: "block" }}
+              />
             </div>
             <p style={{ color: "var(--muted)", fontSize: "0.9rem", lineHeight: 1.6, margin: 0 }}>
               {SITE.brandFull}. {SITE.org}.

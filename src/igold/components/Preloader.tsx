@@ -63,12 +63,12 @@ export function Preloader({ onDone }: { onDone: () => void }) {
           height="101"
           style={{ marginBottom: 20, objectFit: "contain", filter: "drop-shadow(0 14px 28px rgba(0,0,0,.25))" }}
         />
-        <div
+        <img
           className="pl-word display"
-          style={{ fontSize: "2.2rem", letterSpacing: "0.18em", color: "var(--gilded)", opacity: 0, transform: "translateY(16px)" }}
-        >
-          {SITE.brand}
-        </div>
+          src={APP_CONFIG.branding.igoldLogoLight}
+          alt={SITE.brand}
+          style={{ height: 88, width: "auto", display: "block", margin: "0 auto", opacity: 0, transform: "translateY(16px)" }}
+        />
         <div style={{ marginTop: 12, color: "var(--light-veil)", fontSize: "0.85rem", letterSpacing: "0.2em" }}>
           {count}%
         </div>
