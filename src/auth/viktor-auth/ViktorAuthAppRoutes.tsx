@@ -1,6 +1,6 @@
-import { useCallback, useRef } from "react";
+import { lazy, Suspense, useCallback, useRef } from "react";
 import { Navigate, Outlet, Route, Routes } from "react-router-dom";
-import { PublicHeader } from "@/components/PublicHeader";
+import { IgoldSite } from "@/igold/IgoldSite";
 import { beginViktorAuthentication } from "@/lib/viktor-spaces-access/client";
 import {
   getViktorAuthBaseUrl,
@@ -17,19 +17,11 @@ import {
   ViktorSessionProvider,
 } from "@/lib/viktor-spaces-access/ViktorSessionProvider";
 import { ViktorSpaceAccessProvider } from "@/lib/viktor-spaces-access/ViktorSpaceAccessProvider";
-import { PublicLandingPage } from "@/pages/PublicLandingPage";
 import { ProductAuthRoutes } from "../space-auth/SpaceAuthAppRoutes";
 
-function ViktorPublicShell() {
-  return (
-    <div className="min-h-screen flex flex-col">
-      <PublicHeader />
-      <main className="flex-1 flex flex-col">
-        <Outlet />
-      </main>
-    </div>
-  );
-}
+const HomePage = lazy(() =>
+  import("@/landing/HomePage").then(module => ({ default: module.HomePage })),
+);
 
 function ViktorAppShell() {
   return (
@@ -109,9 +101,15 @@ export function ViktorAuthAppRoutes({
             </ViktorProductAuthProvider>
           ) : (
             <Routes>
-              <Route element={<ViktorPublicShell />}>
-                <Route path="/" element={<PublicLandingPage />} />
-              </Route>
+              <Route
+                path="/"
+                element={
+                  <Suspense fallback={null}>
+                    <HomePage />
+                  </Suspense>
+                }
+              />
+              <Route path="/learn" element={<IgoldSite />} />
 
               <Route element={<ViktorAppShell />}>
                 <Route path="/dashboard" element={<ViktorDashboardPage />} />

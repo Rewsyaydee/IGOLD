@@ -21,7 +21,7 @@ IGOLD (International Global Outreach & Leadership Programme) is an interactive I
 
 ```
 src/
-├── igold/                  # Core prayer guide app (the main product)
+├── igold/                  # Core prayer guide app (the main product, served at /learn)
 │   ├── IgoldSite.tsx       # Root component — renders all sections in order
 │   ├── data.ts             # ALL content data (single source of truth)
 │   ├── config.ts           # App config: branding, dev credits, feature flags
@@ -33,9 +33,25 @@ src/
 │   ├── igold.css           # NOOR design system (custom CSS, NOT Tailwind)
 │   ├── useReveal.ts        # Scroll-triggered GSAP reveal animations
 │   └── components/         # All UI components for the prayer guide
+├── landing/                # Public marketing page (served at /)
+│   ├── HomePage.tsx        # Route entry — LangProvider + document meta
+│   ├── data.ts             # ALL landing copy (bilingual, En + Bm pairs)
+│   ├── landing.css         # Landing design system, scoped to .igold-landing
+│   ├── hooks/              # CountUp, launch transition, document meta
+│   └── components/         # Nav, Hero, Bento, Metrics, Support, Finale, Footer
 ├── components/             # App-level components (layout, auth, shadcn/ui)
-├── pages/                  # App pages (dashboard, landing, login, etc.)
+├── pages/                  # App pages (dashboard, login, etc.)
 ```
+
+## Routing
+
+| Path | Content | Mapped in |
+|------|---------|-----------|
+| `/` | Landing page (`src/landing/HomePage.tsx`, lazy-loaded) | `src/auth/public/PublicAppRoutes.tsx`, `src/auth/space-auth/SpaceAuthAppRoutes.tsx`, `src/auth/viktor-auth/ViktorAuthAppRoutes.tsx` |
+| `/learn` | Interactive prayer guide (`src/igold/IgoldSite.tsx`) | same route files |
+| `*` | Redirect to `/` | same route files |
+
+Both paths are client-side routes; `vercel.json` rewrites everything to `index.html` for deep links.
 
 ## How to Add a New Content Module
 

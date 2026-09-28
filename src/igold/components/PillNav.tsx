@@ -17,6 +17,7 @@ interface PillNavProps {
   activeHref: string | undefined;
   onToggleLang: () => void;
   onNavigate: (href: string) => void;
+  onHome?: () => void;
   className?: string;
   ease?: string;
   baseColor?: string;
@@ -36,6 +37,7 @@ export function PillNav({
   activeHref,
   onToggleLang,
   onNavigate,
+  onHome,
   className = "",
   ease = "power3.easeOut",
   baseColor = "#c9a227",
@@ -250,8 +252,14 @@ export function PillNav({
       <nav className={`pill-nav ${className}`} aria-label="Primary" style={cssVars}>
         <button
           className="pill-logos"
-          aria-label="Scroll to top"
-          onClick={() => { window.scrollTo({ top: 0, behavior: "smooth" }); }}
+          aria-label={onHome ? "Back to iGOLD home" : "Scroll to top"}
+          onClick={() => {
+            if (onHome) {
+              onHome();
+              return;
+            }
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
           onMouseEnter={handleLogoEnter}
           ref={logoRef}
         >

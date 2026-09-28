@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { NAV_ITEMS } from "../data";
 import { APP_CONFIG } from "../config";
 import { useLang } from "../lang";
@@ -6,6 +7,7 @@ import { PillNav } from "./PillNav";
 
 export function Nav() {
   const { lang, L, toggle: toggleLang } = useLang();
+  const navigate = useNavigate();
   const sectionIds = NAV_ITEMS.map(n => n.id);
   const activeHref = useActiveSection(sectionIds);
 
@@ -45,6 +47,7 @@ export function Nav() {
         activeHref={activeHref}
         onToggleLang={toggleLang}
         onNavigate={id => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" })}
+        onHome={() => navigate("/")}
         baseColor="var(--gilded)"
         pillColor="var(--light-veil)"
         pillTextColor="var(--everglade)"

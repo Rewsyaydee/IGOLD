@@ -34,6 +34,18 @@ function IgoldContent() {
   const activeHref = useActiveSection(sectionIds);
 
   useEffect(() => {
+    document.title =
+      "IGOLD · Interactive Solat Guide | Panduan Solat Interaktif";
+    const description = document.querySelector<HTMLMetaElement>(
+      'meta[name="description"]',
+    );
+    description?.setAttribute(
+      "content",
+      "Learn to pray correctly with confidence — an interactive solat guide by IGOLD & IIUM. Shafi'i & Hanafi schools, step-by-step with audio and bilingual guidance.",
+    );
+  }, []);
+
+  useEffect(() => {
     const onScroll = () => {
       const hero = document.getElementById("hero");
       if (hero) setSidebarVisible(window.scrollY >= hero.offsetHeight * 0.7);
