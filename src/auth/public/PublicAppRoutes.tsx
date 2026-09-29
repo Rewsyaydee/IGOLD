@@ -8,6 +8,10 @@ const HomePage = lazy(() =>
   import("@/landing/HomePage").then(module => ({ default: module.HomePage })),
 );
 
+const DlsPage = lazy(() =>
+  import("@/dls/DlsPage").then(module => ({ default: module.DlsPage })),
+);
+
 function LandingFallback() {
   return (
     <div
@@ -30,6 +34,14 @@ export function PublicAppRoutes() {
           }
         />
         <Route path="/learn" element={<IgoldSite />} />
+        <Route
+          path="/dls"
+          element={
+            <Suspense fallback={<LandingFallback />}>
+              <DlsPage />
+            </Suspense>
+          }
+        />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </ConvexProvider>

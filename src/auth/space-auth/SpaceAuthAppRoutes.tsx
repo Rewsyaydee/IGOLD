@@ -12,6 +12,10 @@ const HomePage = lazy(() =>
   import("@/landing/HomePage").then(module => ({ default: module.HomePage })),
 );
 
+const DlsPage = lazy(() =>
+  import("@/dls/DlsPage").then(module => ({ default: module.DlsPage })),
+);
+
 export function ProductAuthRoutes() {
   return (
     <Routes>
@@ -24,6 +28,14 @@ export function ProductAuthRoutes() {
         }
       />
       <Route path="/learn" element={<IgoldSite />} />
+      <Route
+        path="/dls"
+        element={
+          <Suspense fallback={null}>
+            <DlsPage />
+          </Suspense>
+        }
+      />
 
       <Route element={<PublicLayout />}>
         <Route element={<PublicOnlyRoute />}>

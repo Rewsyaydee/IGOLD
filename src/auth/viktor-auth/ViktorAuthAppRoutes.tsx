@@ -23,6 +23,10 @@ const HomePage = lazy(() =>
   import("@/landing/HomePage").then(module => ({ default: module.HomePage })),
 );
 
+const DlsPage = lazy(() =>
+  import("@/dls/DlsPage").then(module => ({ default: module.DlsPage })),
+);
+
 function ViktorAppShell() {
   return (
     <div className="min-h-screen">
@@ -110,6 +114,14 @@ export function ViktorAuthAppRoutes({
                 }
               />
               <Route path="/learn" element={<IgoldSite />} />
+              <Route
+                path="/dls"
+                element={
+                  <Suspense fallback={null}>
+                    <DlsPage />
+                  </Suspense>
+                }
+              />
 
               <Route element={<ViktorAppShell />}>
                 <Route path="/dashboard" element={<ViktorDashboardPage />} />

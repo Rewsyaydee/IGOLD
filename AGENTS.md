@@ -49,9 +49,11 @@ src/
 |------|---------|-----------|
 | `/` | Landing page (`src/landing/HomePage.tsx`, lazy-loaded) | `src/auth/public/PublicAppRoutes.tsx`, `src/auth/space-auth/SpaceAuthAppRoutes.tsx`, `src/auth/viktor-auth/ViktorAuthAppRoutes.tsx` |
 | `/learn` | Interactive prayer guide (`src/igold/IgoldSite.tsx`) | same route files |
+| `/dls` | Living design-system spec (`src/dls/DlsPage.tsx`, lazy, unlisted `noindex`) | same route files |
 | `*` | Redirect to `/` | same route files |
 
-Both paths are client-side routes; `vercel.json` rewrites everything to `index.html` for deep links.
+All paths are client-side routes; `vercel.json` rewrites everything to `index.html` for deep links.
+The `/dls` page renders specimens from the real `igold.css` / `landing.css` tokens; update `src/dls/data.ts` only for documentation copy, never for token values.
 
 ## How to Add a New Content Module
 
