@@ -10,7 +10,7 @@ const STROKE = "var(--gold-500)";
 function Mat() {
   return (
     <g opacity="0.55">
-      <ellipse cx="100" cy="186" rx="74" ry="9" fill="rgba(212,175,55,0.10)" />
+      <ellipse cx="100" cy="186" rx="74" ry="9" fill="rgba(234,160,67,0.10)" />
       <line x1="30" y1="186" x2="170" y2="186" stroke={STROKE} strokeWidth="1.2" opacity="0.5" />
     </g>
   );
@@ -120,7 +120,7 @@ export function PrayerFigure({ pose }: { pose: Pose }) {
     >
       <defs>
         <radialGradient id="glow" cx="50%" cy="40%" r="60%">
-          <stop offset="0%" stopColor="rgba(212,175,55,0.18)" />
+          <stop offset="0%" stopColor="rgba(234,160,67,0.18)" />
           <stop offset="100%" stopColor="transparent" />
         </radialGradient>
       </defs>

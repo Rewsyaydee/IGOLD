@@ -92,9 +92,9 @@ export function Contact() {
           <button type="submit" className="btn btn-gold" disabled={status === "sending"} style={{ width: "100%", justifyContent: "center" }}>
             {status === "sending" ? L("Sending…", "Menghantar…") : <><Send size={16} /> {L("Send Message", "Hantar Mesej")}</>}
           </button>
-          {status === "done" && <p style={{ color: "#4ade80", marginTop: "1rem", fontSize: "0.9rem" }}>{L("✓ Thank you! Your message has been sent.", "✓ Terima kasih! Mesej anda telah dihantar.")}</p>}
+          {status === "done" && <p style={{ color: "var(--success)", marginTop: "1rem", fontSize: "0.9rem" }}>{L("✓ Thank you! Your message has been sent.", "✓ Terima kasih! Mesej anda telah dihantar.")}</p>}
           {status === "error" && (
-            <p style={{ color: "#f87171", marginTop: "1rem", fontSize: "0.9rem" }}>
+            <p style={{ color: "var(--danger)", marginTop: "1rem", fontSize: "0.9rem" }}>
               {errorMsg || L("Sorry, something went wrong. Please try again.", "Maaf, ada masalah. Sila cuba lagi.")}
             </p>
           )}
@@ -102,7 +102,7 @@ export function Contact() {
 
         <div className="reveal" style={{ display: "flex", flexDirection: "column", justifyContent: "center", gap: "1.4rem" }}>
           <div style={{ display: "flex", gap: "1rem", alignItems: "flex-start" }}>
-            <span style={{ display: "grid", placeItems: "center", width: 46, height: 46, borderRadius: 12, background: "var(--gold-tint)", border: "1px solid var(--line)", flexShrink: 0 }}>
+            <span style={{ display: "grid", placeItems: "center", width: 46, height: 46, borderRadius: "var(--radius-thumb)", background: "var(--gold-tint)", border: "1px solid var(--line)", flexShrink: 0 }}>
               <Mail size={20} color="var(--gold-500)" />
             </span>
             <div>
@@ -130,7 +130,7 @@ const inputStyle: React.CSSProperties = {
   width: "100%",
   background: "var(--surface-inset)",
   border: "1px solid var(--line)",
-  borderRadius: 12,
+  borderRadius: "var(--radius-thumb)",
   padding: "0.85rem 1rem",
   color: "var(--ink)",
   fontFamily: "var(--font-body)",

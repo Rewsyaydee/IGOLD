@@ -45,7 +45,7 @@ export function Janazah() {
             width: "100%",
             maxWidth: 800,
             margin: "0 auto",
-            borderRadius: 20,
+            borderRadius: "var(--radius-card)",
             overflow: "hidden",
             border: "1px solid var(--line-soft)",
             boxShadow: "var(--shadow-md)",
@@ -64,7 +64,7 @@ export function Janazah() {
                   left: 0,
                   width: "100%",
                   height: "100%",
-                  borderRadius: 20,
+                  borderRadius: "var(--radius-card)",
                 }}
               />
             ) : (
@@ -81,7 +81,7 @@ export function Janazah() {
                   background: "linear-gradient(135deg, var(--navy-800) 0%, var(--navy-900) 100%)",
                   border: "none",
                   cursor: "pointer",
-                  borderRadius: 20,
+                  borderRadius: "var(--radius-card)",
                   fontFamily: "var(--font-body)",
                 }}
               >
@@ -93,7 +93,7 @@ export function Janazah() {
                     height: 72,
                     borderRadius: "50%",
                     background: "var(--gold-500)",
-                    boxShadow: "0 0 32px rgba(212,175,55,0.35)",
+                    boxShadow: "0 0 32px rgba(234,160,67,0.4)",
                   }}
                 >
                   <Play size={30} fill="var(--white)" color="var(--white)" style={{ marginLeft: 3 }} />
@@ -146,7 +146,7 @@ export function Janazah() {
               </div>
 
               {s.arabic && (
-                <div className="arabic" style={{ fontSize: "1.35rem", color: "var(--ink)", lineHeight: 1.9, padding: "0.6rem 1rem", background: "var(--surface-inset)", borderRadius: 10 }}>
+                <div className="arabic" style={{ fontSize: "1.35rem", color: "var(--ink)", lineHeight: 1.9, padding: "0.6rem 1rem", background: "var(--surface-inset)", borderRadius: "var(--radius-thumb)" }}>
                   {s.arabic}
                 </div>
               )}

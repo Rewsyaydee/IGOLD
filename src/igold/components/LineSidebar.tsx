@@ -31,9 +31,9 @@ interface LineSidebarProps {
 
 export function LineSidebar({
   items,
-  accentColor = "#c9a227",
-  textColor = "rgba(22, 34, 63, 0.45)",
-  markerColor = "rgba(22, 34, 63, 0.18)",
+  accentColor = "var(--gilded)",
+  textColor = "rgba(232, 242, 247, 0.72)",
+  markerColor = "rgba(190, 217, 235, 0.28)",
   showIndex = true,
   showMarker = true,
   markerLength = 50,

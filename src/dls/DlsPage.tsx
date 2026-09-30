@@ -21,6 +21,7 @@ import {
 } from "./data";
 
 const STATUS_LABELS: Record<ConflictStatus, string> = {
+  resolved: "Resolved",
   legacy: "Legacy",
   drift: "Drift",
   dead: "Dead code",
@@ -179,7 +180,7 @@ export function DlsPage() {
               </span>
               <span className="dls-pill">
                 <i />
-                v1.0.0
+                v1.1.0
               </span>
             </div>
           </section>
@@ -356,16 +357,16 @@ export function DlsPage() {
               <div className="dls-measure__bar">
                 <span
                   className="dls-measure__fill"
-                  style={{ width: "90.9%" }}
+                  style={{ width: "93.9%" }}
                 />
               </div>
               <div className="dls-measure__labels">
-                <span>Guide · --maxw 1200px</span>
+                <span>Guide · --maxw 1240px</span>
                 <span>Landing · 1240px</span>
               </div>
             </div>
             <p className="dls-caption">
-              Canonical recommendation: one width, 1240px, for both surfaces.
+              Unified: both surfaces share the 1240px measure.
             </p>
 
             <p className="dls-subhead">Section rhythm</p>
@@ -385,9 +386,8 @@ export function DlsPage() {
               ))}
             </div>
             <p className="dls-caption">
-              Section padding: <code>clamp(4.5rem, 10vw, 8rem)</code> for the
-              guide and <code>clamp(4.5rem, 9vw, 8.5rem)</code> for landing.
-              Align these in the next cleanup pass.
+              Unified: both surfaces use{" "}
+              <code>clamp(4.5rem, 9vw, 8.5rem)</code> section padding.
             </p>
           </section>
 
@@ -463,8 +463,8 @@ export function DlsPage() {
               </button>
             </div>
             <p className="dls-caption">
-              Unify on the 999px pill, one gold ramp and one text color, then
-              keep <code>.btn</code> as the app alias of <code>.ld-btn</code>.
+              Unified: <code>.btn</code> and <code>.ld-btn</code> share the
+              999px pill, gold ramp, ink color and focus ring.
             </p>
 
             <div className="igold-landing dls-specimen dls-specimen--dark">
@@ -658,9 +658,9 @@ export function DlsPage() {
               <span className="dls-kicker">08 · Cleanup backlog</span>
               <h2 className="dls-h2">Conflict register</h2>
               <p className="dls-lead">
-                Every known deviation between the intended NOOR system and the
-                current code, with the fix and file references. Resolve these
-                before extending the system.
+                Every tracked deviation between the intended NOOR system and
+                the code, with the fix and file references. Resolved items stay
+                listed as a change record; deferred items remain open.
               </p>
             </div>
             <div className="dls-conflicts">
@@ -712,7 +712,7 @@ export function DlsPage() {
               </div>
               <div className="dls-version-card">
                 <b>Version</b>
-                <span>v1.0.0 · September 2026</span>
+                <span>v1.1.0 · September 2026 · consistency pass</span>
               </div>
               <div className="dls-version-card">
                 <b>Sources of truth</b>

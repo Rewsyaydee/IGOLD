@@ -80,8 +80,8 @@ export default function Wudu() {
           <span>{L("Step", "Langkah")} {i + 1} / {WUDU_STEPS.length}</span>
           <span className="gold-text">{L(step.name, step.nameEn)}</span>
         </div>
-        <div style={{ height: 4, background: "var(--surface-inset)", borderRadius: 100, overflow: "hidden" }}>
-          <div style={{ height: "100%", width: `${pct}%`, background: "linear-gradient(90deg, var(--gold-600), var(--gold-400))", borderRadius: 100, transition: "width 0.5s var(--ease)" }} />
+        <div style={{ height: 4, background: "var(--surface-inset)", borderRadius: "var(--radius-pill)", overflow: "hidden" }}>
+          <div style={{ height: "100%", width: `${pct}%`, background: "linear-gradient(90deg, var(--gold-600), var(--gold-400))", borderRadius: "var(--radius-pill)", transition: "width 0.5s var(--ease)" }} />
         </div>
       </div>
 
@@ -91,14 +91,14 @@ export default function Wudu() {
             position: "relative",
             background: "var(--surface)",
             border: "1px solid var(--line-soft)",
-            borderRadius: 22,
+            borderRadius: "var(--radius-card)",
             boxShadow: "var(--shadow-md)",
             padding: "1rem",
             display: "grid",
             placeItems: "center",
           }}
         >
-          <div ref={figureRef} style={{ position: "relative", height: "clamp(340px, 54vh, 480px)", aspectRatio: "9 / 16", maxWidth: "100%", borderRadius: 18, overflow: "hidden", background: "var(--navy-800)", boxShadow: "0 10px 30px -14px rgba(22,34,63,0.4)", border: "1px solid var(--line-soft)" }}>
+          <div ref={figureRef} style={{ position: "relative", height: "clamp(340px, 54vh, 480px)", aspectRatio: "9 / 16", maxWidth: "100%", borderRadius: "var(--radius-card)", overflow: "hidden", background: "var(--navy-800)", boxShadow: "0 10px 30px -14px rgba(38,68,49,0.35)", border: "1px solid var(--line-soft)" }}>
             {!vidErr[step.pose] ? (
               <video
                 key={`${DEFAULT_MODEL}-${step.pose}`}
@@ -118,8 +118,8 @@ export default function Wudu() {
                 <p style={{ fontSize: "0.75rem", opacity: 0.6 }}>{L("Place MP4 in", "Letak MP4 di")} public/media/default/wudu/{step.pose}.mp4</p>
               </div>
             )}
-            <div style={{ position: "absolute", inset: "0 0 auto 0", height: "24%", background: "linear-gradient(to bottom, rgba(6,13,32,0.7), transparent)", pointerEvents: "none", zIndex: 1 }} />
-            <div style={{ position: "absolute", inset: "auto 0 0 0", height: "34%", background: "linear-gradient(to top, rgba(6,13,32,0.82), transparent)", pointerEvents: "none", zIndex: 1 }} />
+            <div style={{ position: "absolute", inset: "0 0 auto 0", height: "24%", background: "linear-gradient(to bottom, rgba(10,24,17,0.7), transparent)", pointerEvents: "none", zIndex: 1 }} />
+            <div style={{ position: "absolute", inset: "auto 0 0 0", height: "34%", background: "linear-gradient(to top, rgba(10,24,17,0.82), transparent)", pointerEvents: "none", zIndex: 1 }} />
             <span style={{ position: "absolute", top: 12, left: 14, zIndex: 2, fontSize: "0.68rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--cream)", opacity: 0.85 }}>{L("Wudu Step", "Langkah Wuduk")}</span>
             <span className="display" style={{ position: "absolute", bottom: 12, right: 16, zIndex: 2, fontSize: "1.05rem", color: "var(--gold-300)", textShadow: "0 1px 8px rgba(0,0,0,0.8)" }}>{L(step.nameEn, step.name)}</span>
           </div>
@@ -135,7 +135,7 @@ export default function Wudu() {
           </div>
 
           {step.arabic && (
-            <div className="w-anim arabic" style={{ fontSize: "clamp(1.4rem, 4vw, 1.9rem)", color: "var(--ink)", margin: "1rem 0 0.6rem", padding: "1rem 1.2rem", background: "var(--surface-inset)", borderRight: "3px solid var(--gold-500)", borderRadius: "10px" }}>
+            <div className="w-anim arabic" style={{ fontSize: "clamp(1.4rem, 4vw, 1.9rem)", color: "var(--ink)", margin: "1rem 0 0.6rem", padding: "1rem 1.2rem", background: "var(--surface-inset)", borderRight: "3px solid var(--gold-500)", borderRadius: "var(--radius-thumb)" }}>
               {step.arabic}
             </div>
           )}
@@ -152,7 +152,7 @@ export default function Wudu() {
           )}
 
           {step.hasAudio && (
-            <button className="w-anim" onClick={onAudio} style={{ marginTop: "1rem", alignSelf: "flex-start", display: "inline-flex", alignItems: "center", gap: "0.6rem", background: playingId === audioKey ? "var(--gold-500)" : "var(--gold-tint)", border: "1px solid var(--line)", color: playingId === audioKey ? "var(--white)" : "var(--gold-ink)", padding: "0.7rem 1.2rem", borderRadius: 100, cursor: "pointer", fontWeight: 500, fontFamily: "var(--font-body)" }}>
+            <button className="w-anim" onClick={onAudio} style={{ marginTop: "1rem", alignSelf: "flex-start", display: "inline-flex", alignItems: "center", gap: "0.6rem", background: playingId === audioKey ? "var(--gold-500)" : "var(--gold-tint)", border: "1px solid var(--line)", color: playingId === audioKey ? "#2a1a06" : "var(--gold-ink)", padding: "0.7rem 1.2rem", borderRadius: "var(--radius-pill)", cursor: "pointer", fontWeight: 500, fontFamily: "var(--font-body)" }}>
               {playingId === audioKey ? <Square size={18} /> : <Volume2 size={18} />} {playingId === audioKey ? L("Stop", "Hentikan") : L("Listen to recitation", "Dengar bacaan")} {!hasRealAudio(audioKey) && <span style={{ fontSize: "0.7rem", opacity: 0.6 }}>{L("(sample)", "(contoh)")}</span>}
             </button>
           )}
@@ -163,14 +163,14 @@ export default function Wudu() {
         <button className="btn btn-ghost" onClick={() => go(-1)} disabled={i === 0} style={{ opacity: i === 0 ? 0.4 : 1 }}>← {L("Previous", "Sebelum")}</button>
         <div style={{ display: "flex", gap: 6, flexWrap: "wrap", justifyContent: "center" }}>
           {WUDU_STEPS.map((_, idx) => (
-            <button key={idx} onClick={() => setI(idx)} aria-label={`${L("Step", "Langkah")} ${idx + 1}`} style={{ width: idx === i ? 24 : 9, height: 9, borderRadius: 100, border: "none", cursor: "pointer", background: idx === i ? "var(--gold-500)" : "rgba(22,34,63,0.18)", transition: "all 0.3s var(--ease)" }} />
+            <button key={idx} onClick={() => setI(idx)} aria-label={`${L("Step", "Langkah")} ${idx + 1}`} style={{ width: idx === i ? 24 : 9, height: 9, borderRadius: "var(--radius-pill)", border: "none", cursor: "pointer", background: idx === i ? "var(--gold-500)" : "rgba(38,68,49,0.18)", transition: "all 0.3s var(--ease)" }} />
           ))}
         </div>
         <button className="btn btn-gold" onClick={() => go(1)} disabled={i === WUDU_STEPS.length - 1} style={{ opacity: i === WUDU_STEPS.length - 1 ? 0.4 : 1 }}>{L("Next", "Seterusnya")} →</button>
       </div>
 
       {toast && (
-        <div style={{ position: "fixed", bottom: 28, left: "50%", transform: "translateX(-50%)", zIndex: 60, background: "var(--scrim)", border: "1px solid rgba(255,255,255,0.12)", color: "var(--cream)", padding: "0.8rem 1.3rem", borderRadius: 12, fontSize: "0.86rem", maxWidth: "90vw", textAlign: "center" }}>
+        <div style={{ position: "fixed", bottom: 28, left: "50%", transform: "translateX(-50%)", zIndex: 60, background: "var(--scrim)", border: "1px solid rgba(255,255,255,0.12)", color: "var(--cream)", padding: "0.8rem 1.3rem", borderRadius: "var(--radius-thumb)", fontSize: "0.86rem", maxWidth: "90vw", textAlign: "center" }}>
           {toast}
         </div>
       )}
@@ -231,7 +231,7 @@ function InfoPanel({ title, subtitle, items, icons, L }: { title: string; subtit
                   placeItems: "center",
                   width: 46,
                   height: 46,
-                  borderRadius: 13,
+                  borderRadius: "var(--radius-thumb)",
                   flexShrink: 0,
                   background: "var(--gold-tint)",
                   border: "1px solid var(--line)",

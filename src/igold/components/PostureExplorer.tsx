@@ -26,7 +26,7 @@ export default function PostureExplorer() {
               <span className="eyebrow">{L("Postures", "Posisi")}</span>
               <h2 className="section-title" style={{ marginBottom: 0 }}>{L("Explore Each Posture", "Terokai Setiap Posisi")}</h2>
             </div>
-            <div style={{ display: "flex", gap: 3, background: "var(--gold-tint-soft)", borderRadius: 100, padding: 3, border: "1px solid var(--line)" }}>
+            <div style={{ display: "flex", gap: 3, background: "var(--gold-tint-soft)", borderRadius: "var(--radius-pill)", padding: 3, border: "1px solid var(--line)" }}>
               {(["shafii", "hanafi"] as const).map(m => (
                 <button
                   key={m}
@@ -34,15 +34,15 @@ export default function PostureExplorer() {
                   style={{
                     border: "none",
                     cursor: "pointer",
-                    borderRadius: 100,
+                    borderRadius: "var(--radius-pill)",
                     padding: "0.32rem 0.7rem",
                     fontSize: "0.72rem",
                     fontWeight: 700,
                     letterSpacing: "0.04em",
                     fontFamily: "var(--font-body)",
                     transition: "all 0.3s var(--ease)",
-                    background: madhhab === m ? "linear-gradient(120deg, var(--gold-500), var(--gold-600))" : "transparent",
-                    color: madhhab === m ? "var(--white)" : "var(--muted)",
+                    background: madhhab === m ? "linear-gradient(120deg, var(--gold-300), var(--gilded) 55%, var(--gold-600))" : "transparent",
+                    color: madhhab === m ? "#2a1a06" : "var(--muted)",
                   }}
                 >
                   {m === "shafii" ? "Syafi'e" : "Hanafi"}
@@ -62,7 +62,7 @@ export default function PostureExplorer() {
           <div
             style={{
               position: "relative",
-              borderRadius: 20,
+              borderRadius: "var(--radius-card)",
               overflow: "hidden",
               background: "var(--navy-800)",
               border: "1px solid var(--line)",
@@ -93,7 +93,7 @@ export default function PostureExplorer() {
                 fontWeight: 700,
                 color: "var(--white)",
                 background: "var(--scrim)",
-                borderRadius: 100,
+                borderRadius: "var(--radius-pill)",
                 padding: "0.3rem 0.8rem",
               }}
             >

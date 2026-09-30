@@ -69,7 +69,7 @@ export function Syarat() {
               color: "var(--gold-ink)",
               background: "var(--gold-tint)",
               border: "1px solid var(--line)",
-              borderRadius: 100,
+              borderRadius: "var(--radius-pill)",
               cursor: "pointer",
             }}
           >
@@ -107,7 +107,7 @@ export function Syarat() {
                     placeItems: "center",
                     width: 46,
                     height: 46,
-                    borderRadius: 13,
+                    borderRadius: "var(--radius-thumb)",
                     flexShrink: 0,
                     background: "var(--gold-tint)",
                     border: "1px solid var(--line)",

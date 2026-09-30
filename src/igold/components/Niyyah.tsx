@@ -36,18 +36,20 @@ export function Niyyah() {
         {NIYYAH.map(n => (
           <article key={n.id} className="card reveal" style={{ display: "flex", flexDirection: "column" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "1rem", marginBottom: "0.6rem" }}>
-              <div>
+              <div style={{ minWidth: 0 }}>
                 <h3 style={{ margin: 0, fontSize: "1.1rem", fontWeight: 600 }}>{L(n.prayerEn, n.prayer)}</h3>
-                <div style={{ display: "flex", alignItems: "center", gap: "0.8rem", marginTop: "0.3rem" }}>
+                <div style={{ display: "flex", alignItems: "center", flexWrap: "wrap", rowGap: "0.35rem", gap: "0.8rem", marginTop: "0.3rem" }}>
                   <span style={{
                     display: "inline-flex",
                     alignItems: "center",
+                    flexShrink: 0,
+                    whiteSpace: "nowrap",
                     gap: "0.3rem",
                     fontSize: "0.78rem",
                     color: "var(--gold-ink)",
                     background: "var(--gold-tint)",
                     border: "1px solid var(--line)",
-                    borderRadius: 100,
+                    borderRadius: 999,
                     padding: "0.18rem 0.6rem",
                     fontWeight: 600,
                   }}>
@@ -89,7 +91,7 @@ export function Niyyah() {
       </div>
 
       {toast && (
-        <div style={{ position: "fixed", bottom: 28, left: "50%", transform: "translateX(-50%)", zIndex: 60, background: "var(--scrim)", border: "1px solid rgba(255,255,255,0.12)", color: "var(--cream)", padding: "0.8rem 1.3rem", borderRadius: 12, fontSize: "0.86rem", maxWidth: "90vw", textAlign: "center" }}>
+        <div style={{ position: "fixed", bottom: 28, left: "50%", transform: "translateX(-50%)", zIndex: 60, background: "var(--scrim)", border: "1px solid rgba(255,255,255,0.12)", color: "var(--cream)", padding: "0.8rem 1.3rem", borderRadius: "var(--radius-thumb)", fontSize: "0.86rem", maxWidth: "90vw", textAlign: "center" }}>
           {toast}
         </div>
       )}

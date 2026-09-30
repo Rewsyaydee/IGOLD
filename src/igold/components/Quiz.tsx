@@ -25,7 +25,7 @@ export function Quiz() {
     const correct = opt === q.answer;
     if (correct) {
       setScore(s => s + 1);
-      gsap.fromTo(cardRef.current, { boxShadow: "0 0 0 0 rgba(212,175,55,0)" }, { boxShadow: "0 0 0 3px rgba(212,175,55,0.5)", duration: 0.4, yoyo: true, repeat: 1 });
+      gsap.fromTo(cardRef.current, { boxShadow: "0 0 0 0 rgba(234,160,67,0)" }, { boxShadow: "0 0 0 3px rgba(234,160,67,0.5)", duration: 0.4, yoyo: true, repeat: 1 });
     } else {
       setWrong(w => [...w, idx]);
       gsap.fromTo(cardRef.current, { x: 0 }, { x: 8, duration: 0.07, repeat: 5, yoyo: true, ease: "power1.inOut", clearProps: "x" });
@@ -65,14 +65,14 @@ export function Quiz() {
         <p className="section-sub q-reveal">{L("Ten short questions to test what you have learned.", "Sepuluh soalan ringkas untuk menguji apa yang anda telah pelajari.")}</p>
       </div>
 
-      <div ref={cardRef} className="q-reveal" style={{ maxWidth: 720, margin: "0 auto", background: "var(--surface)", border: "1px solid var(--line-soft)", borderRadius: 22, boxShadow: "var(--shadow-md)", padding: "clamp(1.5rem, 4vw, 2.6rem)" }}>
+      <div ref={cardRef} className="q-reveal" style={{ maxWidth: 720, margin: "0 auto", background: "var(--surface)", border: "1px solid var(--line-soft)", borderRadius: "var(--radius-card)", boxShadow: "var(--shadow-md)", padding: "clamp(1.5rem, 4vw, 2.6rem)" }}>
         {!done ? (
           <>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.4rem" }}>
               <span style={{ color: "var(--muted)", fontSize: "0.85rem" }}>{L("Question", "Soalan")} {idx + 1} / {QUIZ.length}</span>
               <span className="gold-text" style={{ fontWeight: 600 }}>{L("Score", "Skor")}: {score}</span>
             </div>
-            <div style={{ height: 4, background: "var(--surface-inset)", borderRadius: 100, overflow: "hidden", marginBottom: "1.8rem" }}>
+            <div style={{ height: 4, background: "var(--surface-inset)", borderRadius: "var(--radius-pill)", overflow: "hidden", marginBottom: "1.8rem" }}>
               <div style={{ height: "100%", width: `${((idx + (picked !== null ? 1 : 0)) / QUIZ.length) * 100}%`, background: "linear-gradient(90deg, var(--gold-600), var(--gold-400))", transition: "width 0.4s var(--ease)" }} />
             </div>
 
@@ -87,13 +87,13 @@ export function Quiz() {
                 let icon = null;
                 if (picked !== null) {
                   if (isCorrect) {
-                    bg = "rgba(80,200,120,0.12)";
-                    border = "rgba(80,200,120,0.5)";
-                    icon = <Check size={18} color="#4ade80" />;
+                    bg = "var(--success-soft)";
+                    border = "var(--success)";
+                    icon = <Check size={18} style={{ color: "var(--success)" }} />;
                   } else if (isPicked) {
-                    bg = "rgba(240,90,90,0.12)";
-                    border = "rgba(240,90,90,0.5)";
-                    icon = <X size={18} color="#f87171" />;
+                    bg = "var(--danger-soft)";
+                    border = "var(--danger)";
+                    icon = <X size={18} style={{ color: "var(--danger)" }} />;
                   }
                 }
                 return (
@@ -101,7 +101,7 @@ export function Quiz() {
                     key={oi}
                     onClick={() => choose(oi)}
                     disabled={picked !== null}
-                    style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem", textAlign: "left", padding: "1rem 1.2rem", borderRadius: 12, border: `1px solid ${border}`, background: bg, color: "var(--fg)", cursor: picked === null ? "pointer" : "default", fontSize: "1rem", fontFamily: "var(--font-body)", transition: "all 0.3s var(--ease)" }}
+                    style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem", textAlign: "left", padding: "1rem 1.2rem", borderRadius: "var(--radius-thumb)", border: `1px solid ${border}`, background: bg, color: "var(--fg)", cursor: picked === null ? "pointer" : "default", fontSize: "1rem", fontFamily: "var(--font-body)", transition: "all 0.3s var(--ease)" }}
                   >
                     <span>{opt}</span>
                     {icon}
@@ -112,7 +112,7 @@ export function Quiz() {
 
             {picked !== null && (
               <div style={{ marginTop: "1.4rem" }}>
-                <p style={{ background: "var(--gold-tint-soft)", border: "1px solid var(--line)", borderRadius: 12, padding: "0.9rem 1.1rem", margin: "0 0 1.2rem", color: "var(--body)", fontSize: "0.92rem" }}>
+                <p style={{ background: "var(--gold-tint-soft)", border: "1px solid var(--line)", borderRadius: "var(--radius-thumb)", padding: "0.9rem 1.1rem", margin: "0 0 1.2rem", color: "var(--body)", fontSize: "0.92rem" }}>
                   💡 {L(q.explainEn, q.explain)}
                 </p>
                 <button className="btn btn-gold" onClick={next} style={{ width: "100%", justifyContent: "center" }}>
@@ -137,7 +137,7 @@ export function Quiz() {
                   {wrong.map(wi => {
                     const qq = QUIZ[wi];
                     return (
-                      <div key={wi} style={{ padding: "0.8rem 1rem", background: "var(--surface-inset)", borderRadius: 10, border: "1px solid var(--line-soft)" }}>
+                      <div key={wi} style={{ padding: "0.8rem 1rem", background: "var(--surface-inset)", borderRadius: "var(--radius-thumb)", border: "1px solid var(--line-soft)" }}>
                         <p style={{ margin: "0 0 0.4rem", fontSize: "0.9rem", fontWeight: 500 }}>{L(qq.qEn, qq.q)}</p>
                         <p style={{ margin: 0, fontSize: "0.84rem", color: "var(--gold-ink)" }}>
                           ✓ {L(qq.optionsEn, qq.options)[qq.answer]}

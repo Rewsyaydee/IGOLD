@@ -49,7 +49,7 @@ export function Preloader({ onDone }: { onDone: () => void }) {
         position: "fixed",
         inset: 0,
         zIndex: 100,
-        background: "linear-gradient(145deg, var(--everglade), #1d3526 62%, var(--deep-diving))",
+        background: "linear-gradient(145deg, var(--everglade), var(--everglade-deep) 62%, var(--deep-diving))",
         display: "grid",
         placeItems: "center",
       }}

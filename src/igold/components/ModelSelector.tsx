@@ -14,7 +14,7 @@ export function ModelSelector() {
         display: "inline-flex",
         alignItems: "center",
         border: "1px solid var(--line)",
-        borderRadius: 100,
+        borderRadius: "var(--radius-pill)",
         padding: 3,
         gap: 2,
         background: "var(--gold-tint-soft)",
@@ -34,15 +34,15 @@ export function ModelSelector() {
             style={{
               border: "none",
               cursor: "pointer",
-              borderRadius: 100,
+              borderRadius: "var(--radius-pill)",
               padding: "0.32rem 0.7rem",
               fontSize: "0.7rem",
               fontWeight: 700,
               letterSpacing: "0.04em",
               fontFamily: "var(--font-body)",
               transition: "all 0.3s var(--ease)",
-              background: on ? "linear-gradient(120deg, var(--gold-500), var(--gold-600))" : "transparent",
-              color: on ? "var(--white)" : "var(--muted)",
+              background: on ? "linear-gradient(120deg, var(--gold-300), var(--gilded) 55%, var(--gold-600))" : "transparent",
+              color: on ? "#2a1a06" : "var(--muted)",
             }}
           >
             {L(labels.en, labels.bm)}

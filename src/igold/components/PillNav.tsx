@@ -40,10 +40,10 @@ export function PillNav({
   onHome,
   className = "",
   ease = "power3.easeOut",
-  baseColor = "#c9a227",
-  pillColor = "#f7f2e8",
-  hoveredPillTextColor = "#16223f",
-  pillTextColor = "#16223f",
+  baseColor = "var(--gilded)",
+  pillColor = "var(--light-veil)",
+  hoveredPillTextColor = "var(--everglade)",
+  pillTextColor = "var(--everglade)",
   initialLoadAnimation = true,
 }: PillNavProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -317,7 +317,7 @@ export function PillNav({
             className={`pill pill-toggle ${lang === "en" ? "is-toggle-on" : "is-toggle-off"}`}
             aria-label="Toggle language"
             onClick={onToggleLang}
-            style={{ padding: "0 10px", fontSize: "12px", height: "32px" }}
+            style={{ padding: "0 0.625rem", fontSize: "0.75rem", height: "2rem" }}
           >
             <span className="label-stack">
               <span className="pill-label">{lang === "en" ? "EN" : "BM"}</span>

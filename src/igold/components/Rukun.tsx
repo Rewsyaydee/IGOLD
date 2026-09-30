@@ -43,7 +43,7 @@ export function Rukun() {
                 : L("The 13 Pillars of Prayer (Shafi'i)", "13 Rukun Solat (Syafie)")}
             </h2>
           </div>
-          <div className="reveal" style={{ display: "flex", gap: 3, background: "var(--gold-tint-soft)", borderRadius: 100, padding: 3, border: "1px solid var(--line)" }}>
+          <div className="reveal" style={{ display: "flex", gap: 3, background: "var(--gold-tint-soft)", borderRadius: "var(--radius-pill)", padding: 3, border: "1px solid var(--line)" }}>
             {(["shafii", "hanafi"] as const).map(m => (
               <button
                 key={m}
@@ -51,15 +51,15 @@ export function Rukun() {
                 style={{
                   border: "none",
                   cursor: "pointer",
-                  borderRadius: 100,
+                  borderRadius: "var(--radius-pill)",
                   padding: "0.32rem 0.7rem",
                   fontSize: "0.72rem",
                   fontWeight: 700,
                   letterSpacing: "0.04em",
                   fontFamily: "var(--font-body)",
                   transition: "all 0.3s var(--ease)",
-                  background: madhhab === m ? "linear-gradient(120deg, var(--gold-500), var(--gold-600))" : "transparent",
-                  color: madhhab === m ? "var(--white)" : "var(--muted)",
+                  background: madhhab === m ? "linear-gradient(120deg, var(--gold-300), var(--gilded) 55%, var(--gold-600))" : "transparent",
+                  color: madhhab === m ? "#2a1a06" : "var(--muted)",
                 }}
               >
                 {m === "shafii" ? "Syafi'e" : "Hanafi"}
@@ -91,7 +91,7 @@ export function Rukun() {
               color: "var(--gold-ink)",
               background: "var(--gold-tint)",
               border: "1px solid var(--line)",
-              borderRadius: 100,
+              borderRadius: "var(--radius-pill)",
               cursor: "pointer",
             }}
           >
@@ -135,7 +135,7 @@ export function Rukun() {
                   color: "var(--gold-ink)",
                   border: "1px solid var(--line)",
                   padding: "0.22rem 0.65rem",
-                  borderRadius: 100,
+                  borderRadius: "var(--radius-pill)",
                   width: "fit-content",
                 }}
               >

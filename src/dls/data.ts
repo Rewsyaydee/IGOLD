@@ -162,6 +162,10 @@ export const SEMANTIC_LIGHT: SemanticToken[] = [
   { token: "--surface", role: "Card surface" },
   { token: "--surface-inset", role: "Inset well" },
   { token: "--gold-ink", role: "Gold on light" },
+  { token: "--success", role: "Success feedback" },
+  { token: "--success-soft", role: "Success tint" },
+  { token: "--danger", role: "Error feedback" },
+  { token: "--danger-soft", role: "Error tint" },
 ];
 
 export const SEMANTIC_DARK: SemanticToken[] = [
@@ -174,6 +178,10 @@ export const SEMANTIC_DARK: SemanticToken[] = [
   { token: "--surface", role: "Card surface" },
   { token: "--surface-inset", role: "Inset well" },
   { token: "--gold-ink", role: "Gold on dark" },
+  { token: "--success", role: "Success feedback" },
+  { token: "--success-soft", role: "Success tint" },
+  { token: "--danger", role: "Error feedback" },
+  { token: "--danger-soft", role: "Error tint" },
 ];
 
 export type TypeSpec = {
@@ -321,7 +329,7 @@ export const RADII: RadiusSpec[] = [
 ];
 
 export const RADIUS_DRIFT =
-  "Currently rendered in code: 10 · 12 · 13 · 16 · 20 · 22 · 27px, plus pill values 100px, 999px and 9999px.";
+  "Cards and stages now use the scale tokens across both surfaces; only decorative circles and hairlines keep bespoke radii.";
 
 export type ShadowSpec = {
   token: string;
@@ -388,7 +396,12 @@ export const MOTION: MotionSpec[] = [
   },
 ];
 
-export type ConflictStatus = "legacy" | "drift" | "dead" | "fragmented";
+export type ConflictStatus =
+  | "resolved"
+  | "legacy"
+  | "drift"
+  | "dead"
+  | "fragmented";
 
 export type Conflict = {
   title: string;
@@ -401,10 +414,10 @@ export type Conflict = {
 export const CONFLICTS: Conflict[] = [
   {
     title: "Legacy navy and gold palette still live",
-    status: "legacy",
+    status: "resolved",
     detail:
-      "Pre-NOOR values survive as defaults and fallbacks: #c9a227, #16223f, #f7f2e8, plus navy rgba overlays in Kaifiat and Wudu.",
-    fix: "Replace with var(--gilded), var(--everglade) and gold-tinted rgba; drop stale defaults.",
+      "Pre-NOOR values survived as defaults and fallbacks: #c9a227, #16223f, #f7f2e8, plus navy rgba overlays in Kaifiat and Wudu.",
+    fix: "Done — PillNav and LineSidebar now default to NOOR tokens, and Kaifiat and Wudu use everglade-based scrims.",
     refs: [
       "PillNav.tsx:43-46",
       "PillNav.css:48,117,188",
@@ -416,34 +429,34 @@ export const CONFLICTS: Conflict[] = [
   },
   {
     title: "Old metallic gold in motion and glow",
-    status: "legacy",
+    status: "resolved",
     detail:
-      "Quiz pass flash, Janazah play glow and PrayerFigure mat use rgba(212, 175, 55, ·) — a different gold from --gilded.",
-    fix: "Use rgba(234, 160, 67, ·) through --gold-tint and --gold-tint-soft.",
+      "Quiz pass flash, Janazah play glow and PrayerFigure mat used rgba(212, 175, 55, ·) — a different gold from --gilded.",
+    fix: "Done — all glows now use rgba(234, 160, 67, ·) through the gold tokens.",
     refs: ["Quiz.tsx:28", "Janazah.tsx:96", "PrayerFigure.tsx:13,123"],
   },
   {
     title: "Three success and error color schemes",
-    status: "fragmented",
+    status: "resolved",
     detail:
-      "Contact and Quiz each invent feedback colors: #4ade80 / #f87171 versus rgba(80,200,120) / rgba(240,90,90). No tokens exist.",
-    fix: "Add --success and --danger plus tints to the token layer, then consume them everywhere.",
+      "Contact and Quiz each invented feedback colors: #4ade80 / #f87171 versus rgba(80,200,120) / rgba(240,90,90), with no tokens.",
+    fix: "Done — per-band --success/--success-soft/--danger/--danger-soft tokens added; Contact and Quiz consume them.",
     refs: ["Contact.tsx:95-97", "Quiz.tsx:90-96"],
   },
   {
     title: "Two duplicate token sets with drifted values",
     status: "drift",
     detail:
-      "igold.css :root and landing.css .igold-landing redefine the same palette. Shadows, line colors and max width diverge (1200 vs 1240).",
-    fix: "Keep one canonical token block; landing declares only its deltas.",
+      "igold.css :root and landing.css .igold-landing redefine the same palette. Max width is now unified at 1240, but shadow and line values still differ.",
+    fix: "Remaining — collapse to one canonical token block; landing declares only its deltas.",
     refs: ["igold.css:8-52", "landing.css:9-55"],
   },
   {
     title: "Radius drift across equivalent surfaces",
-    status: "drift",
+    status: "resolved",
     detail:
-      "Cards render at 16/18/20/22/24px and pills at 100px/999px/9999px depending on the component.",
-    fix: "Adopt the radius scale in section 05 and migrate components onto it.",
+      "Cards rendered at 16/18/20/22/24px and pills at 100px/999px/9999px depending on the component.",
+    fix: "Done — --radius-thumb/card/feature/panel/pill tokens added and all surfaces migrated onto the scale.",
     refs: [
       "igold.css:213,237,343",
       "Quiz.tsx:68",
@@ -453,18 +466,18 @@ export const CONFLICTS: Conflict[] = [
   },
   {
     title: "Two button systems with different gold text",
-    status: "drift",
+    status: "resolved",
     detail:
-      ".btn-gold uses everglade text on a gold-500→600 gradient; .ld-btn--gold uses #2a1a06 on gold-300→gilded→gold-600. Focus rings also differ.",
-    fix: "Unify on one gold ramp, text color and focus ring; keep size variants only.",
+      ".btn-gold used everglade text on a gold-500→600 gradient; .ld-btn--gold uses #2a1a06 on gold-300→gilded→gold-600, and focus rings differed.",
+    fix: "Done — both systems share one gold ramp, #2a1a06 ink, --shadow-gold and the gilded focus ring.",
     refs: ["igold.css:456", "landing.css:471-474", "landing.css:503-506"],
   },
   {
     title: "Glass declared but never applied",
-    status: "dead",
+    status: "resolved",
     detail:
-      "igold.css targets .condition-card, .rukun-card, .quiz-card and friends with backdrop blur, but no component uses those class names — real cards stay solid.",
-    fix: "Apply glass to the intended surfaces or delete the rule.",
+      "igold.css targeted .condition-card, .rukun-card, .quiz-card and friends with backdrop blur, but no component uses those class names.",
+    fix: "Done — the dead glass selector was deleted; glass remains chrome-only by design.",
     refs: ["igold.css:449-450"],
   },
   {
@@ -472,15 +485,15 @@ export const CONFLICTS: Conflict[] = [
     status: "drift",
     detail:
       "Global body bg-background, an always-on ThemeProvider (.dark from OS) and Tailwind-styled Toaster and ErrorBoundary render oklch tokens on public NOOR routes.",
-    fix: "Scope the Tailwind base or opt NOOR routes out of the dark theme and token overrides.",
+    fix: "Deferred — scope the Tailwind base or opt NOOR routes out of the dark theme and token overrides (edge case: OS dark mode only).",
     refs: ["index.css:143-161", "ThemeContext.tsx:43-54", "App.tsx:23"],
   },
   {
     title: "Typography bypasses",
-    status: "drift",
+    status: "resolved",
     detail:
-      "PillNav.css and LineSidebar.css hardcode Inter instead of var(--font-body); PillNav switches to px type (12px, 32px height).",
-    fix: "Reference --font-body and rem sizes; add a --font-mono token if the sidebar index needs one.",
+      "PillNav.css and LineSidebar.css hardcoded Inter instead of var(--font-body); PillNav used px type (12px, 32px height).",
+    fix: "Done — both files use var(--font-body), the new --font-mono token and rem sizes.",
     refs: [
       "PillNav.css:109,253,290",
       "LineSidebar.css:54,59",
@@ -492,7 +505,7 @@ export const CONFLICTS: Conflict[] = [
     status: "fragmented",
     detail:
       "The toast block is duplicated 4×, the madhhab/model toggle 4–5× with padding drift, audio buttons have 3 variants and step dots repeat in Kaifiat and Wudu.",
-    fix: "Extract Toast, SegmentedPills, AudioButton and StepDots primitives.",
+    fix: "Partially done — shared radii and feedback tokens are in place; extracting Toast, SegmentedPills, AudioButton and StepDots remains deferred.",
     refs: [
       "Bacaan.tsx:62",
       "Niyyah.tsx:92",
@@ -503,10 +516,10 @@ export const CONFLICTS: Conflict[] = [
   },
   {
     title: "Container and rhythm drift",
-    status: "drift",
+    status: "resolved",
     detail:
-      "igold uses maxw 1200 and 10vw section padding; landing uses 1240 and 9vw. Footers diverge, and landing drops the Scheherazade New fallback.",
-    fix: "Pick one content width and section rhythm; align font stacks.",
+      "igold used maxw 1200 and 10vw section padding; landing used 1240 and 9vw, and landing dropped the Scheherazade New fallback.",
+    fix: "Done — unified at maxw 1240 with the 9vw section rhythm and matching Arabic font stacks.",
     refs: [
       "igold.css:50,115",
       "landing.css:42,128",
@@ -516,10 +529,10 @@ export const CONFLICTS: Conflict[] = [
   },
   {
     title: "DotField is fully off-system and unused",
-    status: "dead",
+    status: "resolved",
     detail:
-      "DotField and DotField.css use a purple palette (#120F17, rgba(168,85,247)) and are imported nowhere.",
-    fix: "Delete, or restyle onto NOOR tokens before use.",
+      "DotField and DotField.css used a purple palette (#120F17, rgba(168,85,247)) and were imported nowhere.",
+    fix: "Done — both files were deleted.",
     refs: ["DotField.tsx:31-33", "DotField.css"],
   },
 ];
