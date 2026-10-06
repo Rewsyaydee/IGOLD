@@ -11,6 +11,12 @@ export interface Bi {
   bm: string;
 }
 
+export interface LandingPartner {
+  name: string;
+  /** Path under /public. Falls back to a monogram tile when the file is absent. */
+  logo: string;
+}
+
 export const LANDING_SITE = {
   brand: "iGOLD",
   url: "igoldiium.my",
@@ -49,7 +55,7 @@ export const LANDING_HERO = {
     bm: "Kini live di igoldiium.my/learn",
   },
   trust: [
-    { en: "Shafi'i + Hanafi", bm: "Syafi'i + Hanafi" },
+    { en: "Shafi'i + Hanafi", bm: "Shafi'i + Hanafi" },
     { en: "13 guided steps", bm: "13 langkah berpanduan" },
     { en: "Free for the ummah", bm: "Percuma untuk ummah" },
     { en: "No account needed", bm: "Tiada akaun diperlukan" },
@@ -84,7 +90,7 @@ export const LANDING_MISSION = {
     },
     {
       en: "Every module is built with the IGOLD academic team, aligned to the Shafi'i and Hanafi schools, and designed to travel — across cities, time zones, and generations.",
-      bm: "Setiap modul dibina bersama pasukan akademik IGOLD, selaras dengan mazhab Syafi'i dan Hanafi, serta direka untuk merentas kota, zon waktu, dan generasi.",
+      bm: "Setiap modul dibina bersama pasukan akademik IGOLD, selaras dengan mazhab Shafi'i dan Hanafi, serta direka untuk merentas kota, zon waktu, dan generasi.",
     },
   ],
   quote: {
@@ -125,86 +131,45 @@ export const LANDING_MISSION = {
       },
     },
   ],
-  timeline: [
-    {
-      date: "12 Nov",
-      title: {
-        en: "Arrival in Tāmaki Makaurau",
-        bm: "Tiba di Tāmaki Makaurau",
-      },
-      desc: {
-        en: "Delegation lands in Auckland; partnership briefing with UAIINZ, Keluarga Kiwi and Fatimah Foundations.",
-        bm: "Delegasi tiba di Auckland; taklimat perkongsian bersama UAIINZ, Keluarga Kiwi dan Fatimah Foundations.",
-      },
-    },
-    {
-      date: "15 Nov",
-      title: {
-        en: "Financial Literacy Education",
-        bm: "Pendidikan Literasi Kewangan",
-      },
-      desc: {
-        en: "Debt management, household budgeting and Shariah-compliant wealth practices for 20–30 families.",
-        bm: "Pengurusan hutang, belanjawan rumah dan amalan kekayaan patuh Syariah untuk 20–30 keluarga.",
-      },
-    },
-    {
-      date: "16–17 Nov",
-      title: {
-        en: "Quranic STEM & Islamic Discovery",
-        bm: "STEM Quranik & Penemuan Islamik",
-      },
-      desc: {
-        en: "Hands-on science experiments paired with Quranic reflection for 30–50 children and youth.",
-        bm: "Eksperimen sains secara praktikal bersama renungan Quranik untuk 30–50 kanak-kanak dan belia.",
-      },
-    },
-    {
-      date: "17 Nov",
-      title: { en: "Jenazah Course", bm: "Kursus Jenazah" },
-      desc: {
-        en: "Hands-on masterclass on funeral rites — body washing, kafan and solat jenazah.",
-        bm: "Kelas praktikal urusan jenazah — memandi, mengafan dan solat jenazah.",
-      },
-    },
-    {
-      date: "18 Nov",
-      title: { en: "Feed the Needy", bm: "Santuari Golongan Memerlukan" },
-      desc: {
-        en: "100–150 hot meals prepared and distributed to 20+ marginalised Auckland families.",
-        bm: "100–150 hidangan panas disediakan dan diagihkan kepada 20+ keluarga Auckland yang terpinggir.",
-      },
-    },
-    {
-      date: "19 Nov",
-      title: {
-        en: "Graceful Guidance for Women",
-        bm: "Bimbingan Berhemah untuk Wanita",
-      },
-      desc: {
-        en: "Facilitated listening circles on family resilience and emotional well-being.",
-        bm: "Bulatan perkongsian terbimbing mengenai ketahanan keluarga dan kesejahteraan emosi.",
-      },
-    },
-    {
-      date: "22 Nov",
-      title: { en: "Departure", bm: "Kepulangan" },
-      desc: {
-        en: "Reflection, handover of toolkits, and the closing of a lasting partnership.",
-        bm: "Refleksi, penyerahan kit, dan penutup kepada satu perkongsian yang berkekalan.",
-      },
-    },
-  ],
   partners: [
-    "Mahallah Halimatus Sa'adiah",
-    "Secretariat of Fiqh & Usul Al-Fiqh (SOFI)",
-    "Universiti Teknologi MARA (UiTM)",
-    "Omani Research & Studies Center Malaysia",
-    "Ulul Albāb Islamic Institute NZ",
-    "Keluarga Kiwi",
-    "Fatimah Foundations",
+    {
+      name: "Universiti Teknologi MARA (UiTM)",
+      logo: "/branding/partners/uitm.jpg",
+    },
+    {
+      name: "Ulul Albāb Islamic Institute NZ",
+      logo: "/branding/partners/uaiinz.jpg",
+    },
+    {
+      name: "Fatimah Foundations",
+      logo: "/branding/partners/fatimah-foundation.png",
+    },
+    {
+      name: "Keluarga Kiwi",
+      logo: "/branding/partners/keluarga-kiwi.jpg",
+    },
+    {
+      name: "Mahallah Halimatus Sa'adiah",
+      logo: "/branding/partners/mahallah-halimatus-saadiah.jpg",
+    },
+    {
+      name: "Secretariat of Fiqh & Usul Al-Fiqh (SOFI)",
+      logo: "/branding/partners/sofi.jpg",
+    },
+    {
+      name: "Omani Research & Studies Center Malaysia",
+      logo: "/branding/partners/omani-research-studies-centre.jpg",
+    },
   ],
   partnersLabel: { en: "Working with", bm: "Bersama" },
+  partnersHeading: {
+    en: "Built together, with partners on the ground.",
+    bm: "Dibina bersama, dengan rakan di lapangan.",
+  },
+  partnersSub: {
+    en: "This mission is carried by institutions and community organisations across Malaysia and Aotearoa New Zealand.",
+    bm: "Misi ini digalas oleh institusi dan pertubuhan komuniti di Malaysia dan Aotearoa New Zealand.",
+  },
 };
 
 export const LANDING_BENTO = {
@@ -251,7 +216,7 @@ export const LANDING_BENTO = {
     title: { en: "Two schools of law", bm: "Dua mazhab" },
     desc: {
       en: "Switch between Shafi'i and Hanafi at any time — every rukun, step and posture updates to match.",
-      bm: "Tukar antara Syafi'i dan Hanafi pada bila-bila masa — setiap rukun, langkah dan gerakan berubah mengikut mazhab.",
+      bm: "Tukar antara Shafi'i dan Hanafi pada bila-bila masa — setiap rukun, langkah dan gerakan berubah mengikut mazhab.",
     },
     shafii: "Shafi'i",
     hanafi: "Hanafi",
@@ -525,7 +490,7 @@ export const LANDING_FOOTER = {
   },
   disclaimer: {
     en: "Religious content follows the Shafi'i and Hanafi schools and is reviewed with the IGOLD academic team. Please refer to a qualified ustaz for personal rulings.",
-    bm: "Kandungan agama mengikut mazhab Syafi'i dan Hanafi serta disemak bersama pasukan akademik IGOLD. Sila rujuk ustaz yang berkelayakan untuk hukum peribadi.",
+    bm: "Kandungan agama mengikut mazhab Shafi'i dan Hanafi serta disemak bersama pasukan akademik IGOLD. Sila rujuk ustaz yang berkelayakan untuk hukum peribadi.",
   },
   developedBy: { en: "Developed by", bm: "Dibangunkan oleh" },
   developerName: "Rusyaidi",

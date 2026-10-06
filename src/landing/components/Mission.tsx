@@ -1,8 +1,44 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useLang } from "@/igold/lang";
 import { useReveal } from "@/igold/useReveal";
-import { LANDING_MISSION } from "../data";
+import { LANDING_MISSION, type LandingPartner } from "../data";
 import { CountUp } from "./CountUp";
+
+function monogram(name: string): string {
+  const acronym = name.match(/\(([^)]+)\)/);
+  if (acronym) return acronym[1];
+  return name
+    .split(/\s+/)
+    .filter(word => /^[A-Za-z]/.test(word))
+    .slice(0, 2)
+    .map(word => word[0].toUpperCase())
+    .join("");
+}
+
+function PartnerTile({ partner }: { partner: LandingPartner }) {
+  const [logoFailed, setLogoFailed] = useState(false);
+
+  return (
+    <figure className="ld-partner-tile">
+      <div className="ld-partner-logo">
+        {logoFailed ? (
+          <span className="ld-partner-monogram" aria-hidden="true">
+            {monogram(partner.name)}
+          </span>
+        ) : (
+          <img
+            src={partner.logo}
+            alt={partner.name}
+            loading="lazy"
+            decoding="async"
+            onError={() => setLogoFailed(true)}
+          />
+        )}
+      </div>
+      <figcaption className="ld-partner-name">{partner.name}</figcaption>
+    </figure>
+  );
+}
 
 export function Mission() {
   const { L } = useLang();
@@ -56,37 +92,30 @@ export function Mission() {
               </div>
             ))}
           </div>
-
-          <div className="ld-timeline ld-reveal">
-            {LANDING_MISSION.timeline.map(item => (
-              <div className="ld-timeline-item" key={item.date + item.title.en}>
-                <span className="ld-timeline-date">{item.date}</span>
-                <span>
-                  <p className="ld-timeline-title">
-                    {L(item.title.en, item.title.bm)}
-                  </p>
-                  <p className="ld-timeline-desc">
-                    {L(item.desc.en, item.desc.bm)}
-                  </p>
-                </span>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
 
       <div className="ld-partners ld-reveal">
-        <p className="ld-partners-label">
-          {L(
-            LANDING_MISSION.partnersLabel.en,
-            LANDING_MISSION.partnersLabel.bm,
-          )}
-        </p>
-        <div className="ld-partner-chips">
+        <div className="ld-partners-head">
+          <p className="ld-partners-label">
+            {L(
+              LANDING_MISSION.partnersLabel.en,
+              LANDING_MISSION.partnersLabel.bm,
+            )}
+          </p>
+          <h3 className="ld-partners-heading">
+            {L(
+              LANDING_MISSION.partnersHeading.en,
+              LANDING_MISSION.partnersHeading.bm,
+            )}
+          </h3>
+          <p className="ld-partners-sub">
+            {L(LANDING_MISSION.partnersSub.en, LANDING_MISSION.partnersSub.bm)}
+          </p>
+        </div>
+        <div className="ld-partner-grid">
           {LANDING_MISSION.partners.map(partner => (
-            <span className="ld-partner-chip" key={partner}>
-              {partner}
-            </span>
+            <PartnerTile partner={partner} key={partner.name} />
           ))}
         </div>
       </div>

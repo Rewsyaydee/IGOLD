@@ -45,7 +45,7 @@ export default function PostureExplorer() {
                     color: madhhab === m ? "#2a1a06" : "var(--muted)",
                   }}
                 >
-                  {m === "shafii" ? "Syafi'e" : "Hanafi"}
+                  {m === "shafii" ? "Shafi'i" : "Hanafi"}
                 </button>
               ))}
             </div>
@@ -124,7 +124,7 @@ export default function PostureExplorer() {
             <p style={{ marginTop: "1.6rem", color: "var(--muted)", fontSize: "0.82rem", lineHeight: 1.6 }}>
               {L(
                 `A general guide following the ${madhhab === "hanafi" ? "Hanafi" : "Shafi'i"} school. For detail on your own situation, please refer to a qualified ustaz.`,
-                `Panduan umum mengikut mazhab ${madhhab === "hanafi" ? "Hanafi" : "Syafie"}. Untuk butiran mengikut keadaan anda, sila rujuk ustaz yang bertauliah.`,
+                `Panduan umum mengikut mazhab ${madhhab === "hanafi" ? "Hanafi" : "Shafi'i"}. Untuk butiran mengikut keadaan anda, sila rujuk ustaz yang bertauliah.`,
               )}
             </p>
           </div>

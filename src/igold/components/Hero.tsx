@@ -23,6 +23,6 @@ export function Hero(){
     {links.map(({id,icon:Icon,en,bm,ar},i)=><button key={id} onClick={()=>go(id)} style={{"--order":i} as React.CSSProperties}><small>0{i+1}</small><Icon/><span><b>{L(en,bm)}</b><i lang="ar">{ar}</i></span><em>↗</em></button>)}
    </nav>
   </div>
-  <footer className="atlas-foot"><span>{L("Shafi’i + Hanafi","Syafi’i + Hanafi")}</span><span>{L("Academically reviewed","Disemak secara akademik")}</span><span>{L("Free for the ummah","Percuma untuk ummah")}</span></footer>
+  <footer className="atlas-foot"><span>{L("Shafi'i + Hanafi","Shafi'i + Hanafi")}</span><span>{L("Academically reviewed","Disemak secara akademik")}</span><span>{L("Free for the ummah","Percuma untuk ummah")}</span></footer>
  </section>;
 }

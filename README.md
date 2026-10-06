@@ -5,7 +5,7 @@ An interactive, bilingual (English / Bahasa Melayu) web platform that teaches Mu
 Built as an initiative under **IGOLD** (International Global Outreach & Leadership Programme) at the International Islamic University Malaysia (IIUM), for audiences in **Malaysia and New Zealand**.
 
 > ⚠️ **Work in progress — pending academic review.**
-> All religious content follows the **Shafi'i (Syafie) school** and is currently **pending verification by a qualified ustaz / the IGOLD academic team** before public release. Some recitation audio is a placeholder sample tone and will be replaced with real recordings.
+> All religious content follows the **Shafi'i school** and is currently **pending verification by a qualified ustaz / the IGOLD academic team** before public release. Some recitation audio is a placeholder sample tone and will be replaced with real recordings.
 
 ## Features
 

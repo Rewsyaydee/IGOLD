@@ -11,12 +11,16 @@ const prefersReduced = () =>
 /**
  * Reveals all `.reveal` elements inside the ref'd container on scroll.
  * Respects prefers-reduced-motion (shows everything instantly).
+ *
+ * Pass `revision` (any value that changes) to re-run the reveal when the
+ * container's children are swapped in place — otherwise newly mounted
+ * elements stay hidden at their CSS opacity of 0.
  */
 export function useReveal(
   ref: React.RefObject<HTMLElement | null>,
-  opts: { stagger?: number; selector?: string } = {},
+  opts: { stagger?: number; selector?: string; revision?: unknown } = {},
 ) {
-  const { stagger = 0.08, selector = ".reveal" } = opts;
+  const { stagger = 0.08, selector = ".reveal", revision } = opts;
 
   useEffect(() => {
     const el = ref.current;
@@ -45,7 +49,7 @@ export function useReveal(
     }, el);
 
     return () => ctx.revert();
-  }, [ref, stagger, selector]);
+  }, [ref, stagger, selector, revision]);
 }
 
 export { gsap, ScrollTrigger };

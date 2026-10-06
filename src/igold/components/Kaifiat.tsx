@@ -145,7 +145,7 @@ export function Kaifiat() {
                   color: madhhab === m ? "#2a1a06" : "var(--muted)",
                 }}
               >
-                {m === "shafii" ? "Syafi'e" : "Hanafi"}
+                {m === "shafii" ? "Shafi'i" : "Hanafi"}
               </button>
             ))}
           </div>

@@ -1,10 +1,12 @@
 // ============================================================================
-// IGOLD — Interactive Solat Guide  ·  Content data (single source of truth)
+// IGOLD — Interactive Solat Guide · Content data (single source of truth)
 // ----------------------------------------------------------------------------
 // Methods: Shafi'i and Hanafi. All religious content should be reviewed and
 // approved by a qualified ustaz / the IGOLD academic team before public release.
 // Every string below is editable here.
 // ============================================================================
+
+import type { Madhhab } from "./madhhab";
 
 export const SITE = {
   brand: "IGOLD",
@@ -508,7 +510,8 @@ export interface Bacaan {
   whenEn: string;
   arabic: string;
   transliteration: string;
-
+  /** Restrict this recitation to one madhhab. Omit to show in both. */
+  madhhab?: Madhhab;
 }
 
 export const BACAAN: Bacaan[] = [
@@ -585,8 +588,21 @@ export const BACAAN: Bacaan[] = [
     whenEn: "Standing after bowing, 2nd rak'ah of Fajr",
     arabic:
       "اللّٰهُمَّ اهْدِنِي فِيمَنْ هَدَيْتَ، وَعَافِنِي فِيمَنْ عَافَيْتَ، وَتَوَلَّنِي فِيمَنْ تَوَلَّيْتَ، وَبَارِكْ لِي فِيمَا أَعْطَيْتَ، وَقِنِي شَرَّ مَا قَضَيْتَ",
-      transliteration:
+    transliteration:
       "Allāhummahdinī fīman hadayt, wa 'āfinī fīman 'āfayt, wa tawallanī fīman tawallayt, wa bārik lī fīmā a'ṭayt, wa qinī sharra mā qaḍayt",
+    madhhab: "shafii",
+  },
+  {
+    id: "qunutwitir",
+    title: "Doa Qunut Witir",
+    titleEn: "Witr Qunut (Hanafi)",
+    when: "Iktidal rakaat ketiga solat Witir",
+    whenEn: "Standing after bowing, final rak'ah of Witr",
+    arabic:
+      "اَللَّهُمَّ إِنَّا نَسْتَعِينُكَ وَنَسْتَغْفِرُكَ وَنُؤْمِنُ بِكَ وَنَتَوَكَّلُ عَلَيْكَ وَنُثْنِيْ عَلَيْكَ الْخَيْرَ وَنَشْكُرُكَ وَلَا نَكْفُرُكَ وَنَخْلَعُ وَنَتْرُكُ مَنْ يَفْجُرُكَ\n\nاَللَّهُمَّ إِيَّاكَ نَعْبُدُ وَلَكَ نُصَلِّيْ وَنَسْجُدُ وَإِلَيْكَ نَسْعَىٰ وَنَحْفِدُ وَنَرْجُوْ رَحْمَتَكَ وَنَخْشَىٰ عَذَابَكَ إِنَّ عَذَابَكَ بِالْكُفَّارِ مُلْحِقٌ",
+    transliteration:
+      "Allāhumma innā nasta'īnuka wa nastaghfiruka wa nu'minu bika wa natawakkalu 'alayka wa nuthnī 'alaykal-khayra wa nashkuruka wa lā nakfuruka wa nakhla'u wa natruku man yafjuruk. Allāhumma iyyāka na'budu wa laka nuṣallī wa nasjudu wa ilayka nas'ā wa naḥfidu wa narjū raḥmataka wa nakhshā 'adhābaka inna 'adhābaka bil-kuffāri mulḥiq",
+    madhhab: "hanafi",
   },
   {
     id: "sujudtilawah",
@@ -638,12 +654,12 @@ export const QUIZ: QuizQuestion[] = [
   },
   {
     id: 3,
-    q: "Berapakah bilangan rukun solat dalam mazhab Syafie?",
+    q: "Berapakah bilangan rukun solat dalam mazhab Shafi'i?",
     qEn: "How many pillars (rukun) of prayer are there in the Shafi'i school?",
     options: ["10", "13", "17", "5"],
     optionsEn: ["10", "13", "17", "5"],
     answer: 1,
-    explain: "Terdapat 13 rukun solat dalam mazhab Syafie (mazhab Hanafi mengklasifikasikannya secara berbeza).",
+    explain: "Terdapat 13 rukun solat dalam mazhab Shafi'i (mazhab Hanafi mengklasifikasikannya secara berbeza).",
     explainEn: "There are 13 pillars in the Shafi'i school (the Hanafi school classifies them differently).",
   },
   {
@@ -1228,7 +1244,7 @@ export const WUDU_STEPS: WuduStep[] = [
     pose: "wipe-head",
     meaning: "Sapu sebahagian kepala dengan air. Mulakan dari depan kepala hingga ke belakang, kemudian kembalikan ke depan. Cukup sekali sapuan yang merangkumi sebahagian besar kepala.",
     meaningEn: "Wipe part of the head with water. Start from the front of the head to the back, then return to the front. One thorough wipe covering most of the head suffices.",
-    note: "Dalam mazhab Hanafi, menyapu 1/4 kepala sudah memadai. Dalam mazhab Syafie, memadai dengan menyapu sebahagian kepala walaupun sedikit.",
+    note: "Dalam mazhab Hanafi, menyapu 1/4 kepala sudah memadai. Dalam mazhab Shafi'i, memadai dengan menyapu sebahagian kepala walaupun sedikit.",
     noteEn: "In the Hanafi school, wiping 1/4 of the head is sufficient. In the Shafi'i school, wiping even a small portion suffices.",
   },
   {
@@ -1304,7 +1320,7 @@ export const JANAZAH_STEPS: JanazahStep[] = [
     transliteration: "Al-ḥamdu lillāhi rabbil-'ālamīn · Ar-raḥmānir-raḥīm · Māliki yawmid-dīn · Iyyāka na'budu wa iyyāka nasta'īn · Ihdinaṣ-ṣirāṭal-mustaqīm · Ṣirāṭal-lażīna an'amta 'alayhim ghayril-maghḍūbi 'alayhim wa laḍ-ḍāllīn",
     meaning: "Selepas takbir pertama, baca surah Al-Fatihah. Dilakukan secara sirr (perlahan) walaupun solat jenazah berjemaah.",
     meaningEn: "After the first takbir, recite Surah Al-Fatihah. This is done silently even in congregational janazah prayer.",
-    note: "Membaca Al-Fatihah adalah rukun dalam solat jenazah mengikut mazhab Syafie.",
+    note: "Membaca Al-Fatihah adalah rukun dalam solat jenazah mengikut mazhab Shafi'i.",
     noteEn: "Reciting Al-Fatihah is a pillar of the janazah prayer in the Shafi'i school.",
     hasAudio: true,
   },

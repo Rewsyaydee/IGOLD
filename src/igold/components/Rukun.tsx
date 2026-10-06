@@ -40,7 +40,7 @@ export function Rukun() {
             <h2 className="section-title reveal" style={{ marginBottom: 0 }}>
               {madhhab === "hanafi"
                 ? L("Pillars & Obligations of Prayer (Hanafi)", "Rukun & Wajib Solat (Hanafi)")
-                : L("The 13 Pillars of Prayer (Shafi'i)", "13 Rukun Solat (Syafie)")}
+                : L("The 13 Pillars of Prayer (Shafi'i)", "13 Rukun Solat (Shafi'i)")}
             </h2>
           </div>
           <div className="reveal" style={{ display: "flex", gap: 3, background: "var(--gold-tint-soft)", borderRadius: "var(--radius-pill)", padding: 3, border: "1px solid var(--line)" }}>
@@ -62,7 +62,7 @@ export function Rukun() {
                   color: madhhab === m ? "#2a1a06" : "var(--muted)",
                 }}
               >
-                {m === "shafii" ? "Syafi'e" : "Hanafi"}
+                {m === "shafii" ? "Shafi'i" : "Hanafi"}
               </button>
             ))}
           </div>

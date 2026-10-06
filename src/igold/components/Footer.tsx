@@ -25,7 +25,7 @@ export function Footer() {
             <p style={{ color: "var(--muted)", fontSize: "0.78rem", marginTop: "1rem", lineHeight: 1.6, opacity: 0.7 }}>
               {L(
                 "Religious content follows the Shafi'i and Hanafi schools. Please refer to a qualified ustaz / the IGOLD academic team for verification.",
-                "Kandungan agama mengikut mazhab Syafie dan Hanafi. Sila rujuk ustaz / pasukan akademik IGOLD untuk pengesahan.",
+                "Kandungan agama mengikut mazhab Shafi'i dan Hanafi. Sila rujuk ustaz / pasukan akademik IGOLD untuk pengesahan.",
               )}
             </p>
           </div>

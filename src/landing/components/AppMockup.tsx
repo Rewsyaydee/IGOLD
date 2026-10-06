@@ -183,7 +183,7 @@ export function AppMockup() {
               color: "var(--cream-muted)",
             }}
           >
-            {L("Shafi'i ·", "Syafi'i ·")}{" "}
+            {L("Shafi'i ·", "Shafi'i ·")}{" "}
             {lang === "en" ? "English" : "Bahasa Melayu"}
           </p>
         </div>
